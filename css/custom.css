@@ -645,6 +645,13 @@ progress {
 	margin-top: 2rem;
 }
 
+div.item {
+	margin-bottom: .6rem;
+}
+li {
+	margin-bottom: .25rem;
+}
+
 @media (min-width: 576px) {
   .container-sm, .container {
     max-width: 540px;
