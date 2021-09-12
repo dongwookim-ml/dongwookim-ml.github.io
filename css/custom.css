@@ -4892,16 +4892,28 @@ textarea.form-control-lg {
 
 .badge {
   display: inline-block;
-  padding: 0.35em 0.65em;
-  font-size: 0.75em;
+  padding: 0.4em;
+  margin: 0.25em 0em;
+  font-size: 0.65em;
   font-weight: 700;
   line-height: 1;
-  color: #fff;
+  color: #000;
+  background-color: rgba(var(--bs-secondary-rgb));
   text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
+  vertical-align: top;
   border-radius: 0.25rem;
+  text-decoration: none;
 }
+
+.badge-info {
+  font-size: var(--bs-body-font-size);
+  font-weight: normal;
+  padding: 0 0.2em;
+  color: rgba(var(--bs-success-rgb));
+  background-color: transparent;
+  margin: 0.2em -0.2em 0 -0.2em;
+}
+
 .badge:empty {
   display: none;
 }
