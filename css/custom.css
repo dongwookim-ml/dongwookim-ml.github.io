@@ -4905,6 +4905,36 @@ textarea.form-control-lg {
   text-decoration: none;
 }
 
+.badge-warning {
+  display: inline-block;
+  padding: 0.4em;
+  margin: 0.25em 0em;
+  font-size: 0.65em;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  background-color: rgba(255, 0, 0, 0.8);
+  text-align: center;
+  vertical-align: top;
+  border-radius: 0.25rem;
+  text-decoration: none;
+}
+
+.badge-danger {
+  display: inline-block;
+  padding: 0.4em;
+  margin: 0.25em 0em;
+  font-size: 0.65em;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  background-color: rgba(234, 221, 202, 0.8);
+  text-align: center;
+  vertical-align: top;
+  border-radius: 0.25rem;
+  text-decoration: none;
+}
+
 .badge-info {
   font-size: var(--bs-body-font-size);
   font-weight: normal;
