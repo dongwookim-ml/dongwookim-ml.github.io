@@ -489,7 +489,7 @@ progress {
 }
 
 .lead {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 300;
 }
 
@@ -11359,7 +11359,7 @@ h1, .h1 {
 }
 
 p.lead {
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 400;
 }
 
@@ -11484,21 +11484,34 @@ section.resume-section .resume-section-content {
   }
 }
 
-/* News section styles */
-.news-item {
-  margin-bottom: 0.3rem;
-  padding-bottom: 0.2rem;
-  line-height: 1.5;
+/* News section styles - Table format */
+.news-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
 }
 
-.news-date {
+.news-table tr {
+  border: none;
+}
+
+.news-table td {
+  padding: 0.2rem 0;
+  vertical-align: top;
+  border: none;
+}
+
+.news-table .news-date {
+  font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Source Code Pro", monospace;
   font-weight: bold;
   color: #bd5d38;
   font-size: 0.9rem;
-  margin-right: 0.5rem;
+  width: 120px;
+  white-space: nowrap;
+  padding-right: 1rem;
 }
 
-.news-content {
+.news-table .news-content {
   color: #495057;
   line-height: 1.5;
 }
