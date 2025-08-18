@@ -9,6 +9,7 @@
 
 $(document).ready(function() {
     $("#p_bio").load("./pages/bio.html")
+    $("#p_news").load("./pages/news.html")
     $("#p_publication").load("./pages/publication.html")
     $("#p_student").load("./pages/student.html")
     $("#p_contact").load("./pages/contact.html")

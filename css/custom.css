@@ -11483,3 +11483,22 @@ section.resume-section .resume-section-content {
     padding-bottom: 5rem;
   }
 }
+
+/* News section styles */
+.news-item {
+  margin-bottom: 0.3rem;
+  padding-bottom: 0.2rem;
+  line-height: 1.5;
+}
+
+.news-date {
+  font-weight: bold;
+  color: #bd5d38;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+}
+
+.news-content {
+  color: #495057;
+  line-height: 1.5;
+}
