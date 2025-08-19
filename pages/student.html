@@ -5,40 +5,356 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Students | Dongwoo Kim</title>
   <link rel="stylesheet" href="../css/custom.css">
+  <style>
+    .student-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .student-card {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    .student-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+    .student-photo-adjusted {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+    .student-info {
+      flex-grow: 1;
+    }
+    .student-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .student-details {
+      font-size: 0.9em;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    .student-links {
+      margin-top: 8px;
+    }
+    .icon-link {
+      display: inline-block;
+      margin: 2px 6px 2px 0;
+      padding: 4px;
+      text-decoration: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      text-align: center;
+      line-height: 20px;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+    .homepage-icon {
+      background: #b6b6b6;
+      color: white;
+    }
+    .homepage-icon:hover {
+      background: #005c99;
+    }
+    .scholar-icon {
+      background: #b6b6b6;
+      color: white;
+    }
+    .scholar-icon:hover {
+      background: #3367d6;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      margin: 2px 4px 2px 0;
+      background: #007acc;
+      color: white;
+      text-decoration: none;
+      border-radius: 3px;
+      font-size: 0.8em;
+    }
+    .badge:hover {
+      background: #005c99;
+    }
+    .fallback-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #ddd;
+      margin-right: 15px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
 <main id="student">
   <h2>Current Students</h2>
   <h3 class="sub-header">PhD &amp; Combined Students</h3>
-  <ul>
-    <li>Jaeseung Heo @GSAI/POSTECH <br></li>
-    <li>Moonjeong Park @GSAI/POSTECH <a href="https://jeong27.github.io/" class="badge">Homepage</a> <br></li>
-    <li>Saemi Moon @CSED/POSTECH <a href="https://saemi410.github.io/" class="badge">Homepage</a> <a href="https://scholar.google.com/citations?user=FKyWiZMAAAAJ" class="badge">Google Scholar</a> <br></li>
-    <li>Youngbin Choi @CSED/POSTECH <br></li>
-    <li>Chongtae Ahn @GSAI/POSTECH (Industrial PhD student from POSCO)<br></li>
-    <li>Seungbeom Lee @GSAI/POSTECH <br></li>
-    <li>Seunghyuk Cho @GSAI/POSTECH <a href="https://seunghyukcho.github.io" class="badge">Homepage</a> <a href="https://scholar.google.com/citations?hl=en&user=4OOM9_cAAAAJ" class="badge">Google Scholar</a><br></li>
-    <li>Kyeongheung Yun @CSED/POSTECH <br></li>
-    <li>Minjong Lee @CSED/POSTECH <a href="https://scholar.google.com/citations?hl=en&user=peXGkQwAAAAJ" class="badge">Google Scholar</a><br></li>
-    <li>Seokwon Yoon @CSED/POSTECH <br></li>
-  </ul>
+  <div class="student-grid">
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/jsheo_profile.jpg" alt="Jaeseung Heo" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">JH</div>
+      <div class="student-info">
+        <div class="student-name">Jaeseung Heo</div>
+        <div class="student-details">@GSAI/POSTECH</div>
+        <div class="student-details">Graph Neural Networks, Data-Centric AI</div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/mjpark_profile.jpeg" alt="Moonjeong Park" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">MP</div>
+      <div class="student-info">
+        <div class="student-name">Moonjeong Park</div>
+        <div class="student-details">@GSAI/POSTECH</div>
+        <div class="student-details">Graph Neural Network, Dynamical System</div>
+        <div class="student-links">
+          <a href="https://jeong27.github.io/" class="icon-link homepage-icon" title="Homepage">🏠</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/smmoon_profile.jpeg" alt="Saemi Moon" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">SM</div>
+      <div class="student-info">
+        <div class="student-name">Saemi Moon</div>
+        <div class="student-details">@CSED/POSTECH</div>
+        <div class="student-details">Truthworthy AI</div>
+        <div class="student-links">
+          <a href="https://saemi410.github.io/" class="icon-link homepage-icon" title="Homepage">🏠</a>
+          <a href="https://scholar.google.com/citations?user=FKyWiZMAAAAJ" class="icon-link scholar-icon" title="Google Scholar">🎓</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/ybchoi_profile.jpg" alt="Youngbin Choi" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">YC</div>
+      <div class="student-info">
+        <div class="student-name">Youngbin Choi</div>
+        <div class="student-details">@CSED/POSTECH</div>
+        <div class="student-details">Machine Learning</div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/chongtaeahn_profile.jpg" alt="Chongtae Ahn" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">CA</div>
+      <div class="student-info">
+        <div class="student-name">Chongtae Ahn</div>
+        <div class="student-details">@GSAI/POSTECH</div>
+        <div class="student-details">Industrial PhD student from POSCO</div>
+        <div class="student-details">Machine Learning</div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/sblee_profile.jpg" alt="Seungbeom Lee" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">SL</div>
+      <div class="student-info">
+        <div class="student-name">Seungbeom Lee</div>
+        <div class="student-details">@GSAI/POSTECH</div>
+        <div class="student-details">Geometric Deep Learning, ML Application in Biology</div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/shcho_profile.jpg" alt="Seunghyuk Cho" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">SC</div>
+      <div class="student-info">
+        <div class="student-name">Seunghyuk Cho</div>
+        <div class="student-details">@GSAI/POSTECH</div>
+        <div class="student-details">Generative model, Riemannian Geometry</div>
+        <div class="student-links">
+          <a href="https://seunghyukcho.github.io" class="icon-link homepage-icon" title="Homepage">🏠</a>
+          <a href="https://scholar.google.com/citations?hl=en&user=4OOM9_cAAAAJ" class="icon-link scholar-icon" title="Google Scholar">🎓</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/khyun_profile.jpg" alt="Kyeongheung Yun" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">KY</div>
+      <div class="student-info">
+        <div class="student-name">Kyeongheung Yun</div>
+        <div class="student-details">@CSED/POSTECH</div>
+        <div class="student-details">Machine Learning</div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/minjonglee_profile.jpg" alt="Minjong Lee" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">ML</div>
+      <div class="student-info">
+        <div class="student-name">Minjong Lee</div>
+        <div class="student-details">@CSED/POSTECH</div>
+        <div class="student-details">Generative Model</div>
+        <div class="student-links">
+          <a href="https://scholar.google.com/citations?hl=en&user=peXGkQwAAAAJ" class="icon-link scholar-icon" title="Google Scholar">🎓</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/swyoon_profile.JPG" alt="Seokwon Yoon" class="student-photo-adjusted" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">SY</div>
+      <div class="student-info">
+        <div class="student-name">Seokwon Yoon</div>
+        <div class="student-details">@CSED/POSTECH</div>
+        <div class="student-details">Machine Learning</div>
+      </div>
+    </div>
+  </div>
   <h3 class="sub-header">MS Students</h3>
-  <ul>
-    <li>Yesong Ko @CSED/POSTECH <br></li>
-    <li>Sunghyun Choi @GSAI/POSTECH <br></li>
-  </ul>
+  <div class="student-grid">
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/ysko_profile.png" alt="Yesong Ko" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">YK</div>
+      <div class="student-info">
+        <div class="student-name">Yesong Ko</div>
+        <div class="student-details">@CSED/POSTECH</div>
+        <div class="student-details">Machine Learning</div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/shchoi_profile.jpg" alt="Sunghyun Choi" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">SC</div>
+      <div class="student-info">
+        <div class="student-name">Sunghyun Choi</div>
+        <div class="student-details">@GSAI/POSTECH</div>
+        <div class="student-details">Machine Learning, Generative Model</div>
+      </div>
+    </div>
+  </div>
   <h3 class="sub-header">Alumni</h3>
-  <ul>
-    <li>Seongsu Kim @GSAI/POSTECH <a href="https://seongsukim-ml.github.io/" class="badge">Homepage</a> (co-advised with Sungsoo Ahn at KAIST) <br></li>
-    <li>Sean Li @CECS/ANU (co-advise with Qing Wang, <a href="https://graphlabanu.github.io/website/team/">Graph Research Lab @ ANU</a>), PhD<br></li>
-    <li>Munsun Jo @GSAI/POSTECH (Industrial MS student from KT), MS 2025<br></li>
-    <li>Jinho Park @GSAI/POSTECH, MS 2024 <br></li>
-    <li>Jinhyeok Park @GSAI/POSTECH, MS 2024 <br></li>
-    <li>Dain Kim @GSAI/POSTECH, MS 2024 <a href="https://scholar.google.com/citations?hl=en&user=Hr_M5pYAAAAJ" class="badge">Google Scholar</a><br></li>
-    <li>Myeonghyeon Kim @CSED/POSTECH, MS 2022<br></li>
-    <li>Zhenyue Qin @CECS/ANU (co-advise with Tom Gedeon), PhD <a href="https://scholar.google.com/citations?user=z-fQRcUAAAAJ&hl=en" class="badge">Google Scholar</a><br></li>
-    <li>Yang Liu @CECS/ANU (co-advise with Tom Gedeon), PhD <a href="https://scholar.google.com/citations?user=SLCxOTEAAAAJ&hl=en" class="badge">Google Scholar</a><br></li>
-  </ul>
+  <div class="student-grid">
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/sskim_profile.png" alt="Seongsu Kim" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">SK</div>
+      <div class="student-info">
+        <div class="student-name">Seongsu Kim</div>
+        <div class="student-details">@GSAI/POSTECH</div>
+        <div class="student-details">ML for Science</div>
+        <div class="student-details">Co-advised with Sungsoo Ahn at KAIST</div>
+        <div class="student-links">
+          <a href="https://seongsukim-ml.github.io/" class="icon-link homepage-icon" title="Homepage">🏠</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="../images/sean_li.jpeg" alt="Sean Li" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="student-info">
+        <div class="student-name">Sean Li</div>
+        <div class="student-details">@CECS/ANU</div>
+        <div class="student-details">Co-advise with Qing Wang, Graph Research Lab @ ANU</div>
+        <div class="student-details">PhD</div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/msjo_profile.png" alt="Munsun Jo" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">MJ</div>
+      <div class="student-info">
+        <div class="student-name">Munsun Jo</div>
+        <div class="student-details">@GSAI/POSTECH</div>
+        <div class="student-details">Industrial MS student from KT</div>
+        <div class="student-details">MS 2025</div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/jhpark_profile.png" alt="Jinho Park" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">JP</div>
+      <div class="student-info">
+        <div class="student-name">Jinho Park</div>
+        <div class="student-details">@GSAI/POSTECH</div>
+        <div class="student-details">MS 2024</div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/jinhyeokpark_profile.jpg" alt="Jinhyeok Park" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">JP</div>
+      <div class="student-info">
+        <div class="student-name">Jinhyeok Park</div>
+        <div class="student-details">@GSAI/POSTECH</div>
+        <div class="student-details">MS 2024</div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/dikim_profile.png" alt="Dain Kim" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="student-info">
+        <div class="student-name">Dain Kim</div>
+        <div class="student-details">@GSAI/POSTECH</div>
+        <div class="student-details">MS 2024</div>
+        <div class="student-links">
+          <a href="https://scholar.google.com/citations?hl=en&user=Hr_M5pYAAAAJ" class="icon-link scholar-icon" title="Google Scholar">🎓</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/mhkim_profile.jpg" alt="Myeonghyeon Kim" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">MK</div>
+      <div class="student-info">
+        <div class="student-name">Myeonghyeon Kim</div>
+        <div class="student-details">@CSED/POSTECH</div>
+        <div class="student-details">MS 2022</div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <img src="../images/zhenyue.jpeg" alt="Zhenyue Qin" class="student-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback-avatar" style="display:none;">ZQ</div>
+      <div class="student-info">
+        <div class="student-name">Zhenyue Qin</div>
+        <div class="student-details">@CECS/ANU</div>
+        <div class="student-details">Co-advise with Tom Gedeon</div>
+        <div class="student-details">PhD</div>
+        <div class="student-links">
+          <a href="https://scholar.google.com/citations?user=z-fQRcUAAAAJ&hl=en" class="icon-link scholar-icon" title="Google Scholar">🎓</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="student-card">
+      <div class="fallback-avatar">YL</div>
+      <div class="student-info">
+        <div class="student-name">Yang Liu</div>
+        <div class="student-details">@CECS/ANU</div>
+        <div class="student-details">Co-advise with Tom Gedeon</div>
+        <div class="student-details">PhD</div>
+        <div class="student-links">
+          <a href="https://scholar.google.com/citations?user=SLCxOTEAAAAJ&hl=en" class="icon-link scholar-icon" title="Google Scholar">🎓</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 </body>
 </html>
