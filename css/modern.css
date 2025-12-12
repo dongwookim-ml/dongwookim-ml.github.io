@@ -795,15 +795,10 @@ a:hover {
   margin-bottom: 0.5rem;
 }
 
-.pub-venue {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-bottom: 0.75rem;
-}
-
-.pub-links {
+.pub-meta {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.5rem;
 }
 
@@ -831,7 +826,6 @@ a:hover {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  margin-right: 0.5rem;
 }
 
 .pub-badge-venue {

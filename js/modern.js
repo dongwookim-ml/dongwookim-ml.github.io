@@ -230,13 +230,15 @@ function loadPublications() {
       if (pub.project) linksHtml += `<a href="${pub.project}" target="_blank" class="pub-link"><i class="fas fa-globe"></i> Project</a>`;
 
       let badgeHtml = `<span class="pub-badge pub-badge-venue">${pub.venue}</span>`;
-      if (pub.badge) badgeHtml += `<span class="pub-badge pub-badge-award">${pub.badge}</span>`;
+      if (pub.badge) {
+        const badgeEmoji = pub.badge.toLowerCase() === 'oral' || pub.badge.toLowerCase() === 'spotlight' ? '🔥 ' : '';
+        badgeHtml += `<span class="pub-badge pub-badge-award">${badgeEmoji}${pub.badge}</span>`;
+      }
 
       pubItem.innerHTML = `
         <div class="pub-title">${pub.title}</div>
         <div class="pub-authors">${pub.authors}</div>
-        <div class="pub-venue">${badgeHtml}</div>
-        <div class="pub-links">${linksHtml}</div>
+        <div class="pub-meta">${badgeHtml}${linksHtml}</div>
       `;
 
       pubList.appendChild(pubItem);
