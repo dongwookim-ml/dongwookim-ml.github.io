@@ -769,7 +769,7 @@ a:hover {
 }
 
 .pub-item {
-  padding: 1.5rem;
+  padding: 1rem;
   background: var(--bg-card);
   border-radius: 12px;
   margin-bottom: 1rem;
@@ -834,7 +834,7 @@ a:hover {
 }
 
 .pub-badge-venue {
-  background: rgba(102, 126, 234, 0.15);
+  background: rgba(234, 102, 230, 0.15);
   color: var(--primary-color);
 }
 
