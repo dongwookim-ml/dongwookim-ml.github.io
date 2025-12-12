@@ -21,6 +21,11 @@
 
 const NEWS_DATA = [
   {
+    date: 'Dec 2025',
+    emoji: '📄',
+    text: 'A paper accepted to AAAI 2025 as oral presentation'
+  },  
+  {
     date: 'Sep 2025',
     emoji: '📄',
     text: 'Two papers accepted to NeurIPS 2025 (1 spotlight)'
