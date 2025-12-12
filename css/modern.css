@@ -2,11 +2,11 @@
 /* For POSTECH Machine Learning Lab */
 
 :root {
-  /* Color Palette - Modern AI/Tech feel */
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --primary-color: #667eea;
-  --primary-dark: #5a67d8;
-  --secondary-color: #764ba2;
+  /* Color Palette - Dark Purple theme */
+  --primary-gradient: linear-gradient(135deg, #4a1a6b 0%, #2d1b4e 100%);
+  --primary-color: #5e2d82;
+  --primary-dark: #4a1a6b;
+  --secondary-color: #2d1b4e;
   --accent-color: #06d6a0;
   --accent-gradient: linear-gradient(135deg, #06d6a0 0%, #118ab2 100%);
 

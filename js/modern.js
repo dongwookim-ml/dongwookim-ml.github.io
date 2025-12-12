@@ -1,6 +1,11 @@
 /**
  * Modern Academic Website JavaScript
  * For POSTECH Machine Learning Lab
+ *
+ * Data is loaded from external files in /data/ folder:
+ *   - data/news.js       -> NEWS_DATA
+ *   - data/publications.js -> PUBLICATIONS_DATA
+ *   - data/team.js       -> TEAM_DATA
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -148,25 +153,19 @@ function initResearchCards() {
 
 /**
  * Load News Items as Timeline
+ * Data source: data/news.js -> NEWS_DATA
  */
 function loadNews() {
   const newsContainer = document.getElementById('news-timeline');
   if (!newsContainer) return;
 
-  const newsItems = [
-    { date: 'Sep 2025', emoji: '📄', text: 'Two papers accepted to NeurIPS 2025 (1 spotlight)' },
-    { date: 'Aug 2025', emoji: '🎉', text: 'Four papers accepted to EMNLP 2025 (2 mains, 2 findings)' },
-    { date: 'Jul 2025', emoji: '🏆', text: 'Serving as Area Chair for NeurIPS 2025' },
-    { date: 'Jun 2025', emoji: '📄', text: 'Paper accepted to ICCV 2025' },
-    { date: 'Jun 2025', emoji: '🏆', text: 'Seunghyuk wins Presidential Science Scholarship' },
-    { date: 'May 2025', emoji: '📊', text: 'Paper accepted to KDD 2025 (Dataset & Benchmark)' },
-    { date: 'May 2025', emoji: '💊', text: 'Paper accepted to ICML 2025' },
-    { date: 'Feb 2025', emoji: '👋', text: 'Seokwon and Sunghyun join the lab. Welcome!' },
-    { date: 'Jan 2025', emoji: '🎉', text: 'Moonjeong wins BK21 Best Paper Award at POSTECH GSAI' },
-    { date: 'Jan 2025', emoji: '📝', text: 'Paper accepted to ICLR 2025' }
-  ];
+  // Check if NEWS_DATA is loaded from external file
+  if (typeof NEWS_DATA === 'undefined') {
+    console.warn('NEWS_DATA not found. Make sure data/news.js is loaded.');
+    return;
+  }
 
-  newsItems.forEach((item, index) => {
+  NEWS_DATA.forEach((item, index) => {
     const timelineItem = document.createElement('div');
     timelineItem.className = 'timeline-item fade-in';
     timelineItem.style.transitionDelay = (index * 0.1) + 's';
@@ -189,84 +188,23 @@ function loadNews() {
 }
 
 /**
- * Load Publications (Recent/Featured)
+ * Load Publications
+ * Data source: data/publications.js -> PUBLICATIONS_DATA
  */
 function loadPublications() {
   const pubContainer = document.getElementById('publications-container');
   if (!pubContainer) return;
 
-  const publications = {
-    '2025': [
-      {
-        title: 'High-order Equivariant Flow Matching for DFT Hamiltonian Prediction',
-        authors: 'Seongsu Kim, Nayoung Kim, Dongwoo Kim, Sungsoo Ahn',
-        venue: 'NeurIPS',
-        badge: 'Spotlight',
-        arxiv: 'https://arxiv.org/abs/2505.18817'
-      },
-      {
-        title: 'Influence Functions for Edge Edits in Non-Convex Graph Neural Networks',
-        authors: 'Jaeseung Heo, Kyeongheung Yun, Seokwon Yoon, MoonJeong Park, Jungseul Ok, Dongwoo Kim',
-        venue: 'NeurIPS',
-        arxiv: 'https://arxiv.org/abs/2506.04694'
-      },
-      {
-        title: 'CoPL: Collaborative Preference Learning for Personalizing LLMs',
-        authors: 'Youngbin Choi, Seunghyuk Cho, Minjong Lee, MoonJeong Park, Yesong Ko, Jungseul Ok, Dongwoo Kim',
-        venue: 'EMNLP',
-        arxiv: 'https://arxiv.org/abs/2503.01658'
-      },
-      {
-        title: 'Holistic Unlearning Benchmark for Text-to-Image Diffusion Models',
-        authors: 'Saemi Moon*, Minjong Lee*, Sangdon Park, Dongwoo Kim',
-        venue: 'ICCV',
-        arxiv: 'https://arxiv.org/abs/2410.05664',
-        github: 'https://github.com/ml-postech/HUB',
-        project: 'https://saemi410.github.io/HUB/'
-      },
-      {
-        title: 'Enhancing Ligand Validity and Affinity with Multi-Reward Optimization',
-        authors: 'Seungbeom Lee*, Munsun Jo*, Jungseul Ok, Dongwoo Kim',
-        venue: 'ICML',
-        pdf: 'https://openreview.net/pdf?id=gmFeso9sXJ'
-      },
-      {
-        title: 'Towards Bridging Generalization and Expressivity of Graph Neural Networks',
-        authors: 'Shouheng Li, Floris Geerts, Dongwoo Kim, Qing Wang',
-        venue: 'ICLR',
-        arxiv: 'https://arxiv.org/abs/2410.10051'
-      }
-    ],
-    '2024': [
-      {
-        title: 'Mitigating Over-smoothing through Reverse Process GNN for Heterophilic Graphs',
-        authors: 'MoonJeong Park, Jaeseung Heo, Dongwoo Kim',
-        venue: 'ICML',
-        arxiv: 'https://arxiv.org/abs/2403.10543'
-      },
-      {
-        title: 'Few-shot Unlearning',
-        authors: 'Youngsik Yoon*, Jinhwan Nam*, Jaeho Lee, Dongwoo Kim, Jungseul Ok',
-        venue: 'IEEE S&P',
-        arxiv: 'https://arxiv.org/abs/2205.15567',
-        github: 'https://github.com/ml-postech/Few-shot-Unlearning'
-      },
-      {
-        title: 'Hierarchical Graph Generation with K2-trees',
-        authors: 'Yunhui Jang, Dongwoo Kim, Sungsoo Ahn',
-        venue: 'ICLR',
-        arxiv: 'https://arxiv.org/abs/2305.19125'
-      },
-      {
-        title: 'Feature Unlearning for Pre-trained GANs and VAEs',
-        authors: 'Saemi Moon, Seunghyuk Cho, Dongwoo Kim',
-        venue: 'AAAI',
-        arxiv: 'https://arxiv.org/abs/2303.05699'
-      }
-    ]
-  };
+  // Check if PUBLICATIONS_DATA is loaded from external file
+  if (typeof PUBLICATIONS_DATA === 'undefined') {
+    console.warn('PUBLICATIONS_DATA not found. Make sure data/publications.js is loaded.');
+    return;
+  }
 
-  Object.keys(publications).forEach((year, yearIndex) => {
+  // Sort years in reverse chronological order (newest first)
+  const sortedYears = Object.keys(PUBLICATIONS_DATA).sort((a, b) => parseInt(b) - parseInt(a));
+
+  sortedYears.forEach((year, yearIndex) => {
     const yearSection = document.createElement('div');
     yearSection.className = 'pub-year fade-in';
     yearSection.style.transitionDelay = (yearIndex * 0.1) + 's';
@@ -281,7 +219,7 @@ function loadPublications() {
 
     const pubList = yearSection.querySelector('.pub-list');
 
-    publications[year].forEach(pub => {
+    PUBLICATIONS_DATA[year].forEach(pub => {
       const pubItem = document.createElement('li');
       pubItem.className = 'pub-item';
 
@@ -314,100 +252,19 @@ function loadPublications() {
 
 /**
  * Load Team Members
+ * Data source: data/team.js -> TEAM_DATA
  */
 function loadTeam() {
   const teamContainer = document.getElementById('team-container');
   if (!teamContainer) return;
 
-  const team = {
-    'PhD & Combined Students': [
-      {
-        name: 'Moonjeong Park',
-        dept: 'GSAI',
-        research: 'Graph Neural Networks, Dynamical Systems',
-        photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/mjpark_profile.jpeg',
-        homepage: 'https://jeong27.github.io/',
-        scholar: 'https://scholar.google.com/citations?user=EY_FX_sAAAAJ'
-      },
-      {
-        name: 'Seungbeom Lee',
-        dept: 'GSAI',
-        research: 'Geometric Deep Learning, ML for Biology',
-        photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/sblee_profile.jpg'
-      },
-      {
-        name: 'Seunghyuk Cho',
-        dept: 'GSAI',
-        research: 'Generative Models, Riemannian Geometry',
-        photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/shcho_profile.jpg',
-        homepage: 'https://seunghyukcho.github.io',
-        scholar: 'https://scholar.google.com/citations?hl=en&user=4OOM9_cAAAAJ'
-      },
-      {
-        name: 'Jaeseung Heo',
-        dept: 'GSAI',
-        research: 'Graph Neural Networks, Data-Centric AI',
-        photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/jsheo_profile.jpg'
-      },
-      {
-        name: 'Saemi Moon',
-        dept: 'CSE',
-        research: 'Trustworthy AI',
-        photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/smmoon_profile.jpeg',
-        homepage: 'https://saemi410.github.io/',
-        scholar: 'https://scholar.google.com/citations?user=FKyWiZMAAAAJ'
-      },
-      {
-        name: 'Youngbin Choi',
-        dept: 'CSE',
-        research: 'LLM Personalization',
-        photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/ybchoi_profile.jpg',
-        scholar: 'https://scholar.google.com/citations?user=oh2ATg8AAAAJ'
-      },
-      {
-        name: 'Minjong Lee',
-        dept: 'CSE',
-        research: 'Generative Models',
-        photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/minjonglee_profile.jpg',
-        homepage: 'https://minjong-lee.github.io/',
-        scholar: 'https://scholar.google.com/citations?hl=en&user=peXGkQwAAAAJ'
-      },
-      {
-        name: 'Kyeongheung Yun',
-        dept: 'CSE',
-        research: 'Graph Neural Networks',
-        photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/khyun_profile.jpg'
-      },
-      {
-        name: 'Seokwon Yoon',
-        dept: 'CSE',
-        research: 'Machine Learning',
-        photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/swyoon_profile.JPG'
-      },
-      {
-        name: 'Chongtae Ahn',
-        dept: 'GSAI',
-        research: 'Machine Learning (Industrial PhD from POSCO)',
-        photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/chongtaeahn_profile.jpg'
-      }
-    ],
-    'MS Students': [
-      {
-        name: 'Yesong Ko',
-        dept: 'CSE',
-        research: 'Machine Learning',
-        photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/ysko_profile.png'
-      },
-      {
-        name: 'Sunghyun Choi',
-        dept: 'GSAI',
-        research: 'Machine Learning, Generative Models',
-        photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/shchoi_profile.jpg'
-      }
-    ]
-  };
+  // Check if TEAM_DATA is loaded from external file
+  if (typeof TEAM_DATA === 'undefined') {
+    console.warn('TEAM_DATA not found. Make sure data/team.js is loaded.');
+    return;
+  }
 
-  Object.keys(team).forEach((category, catIndex) => {
+  Object.keys(TEAM_DATA).forEach((category, catIndex) => {
     const section = document.createElement('div');
     section.className = 'student-section-grid fade-in';
     section.style.transitionDelay = (catIndex * 0.1) + 's';
@@ -417,7 +274,7 @@ function loadTeam() {
     const grid = document.createElement('div');
     grid.className = 'students-grid';
 
-    team[category].forEach(member => {
+    TEAM_DATA[category].forEach(member => {
       const card = document.createElement('div');
       card.className = 'student-card';
 
