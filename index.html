@@ -3,112 +3,430 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dongwoo Kim</title>
+  <title>Dongwoo Kim | Machine Learning Lab @ POSTECH</title>
+  <meta name="description" content="Associate Professor at POSTECH, leading the Machine Learning Lab. Research focuses on geometric structure of datasets and models in machine learning.">
   <link rel="icon" href="images/dw-sq.svg" type="image/svg+xml" sizes="16x16">
-  <!-- Font Awesome icons (free version) -->
-  <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-  <!-- Google fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <!-- Core theme CSS (includes Bootstrap) -->
-  <link href="css/custom.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+
+  <!-- Modern CSS -->
+  <link href="css/modern.css" rel="stylesheet">
 </head>
-<body id="page-top">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">
-            <span class="d-block d-lg-none">Dongwoo Kim</span>
-            <span class="d-none d-lg-block">
-                <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="images/profile.jpg" alt="Profile image of Dongwoo Kim" />
-            </span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#bio">Bio</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#publication">Publications</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#student">Students</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
-            </ul>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-content">
+      <a href="#" class="navbar-brand">Dongwoo Kim</a>
+      <ul class="navbar-nav" id="navbarNav">
+        <li><a href="#about">About</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#undergrad">For Undergrads</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-particles" id="particles"></div>
+
+    <div class="hero-content">
+      <span class="hero-badge">Machine Learning Lab @ POSTECH</span>
+      <h1>Understanding <span class="highlight">Geometry</span> in Machine Learning</h1>
+      <p class="hero-subtitle">
+        We study the geometric structure of datasets and models, and how they influence machine learning algorithms.
+      </p>
+
+      <div class="hero-profile">
+        <img src="images/profile.jpg" alt="Prof. Dongwoo Kim">
+        <div class="hero-profile-info">
+          <div class="name">Prof. Dongwoo Kim</div>
+          <div class="title">Associate Professor, CSE & GSAI</div>
         </div>
-    </nav>
-    <main class="container-fluid p-0" role="main">
-        <section class="resume-section" id="about">
-            <div class="resume-section-content">
-                <h1 class="mb-0">
-                    Dongwoo
-                    <span class="text-primary">Kim</span>
-                </h1>
-                <div class="subheading mb-5">
-                    Associate Professor @ 
-                    <a href="https://cse.postech.ac.kr/" target="_blank" rel="noopener noreferrer">CSE</a> &amp; 
-                    <a href="https://ai.postech.ac.kr/" target="_blank" rel="noopener noreferrer">GSAI</a> 
-                    <a href="https://postech.ac.kr/eng/" target="_blank" rel="noopener noreferrer">Postech</a><br>
-                    Room4413, RIST Research Building IV 
-                    <a href="https://postech.ac.kr/eng/about-postech/campus-life/campus_map/" target="_blank" rel="noopener noreferrer">[R-05]</a><br>
-                    dongwoo.kim @ postech.ac.kr<br>
-                </div>
-                <p class="lead mb-5">
-                    Dongwoo Kim is an associate professor at POSTECH, leading the 
-                    <a href="https://ml.postech.ac.kr" target="_blank" rel="noopener noreferrer">machine learning lab</a>. 
-                    His research primarily focuses on the geometric structure of datasets and models, and how they influence machine learning algorithms. 
-                    He has a history of working as a lecturer at the Australian National University and holds a Ph.D. and M.S. degrees from KAIST, as well as a B.E. from Sungkyunkwan University.
-                    <br>
-                    <i class="fas lead fa-chevron-circle-right"></i> Undergrad students participating CSED399/499: 
-                    <a class="badge" href="https://ml.postech.ac.kr/#research_participate" target="_blank" rel="noopener noreferrer">Research topics</a> 
-                    <a class="badge" href="slides/CSED499.pdf" target="_blank" rel="noopener noreferrer">Instruction</a>
-                </p>
-                <div class="social-icons">
-                    <a class="social-icon" href="mailto:dongwookim@postech.ac.kr">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a class="social-icon icon-gscholar" href="http://scholar.google.com/citations?hl=en&user=RkspD6IAAAAJ" target="_blank" rel="noopener noreferrer">
-                        <i class="icon-gscholar"></i>
-                    </a>
-                    <a class="social-icon" href="https://github.com/dongwookim-ml" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-                
-                <!-- News subsection within About -->
-                <div class="mt-5">
-                    <h3 class="mb-3">News</h3>
-                    <div id="p_news"></div>
-                </div>
-            </div>
-        </section>
-        <hr class="m-0" />
-        <section class="resume-section" id="bio">
-            <div class="resume-section-content">
-                <div id="p_bio"></div>
-            </div>
-        </section>
-        <hr class="m-0" />
-        <section class="resume-section" id="publication">
-            <div class="resume-section-content">
-                <div id="p_publication"></div>
-            </div>
-        </section>
-        <hr class="m-0" />
-        <section class="resume-section" id="student">
-            <div class="resume-section-content">
-                <div id="p_student"></div>
-            </div>
-        </section>
-        <hr class="m-0" />
-        <section class="resume-section" id="contact">
-            <div class="resume-section-content">
-                <div id="p_contact"></div>
-            </div>
-        </section>
-        <hr class="m-0" />
-    </main>
-    <!-- Bootstrap core JS-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+      </div>
+
+      <div class="hero-buttons">
+        <a href="#undergrad" class="btn btn-primary">
+          <i class="fas fa-graduation-cap"></i> Join Our Lab
+        </a>
+        <a href="#research" class="btn btn-outline">
+          <i class="fas fa-flask"></i> View Research
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Scroll to explore</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>About</h2>
+        <p>Associate Professor at POSTECH, leading research in machine learning with focus on geometric deep learning.</p>
+      </div>
+
+      <div class="bio-grid">
+        <div class="bio-card fade-in stagger-1">
+          <h3><span class="icon"><i class="fas fa-briefcase"></i></span> Experience</h3>
+          <ul class="bio-list">
+            <li><strong>POSTECH</strong> - Associate Professor (2024 ~ Present)</li>
+            <li><strong>POSTECH</strong> - Assistant Professor (2019 ~ 2024)</li>
+            <li><strong>ANU</strong> - Honorary Lecturer (2019 ~ 2024)</li>
+            <li><strong>ANU</strong> - Lecturer & Postdoc (2015 ~ 2019)</li>
+            <li><strong>Microsoft Research</strong> - Research Intern (2012, 2013)</li>
+          </ul>
+        </div>
+
+        <div class="bio-card fade-in stagger-2">
+          <h3><span class="icon"><i class="fas fa-graduation-cap"></i></span> Education</h3>
+          <ul class="bio-list">
+            <li><strong>Ph.D.</strong> Computer Science, KAIST (2015)<br>
+              <em>Best Dissertation Award</em></li>
+            <li><strong>M.S.</strong> Computer Science, KAIST (2011)</li>
+            <li><strong>B.S.E.</strong> Computer Science, Sungkyunkwan University (2009)</li>
+          </ul>
+        </div>
+
+        <div class="bio-card fade-in stagger-3">
+          <h3><span class="icon"><i class="fas fa-trophy"></i></span> Selected Awards</h3>
+          <ul class="bio-list">
+            <li>CSE Award, POSTECH (2023)</li>
+            <li>Best Paper Award, CIKM EvalRS (2022)</li>
+            <li>Outstanding Dissertation Award, KAIST (2015)</li>
+            <li>Microsoft Research Fellowship Nominee (2013)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- News Section -->
+  <section class="section section-alt" id="news">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>Latest News</h2>
+        <p>Recent updates and announcements from our lab</p>
+      </div>
+
+      <div class="timeline" id="news-timeline">
+        <!-- News items will be loaded dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Section -->
+  <section class="section" id="research">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>Research Themes</h2>
+        <p>Explore our research areas and discover what drives our scientific inquiry</p>
+      </div>
+
+      <div class="research-grid">
+        <div class="research-card fade-in stagger-1" data-theme="gnn">
+          <div class="research-icon"><i class="fas fa-project-diagram"></i></div>
+          <h3>Graph Neural Networks</h3>
+          <p>Understanding and improving GNNs through geometric perspectives, addressing over-smoothing, and developing novel architectures.</p>
+          <div class="research-tags">
+            <span class="research-tag">Over-smoothing</span>
+            <span class="research-tag">Heterophily</span>
+            <span class="research-tag">Expressivity</span>
+          </div>
+          <div class="research-card-expand">
+            <h4>Recent Papers</h4>
+            <ul class="research-papers">
+              <li><a href="https://arxiv.org/abs/2403.10543">Reverse Process GNN for Heterophilic Graphs</a> - ICML 2024</li>
+              <li><a href="https://arxiv.org/abs/2410.10051">Bridging Generalization and Expressivity</a> - ICLR 2025</li>
+              <li><a href="https://openreview.net/forum?id=szL4HN4hkH">Local Vertex Colouring GNN</a> - ICML 2023</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="research-card fade-in stagger-2" data-theme="geometry">
+          <div class="research-icon"><i class="fas fa-shapes"></i></div>
+          <h3>Geometric Deep Learning</h3>
+          <p>Leveraging hyperbolic and Riemannian geometry for better representation learning of hierarchical and structured data.</p>
+          <div class="research-tags">
+            <span class="research-tag">Hyperbolic</span>
+            <span class="research-tag">VAE</span>
+            <span class="research-tag">Riemannian</span>
+          </div>
+          <div class="research-card-expand">
+            <h4>Recent Papers</h4>
+            <ul class="research-papers">
+              <li><a href="https://arxiv.org/abs/2209.15217">Hyperbolic VAE via Latent Gaussian</a> - NeurIPS 2023</li>
+              <li><a href="https://arxiv.org/abs/2205.13371">Rotated Hyperbolic Wrapped Normal</a> - NeurIPS 2022</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="research-card fade-in stagger-3" data-theme="trustworthy">
+          <div class="research-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Trustworthy AI</h3>
+          <p>Developing methods for machine unlearning, privacy-preserving ML, and robust evaluation of AI systems.</p>
+          <div class="research-tags">
+            <span class="research-tag">Unlearning</span>
+            <span class="research-tag">Privacy</span>
+            <span class="research-tag">Robustness</span>
+          </div>
+          <div class="research-card-expand">
+            <h4>Recent Papers</h4>
+            <ul class="research-papers">
+              <li><a href="https://arxiv.org/abs/2410.05664">Holistic Unlearning Benchmark</a> - ICCV 2025</li>
+              <li><a href="https://arxiv.org/abs/2205.15567">Few-shot Unlearning</a> - S&P 2024</li>
+              <li><a href="https://arxiv.org/abs/2303.09051">Robust Evaluation of Diffusion Purification</a> - ICCV 2023 (Oral)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="research-card fade-in stagger-4" data-theme="ml4science">
+          <div class="research-icon"><i class="fas fa-dna"></i></div>
+          <h3>ML for Science</h3>
+          <p>Applying machine learning to scientific discovery, including drug design, molecular modeling, and computational biology.</p>
+          <div class="research-tags">
+            <span class="research-tag">Drug Design</span>
+            <span class="research-tag">Molecular</span>
+            <span class="research-tag">DFT</span>
+          </div>
+          <div class="research-card-expand">
+            <h4>Recent Papers</h4>
+            <ul class="research-papers">
+              <li><a href="https://arxiv.org/abs/2505.18817">High-order Equivariant Flow Matching</a> - NeurIPS 2025 (Spotlight)</li>
+              <li><a href="https://openreview.net/pdf?id=gmFeso9sXJ">Multi-Reward Drug Design</a> - ICML 2025</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="research-card fade-in stagger-5" data-theme="llm">
+          <div class="research-icon"><i class="fas fa-comment-dots"></i></div>
+          <h3>Language Models</h3>
+          <p>Research on LLM personalization, retrieval-augmented generation, and geometric reasoning in vision-language models.</p>
+          <div class="research-tags">
+            <span class="research-tag">Personalization</span>
+            <span class="research-tag">RAG</span>
+            <span class="research-tag">VLM</span>
+          </div>
+          <div class="research-card-expand">
+            <h4>Recent Papers</h4>
+            <ul class="research-papers">
+              <li><a href="https://arxiv.org/abs/2503.01658">CoPL: Collaborative Preference Learning</a> - EMNLP 2025</li>
+              <li><a href="https://arxiv.org/abs/2410.22954">RAG with Source Reliability</a> - EMNLP 2025</li>
+              <li><a href="https://arxiv.org/abs/2502.11360">GeoDANO: Geometric VLM</a> - EMNLP 2025</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="research-card fade-in stagger-6" data-theme="generation">
+          <div class="research-icon"><i class="fas fa-magic"></i></div>
+          <h3>Generative Models</h3>
+          <p>Advancing graph generation, diffusion models, and generative approaches for structured data.</p>
+          <div class="research-tags">
+            <span class="research-tag">Graph Gen</span>
+            <span class="research-tag">Diffusion</span>
+            <span class="research-tag">VAE</span>
+          </div>
+          <div class="research-card-expand">
+            <h4>Recent Papers</h4>
+            <ul class="research-papers">
+              <li><a href="https://arxiv.org/abs/2305.19125">Hierarchical Graph Generation with K2-trees</a> - ICLR 2024</li>
+              <li><a href="https://arxiv.org/abs/2303.05699">Feature Unlearning for GANs and VAEs</a> - AAAI 2024</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Undergraduate Section -->
+  <section class="section undergrad-section" id="undergrad">
+    <div class="container undergrad-content">
+      <div class="section-header fade-in">
+        <h2>Undergraduate Research</h2>
+        <p>Join our lab and gain hands-on experience in cutting-edge machine learning research</p>
+      </div>
+
+      <div class="undergrad-grid">
+        <div class="undergrad-card fade-in stagger-1">
+          <h4><i class="fas fa-book-open"></i> CSED399/499</h4>
+          <p>Participate in research through POSTECH's undergraduate research program. Work directly with PhD students on ongoing projects.</p>
+        </div>
+
+        <div class="undergrad-card fade-in stagger-2">
+          <h4><i class="fas fa-users"></i> Mentorship</h4>
+          <p>Get paired with a PhD student mentor who will guide you through the research process and help you develop your skills.</p>
+        </div>
+
+        <div class="undergrad-card fade-in stagger-3">
+          <h4><i class="fas fa-lightbulb"></i> Research Topics</h4>
+          <p>Explore topics in GNNs, geometric deep learning, trustworthy AI, and more. Find projects matching your interests.</p>
+        </div>
+
+        <div class="undergrad-card fade-in stagger-4">
+          <h4><i class="fas fa-rocket"></i> Career Paths</h4>
+          <p>Our undergrad alumni have gone on to top PhD programs and industry positions. Build your foundation for a research career.</p>
+        </div>
+      </div>
+
+      <div class="undergrad-cta fade-in">
+        <a href="https://ml.postech.ac.kr/#research_participate" target="_blank" class="btn btn-accent">
+          <i class="fas fa-search"></i> View Research Topics
+        </a>
+        <a href="slides/CSED499.pdf" target="_blank" class="btn btn-white-outline">
+          <i class="fas fa-file-pdf"></i> Program Instructions
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications Section -->
+  <section class="section section-alt" id="publications">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>Publications</h2>
+        <p>Our research published in top venues including NeurIPS, ICML, ICLR, CVPR, and more</p>
+      </div>
+
+      <div id="publications-container">
+        <!-- Publications will be loaded dynamically -->
+      </div>
+
+      <div class="text-center mt-4 fade-in">
+        <a href="https://scholar.google.com/citations?hl=en&user=RkspD6IAAAAJ" target="_blank" class="btn btn-primary">
+          <i class="fas fa-external-link-alt"></i> View All on Google Scholar
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="section" id="team">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>Our Team</h2>
+        <p>Meet the researchers driving innovation in our lab</p>
+      </div>
+
+      <div id="team-container">
+        <!-- Team members will be loaded dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section section-alt" id="contact">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>Contact</h2>
+        <p>Get in touch or schedule a meeting</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card fade-in stagger-1">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <h4>Email</h4>
+          <p><a href="mailto:dongwoo.kim@postech.ac.kr">dongwoo.kim@postech.ac.kr</a></p>
+        </div>
+
+        <div class="contact-card fade-in stagger-2">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <h4>Office</h4>
+          <p>Room 4413, RIST Building IV<br>POSTECH, Pohang, Korea</p>
+        </div>
+
+        <div class="contact-card fade-in stagger-3">
+          <div class="contact-icon"><i class="fas fa-globe"></i></div>
+          <h4>Lab Website</h4>
+          <p><a href="https://ml.postech.ac.kr" target="_blank">ml.postech.ac.kr</a></p>
+        </div>
+      </div>
+
+      <div class="fade-in">
+        <h3 class="text-center mb-4">For Prospective Students</h3>
+        <div class="bio-card" style="max-width: 800px; margin: 0 auto;">
+          <ol style="padding-left: 1.5rem; margin: 0;">
+            <li style="margin-bottom: 1rem;">
+              <strong>I can supervise students from CSE and GSAI.</strong> You may apply to either program.
+            </li>
+            <li style="margin-bottom: 1rem;">
+              <strong>Gain research experience:</strong>
+              <ul style="margin-top: 0.5rem;">
+                <li>POSTECH undergrads: Join through CSED399/499</li>
+                <li>Currently no openings for external students</li>
+              </ul>
+            </li>
+            <li style="margin-bottom: 1rem;">
+              <strong>Apply to POSTECH Graduate School:</strong>
+              <a href="https://cse.postech.ac.kr/admission-information/graduate-course/">CSE</a> |
+              <a href="https://ai.postech.ac.kr/sub040101">GSAI</a>
+            </li>
+            <li style="margin-bottom: 1rem;">
+              <strong>After admission:</strong> Send your CV via email
+            </li>
+            <li>
+              <strong>Lab interview:</strong> Schedule will be announced
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="text-center mt-5 fade-in">
+        <h4 class="mb-3">Schedule Office Hours</h4>
+        <p class="mb-3" style="color: var(--text-secondary);">Book a 15 or 30 minute meeting slot</p>
+        <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ230o1fvxeoLXOzZnwKh5U17F9XYzbCjSTdDaf9B5UsfaHsGBnUVGx2eFtOxSDM2554mhUUFA1v"
+           target="_blank" class="btn btn-primary">
+          <i class="fas fa-calendar-alt"></i> Schedule Meeting
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="social-links">
+        <a href="mailto:dongwoo.kim@postech.ac.kr" class="social-link" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://scholar.google.com/citations?hl=en&user=RkspD6IAAAAJ" target="_blank" class="social-link" title="Google Scholar">
+          <i class="fas fa-graduation-cap"></i>
+        </a>
+        <a href="https://github.com/dongwookim-ml" target="_blank" class="social-link" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://ml.postech.ac.kr" target="_blank" class="social-link" title="Lab Website">
+          <i class="fas fa-flask"></i>
+        </a>
+      </div>
+      <div class="footer-links">
+        <a href="https://postech.ac.kr" target="_blank">POSTECH</a>
+        <a href="https://cse.postech.ac.kr" target="_blank">CSE</a>
+        <a href="https://ai.postech.ac.kr" target="_blank">GSAI</a>
+        <a href="https://ml.postech.ac.kr" target="_blank">ML Lab</a>
+      </div>
+      <p class="footer-copy">&copy; 2025 Dongwoo Kim. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/modern.js"></script>
 </body>
 </html>
