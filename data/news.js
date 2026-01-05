@@ -22,6 +22,11 @@
 const NEWS_DATA = [
   {
     date: 'Jan 2026',
+    emoji: '🇰🇷',
+    text: 'Serving as Area Chair for ICML 2026'
+  },
+  {
+    date: 'Jan 2026',
     emoji: '🇲🇦',
     text: 'Two papers accepted to EACL 2026 Findings'
   },
