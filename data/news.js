@@ -21,9 +21,14 @@
 
 const NEWS_DATA = [
   {
+    date: 'Jan 2026',
+    emoji: '🇲🇦',
+    text: 'Two papers accepted to EACL 2026 Findings'
+  },
+  {
     date: 'Dec 2025',
     emoji: '📄',
-    text: 'A paper accepted to AAAI 2025 as oral presentation'
+    text: 'A paper accepted to AAAI 2026 as oral presentation'
   },  
   {
     date: 'Sep 2025',
