@@ -4,554 +4,676 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Publications | Dongwoo Kim</title>
-  <link rel="stylesheet" href="../css/custom.css">
+  <meta name="description" content="Full publication list of Prof. Dongwoo Kim, POSTECH Machine Learning Lab">
+  <link rel="icon" href="../images/dw-sq.svg" type="image/svg+xml" sizes="16x16">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+
+  <!-- Modern CSS -->
+  <link href="../css/modern.css" rel="stylesheet">
+
+  <style>
+    /* Publication Page Specific Styles */
+    .pub-page-header {
+      background: var(--primary-gradient);
+      padding: 120px 0 60px;
+      color: white;
+      text-align: center;
+    }
+    .pub-page-header h1 {
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+    .pub-page-header p {
+      color: rgba(255,255,255,0.8);
+      margin: 0;
+    }
+    .pub-page-content {
+      padding: 60px 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .pub-section {
+      margin-bottom: 3rem;
+    }
+    .pub-section h3 {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent-color);
+    }
+    .pub-section ul {
+      list-style: none;
+      padding: 0;
+    }
+    .pub-section li {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      transition: var(--transition-fast);
+    }
+    .pub-section li:hover {
+      box-shadow: var(--glass-shadow);
+      transform: translateY(-2px);
+    }
+    .pub-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    .pub-authors {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .pub-venue {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      margin-right: 0.4rem;
+      margin-top: 0.4rem;
+      transition: var(--transition-fast);
+    }
+    .badge-info {
+      background: var(--primary-color);
+      color: white;
+    }
+    .badge-warning {
+      background: #f59e0b;
+      color: white;
+    }
+    .badge-danger {
+      background: var(--accent-color);
+      color: white;
+    }
+    a.badge {
+      background: #e2e8f0;
+      color: var(--text-primary);
+    }
+    a.badge:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      color: var(--primary-color);
+      font-weight: 500;
+    }
+    .back-link:hover {
+      color: var(--secondary-color);
+    }
+  </style>
 </head>
 <body>
-<main id="publication">
-  <h2>Publications</h2>
+  <!-- Header -->
+  <header class="pub-page-header">
+    <div class="container">
+      <h1>Publications</h1>
+      <p>Full list of academic publications</p>
+    </div>
+  </header>
 
-  <!-- ============================= -->
-  <!--       PREPRINTS SECTION      -->
-  <!-- ============================= -->
-  <h3 class="sub-header">Work in Progress</h3>
-  <ul>
-    <!-- Reverse-chronological by arXiv date or approximate year -->
+  <!-- Content -->
+  <main class="pub-page-content">
+    <div class="container">
+      <a href="../index.html#publications" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
 
-    <li>
-      <b>In-Place Feedback: A New Paradigm for Guiding LLMs in Multi-Turn Reasoning</b><br>
-      Youngbin Choi, Minjong Lee, Saemi Moon, Seunghyuk Cho, Chaehyeon Chung, MoonJeong Park, Dongwoo Kim
-      <a class="badge" href="https://arxiv.org/abs/2510.00777">arXiv</a>
-    </li>
-    <li>
-      <b>The Oversmoothing Fallacy: A Misguided Narrative in GNN Research</b><br>
-      MoonJeong Park, Sunghyun Choi, Jaeseung Heo, Eunhyeok Park, Dongwoo Kim
-      <a class="badge" href="https://www.arxiv.org/abs/2506.04653">arXiv</a>
-    </li>
+      <!-- Work in Progress -->
+      <div class="pub-section">
+        <h3>Work in Progress</h3>
+        <ul>
+          <li>
+            <div class="pub-title">In-Place Feedback: A New Paradigm for Guiding LLMs in Multi-Turn Reasoning</div>
+            <div class="pub-authors">Youngbin Choi, Minjong Lee, Saemi Moon, Seunghyuk Cho, Chaehyeon Chung, MoonJeong Park, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <a class="badge" href="https://arxiv.org/abs/2510.00777">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">The Oversmoothing Fallacy: A Misguided Narrative in GNN Research</div>
+            <div class="pub-authors">MoonJeong Park, Sunghyun Choi, Jaeseung Heo, Eunhyeok Park, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <a class="badge" href="https://www.arxiv.org/abs/2506.04653">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Plane Geometry Problem Solving with Multi-modal Reasoning: A Survey</div>
+            <div class="pub-authors">Seunghyuk Cho, Zhenyue Qin, Yang Liu, Youngbin Choi, Seungbeom Lee, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <a class="badge" href="https://arxiv.org/abs/2505.14340">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Taming Gradient Oversmoothing and Expansion in Graph Neural Networks</div>
+            <div class="pub-authors">Moonjeong Park, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <a class="badge" href="https://arxiv.org/abs/2410.04824">arXiv</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-    <li>
-      <b>Plane Geometry Problem Solving with Multi-modal Reasoning: A Survey</b><br>
-      Seunghyuk Cho, Zhenyue Qin, Yang Liu, Youngbin Choi, Seungbeom Lee, Dongwoo Kim
-      <a class="badge" href="https://arxiv.org/abs/2505.14340">arXiv</a>
-    </li>
-    <li>
-      <b>Taming Gradient Oversmoothing and Expansion in Graph Neural Networks</b><br>
-      Moonjeong Park, Dongwoo Kim
-      <a class="badge" href="https://arxiv.org/abs/2410.04824">arXiv</a>
-    </li>
+      <!-- 2026 -->
+      <div class="pub-section">
+        <h3>2026</h3>
+        <ul>
+          <li>
+            <div class="pub-title">Posterior Label Smoothing for Node Classification</div>
+            <div class="pub-authors">Jaeseung Heo, Moonjeong Park, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">AAAI</span>
+              <span class="badge badge-warning">Oral</span>
+              <a class="badge" href="https://arxiv.org/abs/2406.00410">arXiv</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-  </ul>
+      <!-- 2025 -->
+      <div class="pub-section">
+        <h3>2025</h3>
+        <ul>
+          <li>
+            <div class="pub-title">Influence Functions for Edge Edits in Non-Convex Graph Neural Networks</div>
+            <div class="pub-authors">Jaeseung Heo, Kyeongheung Yun, Seokwon Yoon, MoonJeong Park, Jungseul Ok, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">NeurIPS</span>
+              <a class="badge" href="https://arxiv.org/abs/2506.04694">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">High-order Equivariant Flow Matching for Density Functional Theory Hamiltonian Prediction</div>
+            <div class="pub-authors">Seongsu Kim, Nayoung Kim, Dongwoo Kim, Sungsoo Ahn</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">NeurIPS</span>
+              <span class="badge badge-warning">Spotlight</span>
+              <a class="badge" href="https://arxiv.org/abs/2505.18817">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">CoPL: Collaborative Preference Learning for Personalizing Large Language Models</div>
+            <div class="pub-authors">Youngbin Choi, Seunghyuk Cho, Minjong Lee, MoonJeong Park, Yesong Ko, Jungseul Ok, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">EMNLP</span>
+              <a class="badge" href="https://arxiv.org/abs/2503.01658">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Retrieval-Augmented Generation with Estimation of Source Reliability</div>
+            <div class="pub-authors">Jeongyeon Hwang, Junyoung Park, Hyejin Park, Dongwoo Kim, Sangdon Park, Jungseul Ok</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">EMNLP</span>
+              <a class="badge" href="https://arxiv.org/abs/2410.22954">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">GeoDANO: Geometric VLM with Domain Agnostic Vision Encoder</div>
+            <div class="pub-authors">Seunghyuk Cho, Zhenyue Qin, Yang Liu, Youngbin Choi, Seungbeom Lee, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">EMNLP Findings</span>
+              <a class="badge" href="https://arxiv.org/abs/2502.11360">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">ChronoBias: A Benchmark for Evaluating Time-conditional Group Bias in the Time-sensitive Knowledge of Large Language Models</div>
+            <div class="pub-authors">Kyungmin Kim, Youngbin Choi, Hyounghun Kim, Dongwoo Kim, Sangdon Park</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">EMNLP Findings</span>
+              <a class="badge" href="https://aclanthology.org/2025.findings-emnlp.405.pdf">PDF</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Holistic Unlearning Benchmark: A Multi-Faceted Evaluation for Text-to-Image Diffusion Model Unlearning</div>
+            <div class="pub-authors">Saemi Moon*, Minjong Lee*, Sangdon Park, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">ICCV</span>
+              <a class="badge" href="https://arxiv.org/abs/2410.05664">arXiv</a>
+              <a class="badge" href="https://github.com/ml-postech/HUB">GitHub</a>
+              <a class="badge badge-danger" href="https://saemi410.github.io/HUB/">Project</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Delving into Instance-Dependent Label Noise in Graph Data: A Comprehensive Study and Benchmark</div>
+            <div class="pub-authors">Suyeon Kim, SeongKu Kang, Dongwoo Kim, Jungseul Ok, Hwanjo Yu</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">KDD</span> Datasets and Benchmarks
+              <a class="badge" href="https://dl.acm.org/doi/10.1145/3711896.3737376">ACM</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Enhancing Ligand Validity and Affinity in Structure-Based Drug Design with Multi-Reward Optimization</div>
+            <div class="pub-authors">Seungbeom Lee*, Munsun Jo*, Jungseul Ok, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">ICML</span>
+              <a class="badge" href="https://openreview.net/pdf?id=gmFeso9sXJ">PDF</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Towards Bridging Generalization and Expressivity of Graph Neural Networks</div>
+            <div class="pub-authors">Shouheng Li, Floris Geerts, Dongwoo Kim, Qing Wang</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">ICLR</span>
+              <a class="badge" href="https://arxiv.org/abs/2410.10051">arXiv</a>
+              <br><em style="font-size: 0.85rem; color: var(--text-muted);">In loving memory of our collaborator and friend, Qing.</em>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-  <!-- ============================= -->
-  <!--         2026                 -->
-  <!-- ============================= -->
-  <h3 class="sub-header">2026</h3>  
-  <ul>  
-    <li>
-      <b>Posterior Label Smoothing for Node Classification</b><br>
-      Jaeseung Heo, Moonjeong Park, Dongwoo Kim<br>
-      AAAI Conference on Artificial Intelligence (<span class="badge badge-info">AAAI</span>), 2026
-      <a class="badge" href="https://arxiv.org/abs/2406.00410">arXiv</a> <span class="badge badge-warning">Oral</span> <br>
-      <span class="badge badge-info">NeurIPS</span> workshop on New Perspectives in Graph Machine Learning (NPGML), 2025
-    </li>  
-  </ul>
+      <!-- 2024 -->
+      <div class="pub-section">
+        <h3>2024</h3>
+        <ul>
+          <li>
+            <div class="pub-title">Mitigating over-smoothing through reverse process GNN for heterophilic graphs</div>
+            <div class="pub-authors">MoonJeong Park, Jaeseung Heo, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">ICML</span>
+              <a class="badge" href="https://arxiv.org/abs/2403.10543">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">EPIC: Graph Augmentation with Edit Path Interpolation via Learnable Cost</div>
+            <div class="pub-authors">Jaeseung Heo*, Seungbeom Lee*, Sungsoo Ahn, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">IJCAI</span>
+              <a class="badge" href="https://arxiv.org/abs/2306.01310">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Few-shot unlearning</div>
+            <div class="pub-authors">Youngsik Yoon*, Jinhwan Nam*, Jaeho Lee, Dongwoo Kim, Jungseul Ok</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">IEEE S&P</span>
+              <a class="badge" href="https://arxiv.org/abs/2205.15567">arXiv</a>
+              <a class="badge" href="https://github.com/ml-postech/Few-shot-Unlearning">GitHub</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Position-Sensing Graph Neural Networks: Proactively Learning Nodes Relative Positions</div>
+            <div class="pub-authors">Zhenyue Qin, Saeed Anwar, Dongwoo Kim, Yang Liu, Pan Ji, Tom Gedeon</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">TNNLS</span>
+              <a class="badge" href="https://ieeexplore.ieee.org/document/10478451">IEEE</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Hierarchical Graph Generation with K2-trees</div>
+            <div class="pub-authors">Yunhui Jang, Dongwoo Kim, Sungsoo Ahn</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">ICLR</span>
+              <a class="badge" href="https://arxiv.org/abs/2305.19125">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Feature Unlearning for Pre-trained GANs and VAEs</div>
+            <div class="pub-authors">Saemi Moon, Seunghyuk Cho, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">AAAI</span>
+              <a class="badge" href="https://arxiv.org/abs/2303.05699">arXiv</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-  <!-- ============================= -->
-  <!--         2025                 -->
-  <!-- ============================= -->
-  <h3 class="sub-header">2025</h3>
-  <ul>
-    <li>
-      <b>Influence Functions for Edge Edits in Non-Convex Graph Neural Networks</b><br>
-      Jaeseung Heo, Kyeongheung Yun, Seokwon Yoon, MoonJeong Park, Jungseul Ok, Dongwoo Kim<br>
-      Advances in Neural Information Processing Systems (<span class="badge badge-info">NeurIPS</span>), 2025
-      <a class="badge" href="https://arxiv.org/abs/2506.04694">arXiv</a>
-    </li>    
-    <li>
-      <b>High-order Equivariant Flow Matching for Density Functional Theory Hamiltonian Prediction</b><br>
-      Seongsu Kim, Nayoung Kim, Dongwoo Kim, Sungsoo Ahn<br>
-      Advances in Neural Information Processing Systems (<span class="badge badge-info">NeurIPS</span>), 2025
-      <a class="badge badge-danger">spotlight</a> <a class="badge" href="https://arxiv.org/abs/2505.18817">arXiv</a>
-    </li>
-    <li>
-      <b>CoPL: Collaborative Preference Learning for Personalizing Large Language Models</b><br>
-      Youngbin Choi, Seunghyuk Cho, Minjong Lee, MoonJeong Park, Yesong Ko, Jungseul Ok, Dongwoo Kim <br>
-      Empirical Methods in Natural Language Processing <span class="badge-info"> (EMNLP)</span>, 2025 <br>
-      <span class="badge badge-info">ICLR</span> Workshop on Bidirectional Human↔AI alignment (Bi-Align), 2025
-      <a class="badge" href="https://arxiv.org/abs/2503.01658">arXiv</a>
-    </li> 
-    <li>
-      <b>Retrieval-Augmented Generation with Estimation of Source Reliability</b><br>
-      Jeongyeon Hwang, Junyoung Park, Hyejin Park, Dongwoo Kim, Sangdon Park, Jungseul Ok <br>
-      Empirical Methods in Natural Language Processing <span class="badge-info"> (EMNLP)</span>, 2025
-      <a class="badge" href="https://arxiv.org/abs/2410.22954">arXiv</a>
-    </li>    
-    <li>
-      <b>GeoDANO: Geometric VLM with Domain Agnostic Vision Encoder</b><br>
-      Seunghyuk Cho, Zhenyue Qin, Yang Liu, Youngbin Choi, Seungbeom Lee, Dongwoo Kim<br>
-      Findings of Empirical Methods in Natural Language Processing <span class="badge-info"> (EMNLP-Findings)</span>, 2025 <br>
-      <span class="badge badge-info">ICLR</span> Workshop on Open Science for Foundation Models (SCI-FM), 2025
-      <a class="badge" href="https://arxiv.org/abs/2502.11360">arXiv</a>
-    </li>		  
-    <li>
-      <b>ChronoBias: A Benchmark for Evaluating Time-conditional Group Bias in the Time-sensitive Knowledge of Large Language Models</b><br>
-      Kyungmin Kim, Youngbin Choi, Hyounghun Kim, Dongwoo Kim, Sangdon Park <br>
-      Findings of Empirical Methods in Natural Language Processing <span class="badge-info"> (EMNLP-Findings)</span>, 2025
-      <a class="badge" href="https://aclanthology.org/2025.findings-emnlp.405.pdf">PDF</a>
-    </li>
-    <li>
-      <b>Holistic Unlearning Benchmark: A Multi-Faceted Evaluation for Text-to-Image Diffusion Model Unlearning</b><br>
-      Saemi Moon*, Minjong Lee*, Sangdon Park, Dongwoo Kim <br>
-      International Conference on Computer Vision (<span class="badge badge-info">ICCV</span>), 2025 
-      <a class="badge" href="https://arxiv.org/abs/2410.05664">arXiv</a> <a class="badge" href="https://github.com/ml-postech/HUB">Github</a> <a class="badge badge-danger" href="https://saemi410.github.io/HUB/">Project Page</a> 
-    </li> 
-    <li>
-      <b>Delving into Instance-Dependent Label Noise in Graph Data: A Comprehensive Study and Benchmark</b><br>
-      Suyeon Kim, SeongKu Kang, Dongwoo Kim, Jungseul Ok, Hwanjo Yu <br>
-      ACM SIGKDD Conference on Knowledge Discovery and Data Mining (<span class="badge badge-info">KDD</span>), Datasets and Benchmarks Track, 2025
-      <a class="badge" href="https://dl.acm.org/doi/10.1145/3711896.3737376">ACM</a>
-    </li>    
-    <li>
-      <b>Enhancing Ligand Validity and Affinity in Structure-Based Drug Design with Multi-Reward Optimization</b><br>
-      Seungbeom Lee*, Munsun Jo*, Jungseul Ok, Dongwoo Kim<br>
-      International Conference on Machine Learning (<span class="badge badge-info">ICML</span>), 2025 <br>
-      <span class="badge badge-info">AAAI</span> Workshop on AI to Accelerate Science and Engineering (AI2ASE), 2025 <a class="badge" href="https://openreview.net/pdf?id=gmFeso9sXJ">PDF</a>
-    </li>
-    <li>
-      <b>Towards Bridging Generalization and Expressivity of Graph Neural Networks</b><br>
-      Shouheng Li, Floris Geerts, Dongwoo Kim, Qing Wang.<br>
-      International Conference on Learning Representations (<span class="badge badge-info">ICLR</span>), 2025
-      <a class="badge" href="https://arxiv.org/abs/2410.10051">arXiv</a> <br>
-      <i>In loving memory of our collaborator and friend, Qing.</i>
-    </li>	
+      <!-- 2023 -->
+      <div class="pub-section">
+        <h3>2023</h3>
+        <ul>
+          <li>
+            <div class="pub-title">Hyperbolic VAE via Latent Gaussian Distributions</div>
+            <div class="pub-authors">Seunghyuk Cho, Juyong Lee, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">NeurIPS</span>
+              <a class="badge" href="https://arxiv.org/abs/2209.15217">arXiv</a>
+              <a class="badge" href="https://github.com/ml-postech/GM-VAE">GitHub</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Test-time Embedding Normalization for Popularity Bias Mitigation</div>
+            <div class="pub-authors">Dain Kim*, Jinhyeok Park*, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">CIKM</span> Short Paper
+              <a class="badge" href="https://arxiv.org/abs/2308.11288">arXiv</a>
+              <a class="badge" href="https://github.com/ml-postech/TTEN">GitHub</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Robust Evaluation of Diffusion-Based Adversarial Purification</div>
+            <div class="pub-authors">Minjong Lee, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">ICCV</span>
+              <span class="badge badge-warning">Oral</span>
+              <a class="badge" href="https://arxiv.org/abs/2303.09051">arXiv</a>
+              <a class="badge" href="https://github.com/ml-postech/robust-evaluation-of-diffusion-based-purification">GitHub</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Local Vertex Colouring Graph Neural Network</div>
+            <div class="pub-authors">Shouheng Li, Dongwoo Kim, Qing Wang</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">ICML</span>
+              <a class="badge" href="https://openreview.net/forum?id=szL4HN4hkH">OpenReview</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Restructuring Graph for Higher Homophily via Learnable Spectral Clustering</div>
+            <div class="pub-authors">Shouheng Li, Dongwoo Kim, Qing Wang</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">AAAI</span>
+              <a class="badge" href="https://arxiv.org/abs/2206.02386">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Anonymization for Skeleton Action Recognition</div>
+            <div class="pub-authors">Saemi Moon*, Myeonghyeon Kim*, Zhenyue Qin, Yang Liu, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">AAAI</span>
+              <a class="badge" href="https://arxiv.org/abs/2111.15129">arXiv</a>
+              <a class="badge" href="https://github.com/ml-postech/Skeleton-anonymization">GitHub</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
+      <!-- 2022 -->
+      <div class="pub-section">
+        <h3>2022</h3>
+        <ul>
+          <li>
+            <div class="pub-title">A Rotated Hyperbolic Wrapped Normal Distribution for Hierarchical Representation Learning</div>
+            <div class="pub-authors">Seunghyuk Cho, Juyong Lee, Jaesik Park, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">NeurIPS</span>
+              <a class="badge" href="https://arxiv.org/abs/2205.13371">arXiv</a>
+              <a class="badge" href="https://github.com/ml-postech/RoWN">GitHub</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Fusing Higher-Order Features in Graph Neural Networks for Skeleton-Based Action Recognition</div>
+            <div class="pub-authors">Zhenyue Qin, Yang Liu, Pan Ji, Dongwoo Kim, Lei Wang, Bob McKay, Saeed Anwar, Tom Gedeon</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">TNNLS</span>
+              <a class="badge" href="https://ieeexplore.ieee.org/document/9895208">IEEE</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">MetaSSD: Meta-Learned Self-Supervised Detection</div>
+            <div class="pub-authors">MoonJeong Park, Jungseul Ok, Yo-Seb Jeon, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">ISIT</span>
+              <a class="badge" href="https://arxiv.org/abs/2205.15271">arXiv</a>
+              <a class="badge" href="https://github.com/ml-postech/MetaSSD">GitHub</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Robust Deep Learning from Crowds with Belief Propagation</div>
+            <div class="pub-authors">Hoyoung Kim*, Seunghyuk Cho*, Dongwoo Kim, Jungseul Ok</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">AISTATS</span>
+              <a class="badge" href="https://arxiv.org/abs/2111.00734">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Item-based Variational Auto-encoder for Fair Music Recommendation</div>
+            <div class="pub-authors">Jinhyeok Park*, Dain Kim*, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">CIKM</span> EvalRS DataChallenge
+              <span class="badge badge-warning">Best Paper</span>
+              <a class="badge" href="https://github.com/RecList/evalRS-CIKM-2022/blob/main/final_papers/EvalRS2022_paper_5248.pdf">PDF</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-</ul>
+      <!-- 2021 -->
+      <div class="pub-section">
+        <h3>2021</h3>
+        <ul>
+          <li>
+            <div class="pub-title">Beyond Low-Pass Filters: Adaptive Feature Propagation on Graphs</div>
+            <div class="pub-authors">Sean Li, Dongwoo Kim, Qing Wang</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">ECML-PKDD</span>
+              <a class="badge" href="https://arxiv.org/abs/2103.14187">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Invertible Denoising Network: A Light Solution for Real Noise Removal</div>
+            <div class="pub-authors">Yang Liu, Zhenyue Qin, Saeed Anwar, Pan Ji, Dongwoo Kim, Sabrina Caldwell, Tom Gedeon</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">CVPR</span>
+              <a class="badge" href="https://arxiv.org/abs/2104.10546">arXiv</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-<!-- ============================= -->
-<!--         2024                 -->
-<!-- ============================= -->
-<h3 class="sub-header">2024</h3>
-<ul>
-  <li>
-    <b>Mitigating over-smoothing through reverse process GNN for heterophilic graphs</b><br>
-    MoonJeong Park, Jaeseung Heo, Dongwoo Kim<br>
-    International Conference on Machine Learning (<span class="badge badge-info">ICML</span>), 2024
-    <a class="badge" href="https://arxiv.org/abs/2403.10543">arXiv</a>
-  </li>
-  <li>
-    <b>EPIC: Graph Augmentation with Edit Path Interpolation via Learnable Cost</b><br>
-    Jaeseung Heo*, Seungbeom Lee*, Sungsoo Ahn, Dongwoo Kim<br>
-    International Joint Conference on Artificial Intelligence (<span class="badge badge-info">IJCAI</span>), 2024
-    <a class="badge" href="https://arxiv.org/abs/2306.01310">arXiv</a> <br>
-    <span class="badge badge-info">ICML</span> workshop on Data-centric Machine Learning Research, 2023
-  </li>
-  <li>
-    <b>Few-shot unlearning</b><br>
-    Youngsik Yoon*, Jinhwan Nam*, Jaeho Lee, Dongwoo Kim, Jungseul Ok.<br>
-    IEEE Symposium on Security and Privacy (<span class="badge badge-info">S&P</span>), 2024
-    <a class="badge" href="https://arxiv.org/abs/2205.15567">arXiv</a>
-    <a class="badge" href="https://github.com/ml-postech/Few-shot-Unlearning">GitHub</a>
-  </li>
-  <li>
-    <b>Position-Sensing Graph Neural Networks: Proactively Learning Nodes Relative Positions</b><br>
-    Zhenyue Qin, Saeed Anwar, Dongwoo Kim, Yang Liu, Pan Ji, Tom Gedeon.<br>
-    IEEE Transactions on Neural Networks and Learning Systems (<span class="badge badge-info">TNNLS</span>), Brief Paper, 2024
-    <a class="badge" href="https://ieeexplore.ieee.org/document/10478451">IEEE</a>
-  </li>
-  <li>
-    <b>Hierarchical Graph Generation with K2-trees</b><br>
-    Yunhui Jang, Dongwoo Kim, Sungsoo Ahn.<br>
-    International Conference on Learning Representations (<span class="badge badge-info">ICLR</span>), 2024
-    <a class="badge" href="https://arxiv.org/abs/2305.19125">arXiv</a> <br>
-    <span class="badge badge-info">ICML</span> workshop on Structured Probabilistic Inference & Generative Modeling, 2023
-  </li>
-  <li>
-    <b>Feature Unlearning for Pre-trained GANs and VAEs</b><br>
-    Saemi Moon, Seunghyuk Cho, Dongwoo Kim<br>
-    AAAI Conference on Artificial Intelligence (<span class="badge badge-info">AAAI</span>), 2024
-    <a class="badge" href="https://arxiv.org/abs/2303.05699">arXiv</a>
-  </li>
-  <li>
-    <b>Generalization of Graph Neural Networks through the Lens of Homomorphism</b><br>
-    Shouheng Li, Dongwoo Kim, Qing Wang.
-    <a class="badge" href="https://arxiv.org/abs/2403.06079">arXiv</a>
-  </li>	
-</ul>
+      <!-- 2019 -->
+      <div class="pub-section">
+        <h3>2019</h3>
+        <ul>
+          <li>
+            <div class="pub-title">Visualizing Graph Differences from Social Media Streams</div>
+            <div class="pub-authors">Minjeong Shin, Dongwoo Kim, Umanga Bista, Jae Hee Lee, Lexing Xie</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">WSDM</span> Demo
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Analysing user identity via time-sensitive semantic edit distance (t-SED): A case study of Russian trolls on Twitter</div>
+            <div class="pub-authors">Dongwoo Kim, Timothy Graham, Zimin Wan, Marian Andrei Rizoiu</div>
+            <div class="pub-venue">
+              Journal of Computational Social Science
+              <a class="badge" href="https://link.springer.com/article/10.1007/s42001-019-00051-x">Link</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
+      <!-- 2018 -->
+      <div class="pub-section">
+        <h3>2018</h3>
+        <ul>
+          <li>
+            <div class="pub-title">Self-Bounded Prediction Suffix Tree via Approximate String Matching</div>
+            <div class="pub-authors">Dongwoo Kim, Christian Walder</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">ICML</span>
+              <a class="badge" href="https://arxiv.org/abs/1802.03184">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Neural Dynamic Programming for Musical Self Similarity</div>
+            <div class="pub-authors">Christian Walder, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">ICML</span>
+              <a class="badge" href="https://arxiv.org/abs/1802.03144">arXiv</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-<!-- ============================= -->
-<!--         2023                 -->
-<!-- ============================= -->
-<h3 class="sub-header">2023</h3>
-<ul>
-  <!-- Journals/Conferences -->
-  <li>
-    <b>Hyperbolic VAE via Latent Gaussian Distributions</b><br>
-    Seunghyuk Cho, Juyong Lee, Dongwoo Kim<br>
-    Advances in Neural Information Processing Systems (<span class="badge badge-info">NeurIPS</span>), 2023
-    <a class="badge" href="https://arxiv.org/abs/2209.15217">arXiv</a>
-    <a class="badge" href="https://github.com/ml-postech/GM-VAE">GitHub</a> <br>
-    <span class="badge badge-info">ICML</span> workshop on Topology, Algebra, and Geometry in Machine Learning (TAG-ML), 2023
-  </li>
-  <li>
-    <b>Test-time Embedding Normalization for Popularity Bias Mitigation</b><br>
-    Dain Kim*, Jinhyeok Park*, Dongwoo Kim<br>
-    International Conference on Information and Knowledge Management (<span class="badge badge-info">CIKM</span>), Short Paper, 2023
-    <a class="badge" href="https://arxiv.org/abs/2308.11288">arXiv</a>
-    <a class="badge" href="https://github.com/ml-postech/TTEN">GitHub</a>
-  </li>
-  <li>
-    <b>Robust Evaluation of Diffusion-Based Adversarial Purification</b><br>
-    Minjong Lee, Dongwoo Kim<br>
-    International Conference on Computer Vision (<span class="badge badge-info">ICCV</span>), 2023
-    <a class="badge" href="https://arxiv.org/abs/2303.09051">arXiv</a>
-    <span class="badge badge-warning">Oral</span>
-    <a class="badge" href="https://github.com/ml-postech/robust-evaluation-of-diffusion-based-purification">GitHub</a>
-  </li>
-  <li>
-    <b>Local Vertex Colouring Graph Neural Network</b><br>
-    Shouheng Li, Dongwoo Kim, Qing Wang.<br>
-    International Conference on Machine Learning (<span class="badge badge-info">ICML</span>), 2023
-    <a class="badge" href="https://openreview.net/forum?id=szL4HN4hkH">OpenReview</a>
-  </li>
-  <li>
-    <b>Restructuring Graph for Higher Homophily via Learnable Spectral Clustering</b><br>
-    Shouheng Li, Dongwoo Kim, Qing Wang.<br>
-    AAAI Conference on Artificial Intelligence (<span class="badge badge-info">AAAI</span>), 2023
-    <a class="badge" href="https://arxiv.org/abs/2206.02386">arXiv</a>
-  </li>
-  <li>
-    <b>Anonymization for Skeleton Action Recognition</b><br>
-    Saemi Moon*, Myeonghyeon Kim*, Zhenyue Qin, Yang Liu, Dongwoo Kim<br>
-    AAAI Conference on Artificial Intelligence (<span class="badge badge-info">AAAI</span>), 2023
-    <a class="badge" href="https://arxiv.org/abs/2111.15129">arXiv</a>
-    <a class="badge" href="https://github.com/ml-postech/Skeleton-anonymization">GitHub</a> <br>
-    <span class="badge badge-info">NeurIPS</span> workshop on Trustworthy and Socially Responsible Machine Learning (TSRML), 2022
-  </li>
+      <!-- 2017 -->
+      <div class="pub-section">
+        <h3>2017</h3>
+        <ul>
+          <li>
+            <div class="pub-title">Computer Assisted Composition with Recurrent Neural Networks</div>
+            <div class="pub-authors">Christian Walder, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">ACML</span>
+              <a class="badge" href="https://arxiv.org/abs/1612.00092">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Joint Modeling of Topics, Citations, and Topical Authority in Academic Corpora</div>
+            <div class="pub-authors">Jooyeon Kim, Dongwoo Kim, Alice Oh</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">TACL</span>
+              <a class="badge" href="https://www.transacl.org/ojs/index.php/tacl/article/view/1061/236">PDF</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Hierarchical Dirichlet Scaling Process</div>
+            <div class="pub-authors">Dongwoo Kim, Alice Oh</div>
+            <div class="pub-venue">
+              Machine Learning Journal
+              <a class="badge" href="http://link.springer.com/article/10.1007/s10994-016-5621-5">Link</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-  <!-- Workshops / Posters / etc. -->
-  <li>
-    <b>SpReME: Sparse Regression for Multi-Environment Dynamic Systems</b><br>
-    Moonjeong Park*, Youngbin Choi*, Dongwoo Kim<br>
-    <span class="badge badge-info">AAAI</span> workshop on When Machine Learning meets Dynamical Systems: Theory and Applications (MLmDS), 2023
-    <a class="badge" href="https://github.com/ml-postech/SpReME">GitHub</a>
-  </li>
-</ul>
+      <!-- 2016 -->
+      <div class="pub-section">
+        <h3>2016</h3>
+        <ul>
+          <li>
+            <div class="pub-title">Probabilistic Knowledge Graph Construction: Compositional and Incremental Approaches</div>
+            <div class="pub-authors">Dongwoo Kim, Lexing Xie, Cheng Soon Ong</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">CIKM</span>
+              <a class="badge" href="https://arxiv.org/abs/1608.05921">arXiv</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Hierarchical learning of grids of microtopics</div>
+            <div class="pub-authors">Nebojsa Jojic, Alessandro Perina, Dongwoo Kim</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">UAI</span>
+              <a class="badge" href="http://www.auai.org/uai2016/proceedings/papers/64.pdf">PDF</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-<!-- ============================= -->
-<!--         2022                 -->
-<!-- ============================= -->
-<h3 class="sub-header">2022</h3>
-<ul>
-  <!-- Journals/Conferences -->
-  <li>
-    <b>A Rotated Hyperbolic Wrapped Normal Distribution for Hierarchical Representation Learning</b><br>
-    Seunghyuk Cho, Juyong Lee, Jaesik Park, Dongwoo Kim<br>
-    Advances in Neural Information Processing Systems (<span class="badge badge-info">NeurIPS</span>), 2022
-    <a class="badge" href="https://arxiv.org/abs/2205.13371">arXiv</a>
-    <a class="badge" href="https://github.com/ml-postech/RoWN">GitHub</a>
-  </li>
-  <li>
-    <b>Fusing Higher-Order Features in Graph Neural Networks for Skeleton-Based Action Recognition</b><br>
-    Zhenyue Qin, Yang Liu, Pan Ji, Dongwoo Kim, Lei Wang, Bob McKay, Saeed Anwar, Tom Gedeon.<br>
-    IEEE Transactions on Neural Networks and Learning Systems (<span class="badge badge-info">TNNLS - IF:14.26</span>), 2022
-    <a class="badge" href="https://ieeexplore.ieee.org/document/9895208">IEEE</a>
-  </li>
-  <li>
-    <b>MetaSSD: Meta-Learned Self-Supervised Detection</b><br>
-    MoonJeong Park, Jungseul Ok, Yo-Seb Jeon, Dongwoo Kim<br>
-    IEEE International Symposium on Information Theory (<span class="badge badge-info">ISIT</span>), 2022
-    <a class="badge" href="https://arxiv.org/abs/2205.15271">arXiv</a>
-    <a class="badge" href="https://github.com/ml-postech/MetaSSD">GitHub</a>
-  </li>
-  <li>
-    <b>Robust Deep Learning from Crowds with Belief Propagation</b><br>
-    Hoyoung Kim*, Seunghyuk Cho*, Dongwoo Kim, Jungseul Ok.<br>
-    International Conference on Artificial Intelligence and Statistics (<span class="badge badge-info">AISTATS</span>), 2022
-    <a class="badge" href="https://arxiv.org/abs/2111.00734">arXiv</a>
-  </li>
+      <!-- 2014 -->
+      <div class="pub-section">
+        <h3>2014</h3>
+        <ul>
+          <li>
+            <div class="pub-title">Hierarchical Dirichlet Scaling Process</div>
+            <div class="pub-authors">Dongwoo Kim, Alice Oh</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">ICML</span>
+              <a class="badge" href="http://uilab.kaist.ac.kr/research/ICML14/icml2014_kim.pdf">PDF</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-  <!-- Workshops / Data Challenges -->
-  <li>
-    <b>Substructure-Atom Cross Attention for Molecular Representation Learning</b><br>
-    Jiye Kim*, Seungbeom Lee*, Dongwoo Kim, Sungsoo Ahn, Jaesik Park.<br>
-    <span class="badge badge-info">NeurIPS</span> workshop on AI for Science, 2022
-    <a class="badge" href="https://arxiv.org/abs/2210.08243">arXiv</a>
-  </li>
-  <li>
-    <b>Strengthening Skeletal Action Recognizers via Leveraging Temporal Patterns</b><br>
-    Zhenyue Qin, Pan Ji, Dongwoo Kim, Yang Liu, Saeed Anwar, Tom Gedeon.<br>
-    <span class="badge badge-info">ECCV</span> workshop on Real-World Surveillance (RWS), 2022
-    <a class="badge" href="https://arxiv.org/abs/2205.14405">arXiv</a>
-  </li>
-  <li>
-    <b>Few-shot unlearning</b><br>
-    Youngsik Yoon, Jinhwan Nam, Dongwoo Kim, Jungseul Ok.<br>
-    <span class="badge badge-info">ICLR</span> Workshop on Socially Responsible Machine Learning, 2022
-    <a class="badge" href="https://download.huan-zhang.com/events/srml2022/accepted/yoon22fewshot.pdf">PDF</a>
-  </li>
-  <li>
-    <b>Item-based Variational Auto-encoder for Fair Music Recommendation</b><br>
-    Jinhyeok Park*, Dain Kim*, Dongwoo Kim<br>
-    <span class="badge badge-info">CIKM</span> EvalRS DataChallenge, 2022
-    <a class="badge" href="https://github.com/RecList/evalRS-CIKM-2022/blob/main/final_papers/EvalRS2022_paper_5248.pdf">PDF</a>
-    <span class="badge badge-warning">Best Paper Award</span>
-    <a href="https://reclist.io/cikm2022-cup/"><span class="badge badge-danger">2nd Winner</span></a>
-    <a href="https://www.aitimes.kr/news/articleView.html?idxno=26463"><span class="badge badge-danger">Media: AI Times</span></a>
-  </li>
-  <li>
-    <b>ANUBIS: Skeleton Action Recognition Dataset, Review, and Benchmark</b><br>
-    Zhenyue Qin, Yang Liu, Madhawa Perera, Tom Gedeon, Pan Ji, Dongwoo Kim, Saeed Anwar.<br>
-    <a class="badge" href="https://arxiv.org/abs/2205.02071">arXiv</a>
-    <a href="http://hcc-workshop.anu.edu.au/webs/anu101/home">
-      <span class="badge badge-danger">Website</span>
-    </a>
-  </li>
-</ul>
+      <!-- 2013 -->
+      <div class="pub-section">
+        <h3>2013</h3>
+        <ul>
+          <li>
+            <div class="pub-title">Context-Dependent Conceptualization</div>
+            <div class="pub-authors">Dongwoo Kim, Haixun Wang, Alice Oh</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">IJCAI</span>
+              <a class="badge" href="http://ijcai.org/papers13/Papers/IJCAI13-391.pdf">PDF</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-<!-- ============================= -->
-<!--         2021                 -->
-<!-- ============================= -->
-<h3 class="sub-header">2021</h3>
-<ul>
-  <li>
-    <b>Beyond Low-Pass Filters: Adaptive Feature Propagation on Graphs</b><br>
-    Sean Li, Dongwoo Kim, Qing Wang.<br>
-    The European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases (<span class="badge badge-info">ECML-PKDD</span>), 2021
-    <a class="badge" href="https://arxiv.org/abs/2103.14187">arXiv</a>
-  </li>
-  <li>
-    <b>Invertible Denoising Network: A Light Solution for Real Noise Removal</b><br>
-    Yang Liu, Zhenyue Qin, Saeed Anwar, Pan Ji, Dongwoo Kim, Sabrina Caldwell, Tom Gedeon.<br>
-    The IEEE/CVF Conference on Computer Vision and Pattern Recognition (<span class="badge badge-info">CVPR</span>), 2021
-    <a class="badge" href="https://arxiv.org/abs/2104.10546">arXiv</a>
-  </li>
-  <li>
-    <b>Informative Class Activation Maps</b><br>
-    Zhenyue Qin, Dongwoo Kim, Tom Gedeon.<br>
-    <span class="badge badge-info">ICML</span> Workshop on Theoretic Foundation, Criticism, and Application Trend of Explainable AI, 2021
-    <a class="badge" href="https://arxiv.org/abs/2106.10472">PDF</a>
-  </li>
-  <li>
-    <b>Neural Network Classifier as Mutual Information Evaluator</b><br>
-    Zhenyue Qin, Dongwoo Kim, Tom Gedeon.<br>
-    <span class="badge badge-info">ICML</span> Workshop on Theoretic Foundation, Criticism, and Application Trend of Explainable AI, 2021
-    <a class="badge" href="https://arxiv.org/abs/2106.10471">PDF</a>
-  </li>
-</ul>
+      <!-- 2012 -->
+      <div class="pub-section">
+        <h3>2012</h3>
+        <ul>
+          <li>
+            <div class="pub-title">Modeling Topic Hierarchies with the Recursive Chinese Restaurant Process</div>
+            <div class="pub-authors">Joon Hee Kim, Dongwoo Kim, Suin Kim, Alice Oh</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">CIKM</span>
+              <a class="badge" href="https://icml.cc/2012/papers/387.pdf">PDF</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Dirichlet Process with Mixed Random Measures: A Nonparametric Topic Model for Labeled Data</div>
+            <div class="pub-authors">Dongwoo Kim, Suin Kim, Alice Oh</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">ICML</span>
+              <a class="badge" href="https://icml.cc/2012/papers/387.pdf">PDF</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-<!-- ============================= -->
-<!--         2019                 -->
-<!-- ============================= -->
-<h3 class="sub-header">2019</h3>
-<ul>
-  <li>
-    <b>Visualizing Graph Differences from Social Media Streams</b><br>
-    Minjeong Shin, Dongwoo Kim, Umanga Bista, Jae Hee Lee, Lexing Xie.<br>
-    The Twelfth International Conference on Web Search and Data Mining (<span class="badge badge-info">WSDM</span>), Demo Paper, 2019
-  </li>
-  <li>
-    <b>Analysing user identity via time-sensitive semantic edit distance (t-SED): A case study of Russian trolls on Twitter</b><br>
-    Dongwoo Kim, Timothy Graham, Zimin Wan, Marian Andrei Rizoiu.<br>
-    Journal of Computational Social Science, 2019
-    <a class="badge" href="https://link.springer.com/article/10.1007/s42001-019-00051-x">Link</a>
-  </li>
-</ul>
+      <!-- 2011 -->
+      <div class="pub-section">
+        <h3>2011</h3>
+        <ul>
+          <li>
+            <div class="pub-title">Accounting for Data Dependencies within a Hierarchical Dirichlet Process Mixture Model</div>
+            <div class="pub-authors">Dongwoo Kim, Alice Oh</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">CIKM</span>
+              <a class="badge" href="https://dl.acm.org/doi/abs/10.1145/2063576.2063702">Link</a>
+            </div>
+          </li>
+          <li>
+            <div class="pub-title">Topic Chains for Understanding a News Corpus</div>
+            <div class="pub-authors">Dongwoo Kim, Alice Oh</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">CICLING</span>
+              <a class="badge" href="http://www.springerlink.com/content/7853085022124651/">Link</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-<!-- ============================= -->
-<!--         2018                 -->
-<!-- ============================= -->
-<h3 class="sub-header">2018</h3>
-<ul>
-  <li>
-    <b>Self-Bounded Prediction Suffix Tree via Approximate String Matching</b><br>
-    Dongwoo Kim, Christian Walder.<br>
-    International Conference on Machine Learning (<span class="badge badge-info">ICML</span>), 2018
-    <a class="badge" href="https://arxiv.org/abs/1802.03184">arXiv</a>
-  </li>
-  <li>
-    <b>Neural Dynamic Programming for Musical Self Similarity</b><br>
-    Christian Walder, Dongwoo Kim<br>
-    International Conference on Machine Learning (<span class="badge badge-info">ICML</span>), 2018
-    <a class="badge" href="https://arxiv.org/abs/1802.03144">arXiv</a>
-  </li>
-</ul>
+      <!-- 2010 -->
+      <div class="pub-section">
+        <h3>2010</h3>
+        <ul>
+          <li>
+            <div class="pub-title">Analysis of Twitter Lists as a Potential Source for Discovering Latent Characteristics of Users</div>
+            <div class="pub-authors">Dongwoo Kim, Yohan Jo, Il-Chul Moon, Alice Oh</div>
+            <div class="pub-venue">
+              <span class="badge badge-info">CHI</span> Workshop
+              <a class="badge" href="http://people.csail.mit.edu/aoh/papers/chi2010microblogging.pdf">PDF</a>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-<!-- ============================= -->
-<!--         2017                 -->
-<!-- ============================= -->
-<h3 class="sub-header">2017</h3>
-<ul>
-  <li>
-    <b>Computer Assisted Composition with Recurrent Neural Networks</b><br>
-    Christian Walder, Dongwoo Kim<br>
-    The Asian Conference on Machine Learning (<span class="badge badge-info">ACML</span>), 2017
-    <a class="badge" href="https://arxiv.org/abs/1612.00092">arXiv</a>
-  </li>
-  <li>
-    <b>Leveraging Side Information to Improve Crowd-sourcing</b><br>
-    Yuan Jin, Mark Carman, Dongwoo Kim, Lexing Xie.<br>
-    The AAAI Conference on Human Computation and Crowdsourcing (<span class="badge badge-info">HCOMP</span>), 2017
-    <a class="badge" href="https://users.monash.edu.au/~mcarman/papers/Jin_HCOMP_2017.pdf">PDF</a>
-  </li>
-  <li>
-    <b>Joint Modeling of Topics, Citations, and Topical Authority in Academic Corpora</b><br>
-    Jooyeon Kim, Dongwoo Kim, Alice Oh.<br>
-    Transactions of the Association for Computational Linguistics (<span class="badge badge-info">TACL</span>), 2017
-    <a class="badge" href="https://www.transacl.org/ojs/index.php/tacl/article/view/1061/236">PDF</a>
-    <a class="badge" href="./bibtex/kim2017tacl.txt">Bibtex</a>
-  </li>
-  <li>
-    <b>Hierarchical Dirichlet Scaling Process, Machine Learning</b><br>
-    Dongwoo Kim, Alice Oh.<br>
-    2017
-    <a class="badge" href="http://link.springer.com/article/10.1007/s10994-016-5621-5">Link</a>
-  </li>
-  <li>
-    <b>PathRec: Visual Analysis of Travel Route Recommendations</b><br>
-    Dawei Chen, Dongwoo Kim, Lexing Xie, Minjeong Shin, Aditya Menon, Cheng Soon Ong, Iman Avazpour, John Grundy.<br>
-    The ACM Conference on Recommender Systems (<span class="badge badge-info">RecSys</span>), Demo Paper, 2017
-    <a class="badge" href="https://arxiv.org/pdf/1707.01627.pdf">PDF</a>
-  </li>
-</ul>
+    </div>
+  </main>
 
-<!-- ============================= -->
-<!--         2016                 -->
-<!-- ============================= -->
-<h3 class="sub-header">2016</h3>
-<ul>
-  <li>
-    <b>Probabilistic Knowledge Graph Construction: Compositional and Incremental Approaches</b><br>
-    Dongwoo Kim, Lexing Xie, Cheng Soon Ong.<br>
-    The ACM Conference on Information and Knowledge Management (<span class="badge badge-info">CIKM</span>), 2016
-    <a class="badge" href="https://arxiv.org/abs/1608.05921">arXiv</a>
-  </li>
-  <li>
-    <b>Hierarchical learning of grids of microtopics</b><br>
-    Nebojsa Jojic, Alessandro Perina, Dongwoo Kim<br>
-    The Conference on Uncertainty in Artificial Intelligence (<span class="badge badge-info">UAI</span>), 2016 
-    <a class="badge" href="http://www.auai.org/uai2016/proceedings/papers/64.pdf">PDF</a>
-  </li>
-</ul>
-
-<!-- ============================= -->
-<!--         2014                 -->
-<!-- ============================= -->
-<h3 class="sub-header">2014</h3>
-<ul>
-  <li>
-    <b>Hierarchical Dirichlet Scaling Process</b><br>
-    Dongwoo Kim, Alice Oh.<br>
-    The International Conference on Machine Learning (<span class="badge badge-info">ICML</span>), 2014 
-    <a class="badge" href="http://uilab.kaist.ac.kr/research/ICML14/icml2014_kim.pdf">PDF</a>
-  </li>
-  <li>
-    <b>Skim-reading thousands of documents in one minute: Data indexing and visualization for multifarious search</b><br>
-    Alessandro Perina, Dongwoo Kim, Andrzej Turski, Nebojsa Jojic.<br>
-    Workshop on Interactive Data Exploration and Analytics (IDEA'14) at 
-    <span class="badge badge-info">KDD</span>, 2014 
-    <a class="badge" href="papers/idea2014/idea2014.pdf">PDF</a>
-  </li>
-  <li>
-    <b>Diversity-seeking users and their influence on social news sites</b><br>
-    Jooyeon Kim, Joon Hee Kim, Dongwoo Kim, Alice Oh.<br>
-    Workshop on Data Science for News Publishing (NewsKDD) at 
-    <span class="badge badge-info">KDD</span>, 2014
-    <a class="badge" href="papers/newskdd2014/newskdd2014.pdf">PDF</a>
-  </li>
-</ul>
-
-<!-- ============================= -->
-<!--         2013                 -->
-<!-- ============================= -->
-<h3 class="sub-header">2013</h3>
-<ul>
-  <li>
-    <b>Context-Dependent Conceptualization</b><br>
-    Dongwoo Kim, Haixun Wang, Alice Oh<br>
-    The International Conference on Artificial Intelligence (<span class="badge badge-info">IJCAI</span>), 2013 
-    <a class="badge" href="http://ijcai.org/papers13/Papers/IJCAI13-391.pdf">PDF</a>
-  </li>
-</ul>
-
-<!-- ============================= -->
-<!--         2012                 -->
-<!-- ============================= -->
-<h3 class="sub-header">2012</h3>
-<ul>
-  <li>
-    <b>Modeling Topic Hierarchies with the Recursive Chinese Restaurant Process</b><br>
-    Joon Hee Kim, Dongwoo Kim, Suin Kim, Alice Oh<br>
-    The ACM International Conference on Information and Knowledge Management 
-    (<span class="badge badge-info">CIKM</span>), 2012
-    <a class="badge" href="https://icml.cc/2012/papers/387.pdf">PDF</a>
-  </li>
-  <li>
-    <b>Dirichlet Process with Mixed Random Measures: A Nonparametric Topic Model for Labeled Data</b><br>
-    Dongwoo Kim, Suin Kim, Alice Oh<br>
-    The International Conference on Machine Learning (<span class="badge badge-info">ICML</span>), 2012
-    <a class="badge" href="https://icml.cc/2012/papers/387.pdf">PDF</a>
-  </li>
-  <li>
-    <b>Distributed Online Learning for Latent Dirichlet Allocation</b><br>
-    JinYeong Bak, Dongwoo Kim, Alice Oh<br>
-    Workshop on Big Learning : Algorithms, Systems, and Touls at the Neural Information Processing Systems
-    (<span class="badge badge-info">NIPS</span>), 2012 
-    <a class="badge" href="http://uilab.kaist.ac.kr/research/NIPSBL12/nips2012_bak_kim_oh.pdf">PDF</a>
-  </li>
-  <li>
-    <b>Variable Selection for Latent Dirichlet Allocation</b><br>
-    Dongwoo Kim, Yeonseung Chung, Alice Oh<br>
-    arXiv:1205.1053  
-    <a class="badge" href="http://arxiv.org/abs/1205.1053">PDF</a>
-  </li>	
-</ul>
-
-<!-- ============================= -->
-<!--         2011                 -->
-<!-- ============================= -->
-<h3 class="sub-header">2011</h3>
-<ul>
-  <li>
-    <b>Accounting for Data Dependencies within a Hierarchical Dirichlet Process Mixture Model</b><br>
-    Dongwoo Kim, Alice Oh<br>
-    The ACM Conference on Information and Knowledge Managment 
-    (<span class="badge badge-info">CIKM</span>), 2011 
-    <a class="badge" href="https://dl.acm.org/doi/abs/10.1145/2063576.2063702">Link</a>
-  </li>
-  <li>
-    <b>Topic Chains for Understanding a News Corpus</b><br>
-    Dongwoo Kim, Alice Oh<br>
-    International Conference on Intelligent Text Processing and Computational Linguistics 
-    (<span class="badge badge-info">CICLING</span>), 2011 
-    <a class="badge" href="http://www.springerlink.com/content/7853085022124651/">Link</a>
-  </li>
-</ul>
-
-<!-- ============================= -->
-<!--         2010                 -->
-<!-- ============================= -->
-<h3 class="sub-header">2010</h3>
-<ul>
-  <li>
-    <b>Learning Influence Propagation on Personal Blogs</b><br>
-    Il-Chul Moon, Dongwoo Kim, Yohan Jo, Alice Oh.<br>
-    The Annual International Sunbelt Social Network Conference (<span class="badge badge-info">Sunbelt</span>), 2010
-    <a class="badge" href="https://ieeexplore.ieee.org/document/5591523/">Link</a>
-  </li>
-  <li>
-    <b>Learning Influence Propagation of Personal Blogs with Content and Network Analyses</b><br>
-    Il-Chul Moon, Dongwoo Kim, Yohan Jo, Alice Oh.<br>
-    Workshop on Finding Synergies Between Texts and Networks at the IEEE International Conference On Social Computing (<span class="badge badge-info">SocialCom</span>), 2010
-    <a class="badge" href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=5591523&tag=1">PDF</a>
-  </li>
-  <li>
-    <b>Analysis of Twitter Lists as a Potential Source for Discovering Latent Characteristics of Users</b><br>
-    Dongwoo Kim, Yohan Jo, Il-Chul Moon, Alice Oh.<br>
-    Workshop on Microblogging at the ACM Conference on Human Factors in Computer Systems (<span class="badge badge-info">CHI</span>), 2010
-    <a class="badge" href="http://people.csail.mit.edu/aoh/papers/chi2010microblogging.pdf">PDF</a>
-    <a class="badge" href="./bibtex/kim2010chi.txt">Bibtex</a>
-  </li>
-</ul>
-
-</div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="https://ml.postech.ac.kr" target="_blank">ML Lab</a>
+        <a href="https://scholar.google.com/citations?hl=en&user=RkspD6IAAAAJ" target="_blank">Google Scholar</a>
+      </div>
+      <p class="footer-copy">&copy; 2025 Dongwoo Kim. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
