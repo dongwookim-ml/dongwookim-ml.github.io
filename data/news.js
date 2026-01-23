@@ -22,6 +22,11 @@
 const NEWS_DATA = [
   {
     date: 'Jan 2026',
+    emoji: '🇦🇺',
+    text: 'Joining ANU as a visiting researcher for sabbatical'
+  },
+  {
+    date: 'Jan 2026',
     emoji: '🇰🇷',
     text: 'Serving as Area Chair for ICML 2026'
   },
