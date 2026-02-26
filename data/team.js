@@ -92,16 +92,31 @@ const TEAM_DATA = {
 
   'MS Students': [
     {
-      name: 'Yesong Ko',
-      dept: 'CSE',
-      research: 'Machine Learning',
-      photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/ysko_profile.png'
-    },
-    {
       name: 'Sunghyun Choi',
       dept: 'GSAI',
       research: 'Machine Learning, Generative Models',
       photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/shchoi_profile.jpg'
+    },
+    {
+      name: 'Suhyeon Jun',
+      dept: 'CSE',
+      research: 'Machine Learning',
+      photo: 'https://ml.postech.ac.kr/img/shjun_profile.jpg'
+    },
+    {
+      name: 'Seoyeon Lee',
+      dept: 'GSAI',
+      research: 'Machine Learning',
+      photo: 'https://ml.postech.ac.kr/img/sylee_profile.jpeg'
+    }
+  ],
+
+  'Alumni': [
+    {
+      name: 'Yesong Ko',
+      dept: 'CSE (MS 2025)',
+      research: 'Machine Learning',
+      photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/ysko_profile.png'
     }
   ]
 };

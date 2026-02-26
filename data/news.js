@@ -21,6 +21,16 @@
 
 const NEWS_DATA = [
   {
+    date: 'Feb 2026',
+    emoji: '🎓',
+    text: 'Congratulations to Yesong Ko for completing her MS degree!'
+  },
+  {
+    date: 'Feb 2026',
+    emoji: '👋',
+    text: 'Suhyeon and Seoyeon join the lab as MS students. Welcome!'
+  },
+  {
     date: 'Jan 2026',
     emoji: '🇦🇺',
     text: 'Joining ANU as a visiting researcher for sabbatical'
