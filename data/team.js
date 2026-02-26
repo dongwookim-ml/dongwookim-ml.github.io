@@ -114,9 +114,33 @@ const TEAM_DATA = {
   'Alumni': [
     {
       name: 'Yesong Ko',
-      dept: 'CSE (MS 2025)',
-      research: 'Machine Learning',
-      photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/ysko_profile.png'
+      dept: 'MS 2025',
+      photo: 'https://ml.postech.ac.kr/img/ysko_profile.png'
+    },
+    {
+      name: 'Munsun Jo',
+      dept: 'MS 2025',
+      photo: 'https://ml.postech.ac.kr/img/msjo_profile.png'
+    },
+    {
+      name: 'Jinho Park',
+      dept: 'MS 2023',
+      photo: 'https://ml.postech.ac.kr/img/jhpark_profile.png'
+    },
+    {
+      name: 'Dain Kim',
+      dept: 'MS 2023',
+      photo: 'https://ml.postech.ac.kr/img/dikim_profile.png'
+    },
+    {
+      name: 'Jinhyeok Park',
+      dept: 'MS 2023',
+      photo: 'https://ml.postech.ac.kr/img/jinhyeokpark_profile.jpg'
+    },
+    {
+      name: 'Myeonghyeon Kim',
+      dept: 'MS 2022',
+      photo: 'https://ml.postech.ac.kr/img/mhkim_profile.jpg'
     }
   ]
 };
