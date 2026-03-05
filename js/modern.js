@@ -27,9 +27,15 @@ function loadNews() {
 
   NEWS_DATA.forEach(function(item) {
     var li = document.createElement('li');
-    var p = document.createElement('p');
-    p.innerHTML = '<b>' + item.date + '</b> ' + item.emoji + ' ' + item.text;
-    li.appendChild(p);
+    var parts = item.date.split(' ');
+    var month = parts[0];
+    var year = parts[1] || '';
+    li.innerHTML =
+      '<div class="news-date-badge">' +
+        '<div class="news-date-month">' + month + '</div>' +
+        '<div class="news-date-year">' + year + '</div>' +
+      '</div>' +
+      '<span class="news-text">' + item.emoji + ' ' + item.text + '</span>';
     newsList.appendChild(li);
   });
 }
