@@ -23,7 +23,7 @@ const NEWS_DATA = [
   {
     date: 'May 2026',
     emoji: '🇰🇷',
-    text: 'Paper accepted to ICML 2026 (Seoul)'
+    text: 'Paper accepted to ICML 2026'
   },
   {
     date: 'Feb 2026',
@@ -52,17 +52,17 @@ const NEWS_DATA = [
   },
   {
     date: 'Dec 2025',
-    emoji: '📄',
+    emoji: '🇸🇬',
     text: 'A paper accepted to AAAI 2026 as oral presentation'
-  },  
+  },
   {
     date: 'Sep 2025',
-    emoji: '📄',
+    emoji: '🇺🇸',
     text: 'Two papers accepted to NeurIPS 2025 (1 spotlight)'
   },
   {
     date: 'Aug 2025',
-    emoji: '🎉',
+    emoji: '🇨🇳',
     text: 'Four papers accepted to EMNLP 2025 (2 mains, 2 findings)'
   },
   {
@@ -72,7 +72,7 @@ const NEWS_DATA = [
   },
   {
     date: 'Jun 2025',
-    emoji: '📄',
+    emoji: '🇺🇸',
     text: 'Paper accepted to ICCV 2025'
   },
   {
@@ -82,12 +82,12 @@ const NEWS_DATA = [
   },
   {
     date: 'May 2025',
-    emoji: '📊',
+    emoji: '🇨🇦',
     text: 'Paper accepted to KDD 2025 (Dataset & Benchmark)'
   },
   {
     date: 'May 2025',
-    emoji: '💊',
+    emoji: '🇨🇦',
     text: 'Paper accepted to ICML 2025'
   },
   {
@@ -102,7 +102,7 @@ const NEWS_DATA = [
   },
   {
     date: 'Jan 2025',
-    emoji: '📝',
+    emoji: '🇸🇬',
     text: 'Paper accepted to ICLR 2025'
   }
 ];
