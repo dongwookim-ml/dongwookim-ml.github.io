@@ -19,12 +19,18 @@
 const PUBLICATIONS_DATA = {
   'Selected Publications': [
     {
+      title: 'Training-free Composition of Pre-trained GFlowNets for Multi-Objective Generation',
+      authors: 'Seokwon Yoon, Youngbin Choi, Seunghyuk Cho, Seungbeom Lee, MoonJeong Park, Dongwoo Kim',
+      venue: 'ICML 2026',
+      arxiv: 'https://arxiv.org/abs/2602.21565'
+    },
+    {
       title: 'Posterior Label Smoothing for Node Classification',
       authors: 'Jaeseung Heo, Moonjeong Park, Dongwoo Kim',
       venue: 'AAAI 2026',
       badge: 'Oral',
       arxiv: 'https://arxiv.org/abs/2406.00410'
-    },    
+    },
     // {
     //   title: 'High-order Equivariant Flow Matching for DFT Hamiltonian Prediction',
     //   authors: 'Seongsu Kim, Nayoung Kim, Dongwoo Kim, Sungsoo Ahn',
