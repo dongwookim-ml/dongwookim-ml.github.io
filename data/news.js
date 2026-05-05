@@ -47,7 +47,7 @@ const NEWS_DATA = [
   },
   {
     date: 'Jan 2026',
-    emoji: '🇰🇷',
+    emoji: '🧑‍⚖️',
     text: 'Serving as Area Chair for ICML 2026'
   },
   {
@@ -72,7 +72,7 @@ const NEWS_DATA = [
   },
   {
     date: 'Jul 2025',
-    emoji: '🏆',
+    emoji: '🧑‍⚖️',
     text: 'Serving as Area Chair for NeurIPS 2025'
   },
   {
