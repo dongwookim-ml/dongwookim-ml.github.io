@@ -60,6 +60,7 @@ const TEAM_DATA = {
       dept: 'CSE',
       research: 'LLM Personalization',
       photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/ybchoi_profile.jpg',
+      homepage: 'https://youngbin4979.github.io/',
       scholar: 'https://scholar.google.com/citations?user=oh2ATg8AAAAJ'
     },
     {
