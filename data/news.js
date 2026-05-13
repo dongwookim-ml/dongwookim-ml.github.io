@@ -31,6 +31,11 @@ const NEWS_DATA = [
     text: 'Paper accepted to ICML 2026'
   },
   {
+    date: 'Apr 2026',
+    emoji: '🎤',
+    text: 'Gave a talk at ANU on influence functions for GNNs'
+  },
+  {
     date: 'Feb 2026',
     emoji: '🎓',
     text: 'Congratulations to Yesong Ko for completing her MS degree!'
