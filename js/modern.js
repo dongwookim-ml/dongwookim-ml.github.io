@@ -2,14 +2,12 @@
  * Minimal Academic Website JavaScript (jemdoc style)
  *
  * Data is loaded from external files in /data/ folder:
- *   - data/news.js       -> NEWS_DATA
- *   - data/publications.js -> PUBLICATIONS_DATA
- *   - data/team.js       -> TEAM_DATA
+ *   - data/news.js -> NEWS_DATA
+ *   - data/team.js -> TEAM_DATA
  */
 
 document.addEventListener('DOMContentLoaded', function() {
   loadNews();
-  loadPublications();
   loadTeam();
 });
 
@@ -37,61 +35,6 @@ function loadNews() {
       '</div>' +
       '<span class="news-text">' + item.emoji + ' ' + item.text + '</span>';
     newsList.appendChild(li);
-  });
-}
-
-/**
- * Load Publications
- */
-function loadPublications() {
-  var pubContainer = document.getElementById('publications-container');
-  if (!pubContainer) return;
-
-  if (typeof PUBLICATIONS_DATA === 'undefined') {
-    console.warn('PUBLICATIONS_DATA not found. Make sure data/publications.js is loaded.');
-    return;
-  }
-
-  var sortedYears = Object.keys(PUBLICATIONS_DATA).sort(function(a, b) {
-    var aNum = parseInt(a);
-    var bNum = parseInt(b);
-    if (isNaN(aNum) && isNaN(bNum)) return 0;
-    if (isNaN(aNum)) return -1;
-    if (isNaN(bNum)) return 1;
-    return bNum - aNum;
-  });
-
-  sortedYears.forEach(function(year) {
-    var h3 = document.createElement('h3');
-    h3.textContent = year;
-    pubContainer.appendChild(h3);
-
-    var ul = document.createElement('ul');
-
-    PUBLICATIONS_DATA[year].forEach(function(pub) {
-      var li = document.createElement('li');
-      var p = document.createElement('p');
-
-      var links = '';
-      if (pub.arxiv) links += ' [<a href="' + pub.arxiv + '" target="_blank">arXiv</a>]';
-      if (pub.pdf) links += ' [<a href="' + pub.pdf + '" target="_blank">PDF</a>]';
-      if (pub.github) links += ' [<a href="' + pub.github + '" target="_blank">Code</a>]';
-      if (pub.project) links += ' [<a href="' + pub.project + '" target="_blank">Project</a>]';
-
-      var badge = '';
-      if (pub.badge) {
-        badge = ' <b style="color:#cc0000">(' + pub.badge + ')</b>';
-      }
-
-      p.innerHTML = '<b>' + pub.title + '</b><br>' +
-        pub.authors + '<br>' +
-        '<i>' + pub.venue + '</i>' + badge + links;
-
-      li.appendChild(p);
-      ul.appendChild(li);
-    });
-
-    pubContainer.appendChild(ul);
   });
 }
 

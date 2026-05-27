@@ -28,7 +28,7 @@ python -m http.server 8000
 
 - `css/modern.css` — active stylesheet; CSS variables in `:root`.
 - `css/custom.css` — legacy stylesheet used only by the four legacy pages above.
-- `js/modern.js` — runtime loaders: `loadNews`, `loadPublications`, `loadTeam`. Each looks for a target element on the current page and bails if absent.
+- `js/modern.js` — runtime loaders: `loadNews`, `loadTeam`. Each looks for a target element on the current page and bails if absent.
 - `js/scripts.js` — legacy Bootstrap-resume script; not referenced by any current page.
 - `index-original.html` — old homepage backup; not linked.
 
@@ -36,9 +36,8 @@ python -m http.server 8000
 
 - `data/news.js` (`NEWS_DATA` array) — rendered on `index.html` into `<ul id="news-list">` by `loadNews()`.
 - `data/team.js` (`TEAM_DATA` object) — rendered on `pages/team.html` by `loadTeam()`.
-- `data/publications.js` (`PUBLICATIONS_DATA` object) — **currently orphaned.** `loadPublications()` in `js/modern.js` looks for `#publications-container`, but `pages/publication.html` is hand-maintained HTML and does not include the container or the script tag. Editing this file alone will not change the site.
 
-Each data file has format documentation in a header comment.
+Each data file has format documentation in a header comment. Publications are not data-driven — see below.
 
 ### Other directories
 
@@ -56,4 +55,4 @@ Each data file has format documentation in a header comment.
 
 - **News:** prepend an object to `NEWS_DATA` in `data/news.js`. Renders on the home page.
 - **Team members:** add to the appropriate category in `TEAM_DATA` in `data/team.js`. Renders on `pages/team.html`.
-- **Publications:** edit `pages/publication.html` directly (hand-maintained). Optionally also update `data/publications.js` to keep the data file in sync, but note it does not currently render anywhere.
+- **Publications:** edit `pages/publication.html` directly (hand-maintained HTML; no data file).
