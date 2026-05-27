@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal academic website for Prof. Dongwoo Kim (POSTECH Machine Learning Lab). This is a static HTML site hosted on GitHub Pages with no build system or package manager.
+Personal academic website for Prof. Dongwoo Kim (POSTECH Machine Learning Lab). Static HTML site hosted on GitHub Pages — no build system or package manager.
 
 ## Development
 
@@ -13,29 +13,47 @@ Personal academic website for Prof. Dongwoo Kim (POSTECH Machine Learning Lab). 
 python -m http.server 8000
 ```
 
-**Deployment:** Push to `master` branch - GitHub Pages auto-deploys.
+**Deployment:** Push to `master` branch — GitHub Pages auto-deploys.
 
 ## Architecture
 
-### Content Management
-Site content is managed through JavaScript data files in `/data/`:
-- `data/news.js` - Lab news items (NEWS_DATA array)
-- `data/publications.js` - Selected publications (PUBLICATIONS_DATA object)
-- `data/team.js` - Team members (TEAM_DATA object)
+### Site layout
 
-These files are loaded as global variables and rendered dynamically by `js/modern.js`. Each data file includes format documentation in comments at the top.
+- `index.html` — home page: profile, bio, experience/education/awards, recent news. Uses `css/modern.css` and a sidebar + mobile-nav layout.
+- `pages/` — sub-pages. Two visual families coexist:
+  - **Modern (sidebar layout, `css/modern.css`):** `research.html`, `publication.html`, `team.html`, `join.html`. These four are the ones linked in the main nav.
+  - **Legacy (Bootstrap-resume style, `css/custom.css`):** `bio.html`, `contact.html`, `news.html`, `student.html`. Not in the main nav; older standalone pages.
 
-### Key Files
-- `index.html` - Main single-page site with all sections
-- `css/modern.css` - All styling (CSS variables defined in `:root`)
-- `js/modern.js` - Dynamic content loading and UI interactions (particles, navbar, scroll animations, research cards)
-- `pages/` - Additional standalone pages (bio, contact, full publication list, student info)
+### Styles & scripts
 
-### Adding Content
-**News:** Add object to beginning of `NEWS_DATA` array in `data/news.js`
-**Publications:** Add to `PUBLICATIONS_DATA` in `data/publications.js` (supports arxiv, pdf, github, project links and badges like Oral/Spotlight)
-**Team members:** Add to appropriate category in `TEAM_DATA` in `data/team.js`
+- `css/modern.css` — active stylesheet; CSS variables in `:root`.
+- `css/custom.css` — legacy stylesheet used only by the four legacy pages above.
+- `js/modern.js` — runtime loaders: `loadNews`, `loadPublications`, `loadTeam`. Each looks for a target element on the current page and bails if absent.
+- `js/scripts.js` — legacy Bootstrap-resume script; not referenced by any current page.
+- `index-original.html` — old homepage backup; not linked.
 
-### External Dependencies (CDN)
+### Data files in `/data/`
+
+- `data/news.js` (`NEWS_DATA` array) — rendered on `index.html` into `<ul id="news-list">` by `loadNews()`.
+- `data/team.js` (`TEAM_DATA` object) — rendered on `pages/team.html` by `loadTeam()`.
+- `data/publications.js` (`PUBLICATIONS_DATA` object) — **currently orphaned.** `loadPublications()` in `js/modern.js` looks for `#publications-container`, but `pages/publication.html` is hand-maintained HTML and does not include the container or the script tag. Editing this file alone will not change the site.
+
+Each data file has format documentation in a header comment.
+
+### Other directories
+
+- `images/` — profile photo, icons, team photos.
+- `papers_pdf/` — PDF copies of papers linked from `publication.html`.
+- `bibtex/` — BibTeX entries for some publications.
+- `slides/` — talk slides linked from elsewhere.
+
+### External dependencies (CDN)
+
 - Google Fonts (Inter)
 - Font Awesome 5.15.4
+
+## Adding content
+
+- **News:** prepend an object to `NEWS_DATA` in `data/news.js`. Renders on the home page.
+- **Team members:** add to the appropriate category in `TEAM_DATA` in `data/team.js`. Renders on `pages/team.html`.
+- **Publications:** edit `pages/publication.html` directly (hand-maintained). Optionally also update `data/publications.js` to keep the data file in sync, but note it does not currently render anywhere.
