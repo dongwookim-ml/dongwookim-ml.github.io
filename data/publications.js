@@ -19,6 +19,12 @@
 const PUBLICATIONS_DATA = {
   'Selected Publications': [
     {
+      title: 'Concept Unlearning via Cross-Attention Activation Projection for Diffusion Models',
+      authors: 'Saemi Moon, Suhyeon Jun, Seoyeon Lee, Dongwoo Kim',
+      venue: 'Preprint',
+      arxiv: 'https://arxiv.org/abs/2605.25765'
+    },
+    {
       title: 'Training-free Composition of Pre-trained GFlowNets for Multi-Objective Generation',
       authors: 'Seokwon Yoon, Youngbin Choi, Seunghyuk Cho, Seungbeom Lee, MoonJeong Park, Dongwoo Kim',
       venue: 'ICML 2026',
