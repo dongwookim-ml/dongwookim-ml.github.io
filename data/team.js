@@ -102,13 +102,15 @@ const TEAM_DATA = {
       name: 'Suhyeon Jun',
       dept: 'CSE',
       research: 'Machine Learning',
-      photo: 'https://ml.postech.ac.kr/img/shjun_profile.jpg'
+      photo: 'https://ml.postech.ac.kr/img/shjun_profile.jpg',
+      homepage: 'https://sooh-j.github.io/'
     },
     {
       name: 'Seoyeon Lee',
       dept: 'GSAI',
       research: 'Machine Learning',
-      photo: 'https://ml.postech.ac.kr/img/sylee_profile.jpeg'
+      photo: 'https://ml.postech.ac.kr/img/sylee_profile.jpeg',
+      homepage: 'https://seoyeomm.github.io/'
     }
   ],
 
