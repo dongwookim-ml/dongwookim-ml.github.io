@@ -22,6 +22,11 @@
 const NEWS_DATA = [
   {
     date: 'May 2026',
+    emoji: '📄',
+    text: 'ANUBIS skeleton action recognition benchmark accepted to Pattern Recognition'
+  },
+  {
+    date: 'May 2026',
     emoji: '🧑‍⚖️',
     text: 'Serving as Area Chair for NeurIPS 2026'
   },
