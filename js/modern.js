@@ -79,7 +79,7 @@ function loadTeam() {
         '<div class="team-info">' +
           '<h4>' + member.name + '</h4>' +
           '<div class="team-dept">' + member.dept + ', POSTECH</div>' +
-          '<div class="team-research">' + member.research + '</div>' +
+          (member.research ? '<div class="team-research">' + member.research + '</div>' : '') +
           (links ? '<div class="team-links">' + links + '</div>' : '') +
         '</div>';
 
