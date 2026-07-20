@@ -20,17 +20,12 @@ python -m http.server 8000
 ### Site layout
 
 - `index.html` — home page: profile, bio, experience/education/awards, recent news. Uses `css/modern.css` and a sidebar + mobile-nav layout.
-- `pages/` — sub-pages. Two visual families coexist:
-  - **Modern (sidebar layout, `css/modern.css`):** `research.html`, `publication.html`, `team.html`, `join.html`. These four are the ones linked in the main nav.
-  - **Legacy (Bootstrap-resume style, `css/custom.css`):** `bio.html`, `contact.html`, `news.html`, `student.html`. Not in the main nav; older standalone pages.
+- `pages/` — sub-pages: `research.html`, `publication.html`, `team.html`, `join.html`, all linked in the main nav.
 
 ### Styles & scripts
 
-- `css/modern.css` — active stylesheet; CSS variables in `:root`.
-- `css/custom.css` — legacy stylesheet used only by the four legacy pages above.
+- `css/modern.css` — the stylesheet; CSS variables in `:root`.
 - `js/modern.js` — runtime loaders: `loadNews`, `loadTeam`. Each looks for a target element on the current page and bails if absent.
-- `js/scripts.js` — legacy Bootstrap-resume script; not referenced by any current page.
-- `index-original.html` — old homepage backup; not linked.
 
 ### Data files in `/data/`
 
@@ -42,8 +37,8 @@ Each data file has format documentation in a header comment. Publications are no
 ### Other directories
 
 - `images/` — profile photo, icons, team photos.
-- `papers_pdf/` — PDF copies of papers linked from `publication.html`.
-- `bibtex/` — BibTeX entries for some publications.
+- `papers_pdf/` — PDF copies of papers. Not linked from current pages, but kept because external sites (e.g., Google Scholar) link to them directly.
+- `bibtex/` — BibTeX entries for some publications. Kept for the same reason.
 - `slides/` — talk slides linked from elsewhere.
 
 ### External dependencies (CDN)

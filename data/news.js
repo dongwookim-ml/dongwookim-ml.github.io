@@ -43,7 +43,7 @@ const NEWS_DATA = [
   {
     date: 'Apr 2026',
     emoji: '🎤',
-    text: 'Gave a talk at ANU on influence functions for GNNs'
+    text: 'Gave a talk at ANU on influence functions for GNNs <a href="slides/anu_talk_2026.pdf" target="_blank">[slides]</a>'
   },
   {
     date: 'Feb 2026',

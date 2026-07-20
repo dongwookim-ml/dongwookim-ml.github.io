@@ -1,2 +1,10 @@
 *.swp
 .DS_Store
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.nav
+*.snm
+*.toc
