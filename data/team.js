@@ -45,7 +45,9 @@ const TEAM_DATA = {
       name: 'Jaeseung Heo',
       dept: 'GSAI',
       research: 'Graph Neural Networks, Data-Centric AI',
-      photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/jsheo_profile.jpg'
+      photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/jsheo_profile.jpg',
+      homepage: 'https://jason9464.github.io/',
+      scholar: 'https://scholar.google.com/citations?user=OiDlGBwAAAAJ'
     },
     {
       name: 'Saemi Moon',
