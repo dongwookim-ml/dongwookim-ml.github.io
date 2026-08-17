@@ -21,9 +21,9 @@
 
 const NEWS_DATA = [
   {
-    date: 'Jul 2026',
+    date: 'Aug 2026',
     emoji: '🧑‍⚖️',
-    text: 'Serving as Senior PC for AAAI 2027'
+    text: 'Serving as Area Chair for ICLR 2027 and Senior PC for AAAI 2027'
   },
   {
     date: 'May 2026',
