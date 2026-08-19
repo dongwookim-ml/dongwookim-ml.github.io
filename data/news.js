@@ -38,7 +38,7 @@ const NEWS_DATA = [
   {
     date: 'May 2026',
     emoji: '🇰🇷',
-    text: 'Paper accepted to ICML 2026'
+    text: 'A paper accepted to ICML 2026'
   },
   {
     date: 'Apr 2026',
@@ -93,7 +93,7 @@ const NEWS_DATA = [
   {
     date: 'Jun 2025',
     emoji: '🇺🇸',
-    text: 'Paper accepted to ICCV 2025'
+    text: 'A paper accepted to ICCV 2025'
   },
   {
     date: 'Jun 2025',
@@ -103,12 +103,12 @@ const NEWS_DATA = [
   {
     date: 'May 2025',
     emoji: '🇨🇦',
-    text: 'Paper accepted to KDD 2025 (Dataset & Benchmark)'
+    text: 'A paper accepted to KDD 2025 (Dataset & Benchmark)'
   },
   {
     date: 'May 2025',
     emoji: '🇨🇦',
-    text: 'Paper accepted to ICML 2025'
+    text: 'A paper accepted to ICML 2025'
   },
   {
     date: 'Feb 2025',
@@ -123,6 +123,6 @@ const NEWS_DATA = [
   {
     date: 'Jan 2025',
     emoji: '🇸🇬',
-    text: 'Paper accepted to ICLR 2025'
+    text: 'A paper accepted to ICLR 2025'
   }
 ];
