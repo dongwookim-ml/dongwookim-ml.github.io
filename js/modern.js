@@ -23,7 +23,10 @@ function loadNews() {
     return;
   }
 
-  NEWS_DATA.forEach(function(item) {
+  var limit = parseInt(newsList.getAttribute('data-limit'), 10);
+  var items = limit > 0 ? NEWS_DATA.slice(0, limit) : NEWS_DATA;
+
+  items.forEach(function(item) {
     var li = document.createElement('li');
     var parts = item.date.split(' ');
     var month = parts[0];
@@ -36,6 +39,9 @@ function loadNews() {
       '<span class="news-text">' + item.emoji + ' ' + item.text + '</span>';
     newsList.appendChild(li);
   });
+
+  var more = document.getElementById('news-more');
+  if (more && NEWS_DATA.length > items.length) more.style.display = '';
 }
 
 /**

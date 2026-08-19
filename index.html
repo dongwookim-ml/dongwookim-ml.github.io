@@ -85,9 +85,10 @@
 
 <!-- News -->
 <h2 id="news">Recent News in Our Lab</h2>
-<ul id="news-list">
-  <!-- Loaded dynamically from data/news.js -->
+<ul id="news-list" data-limit="20">
+  <!-- Loaded dynamically from data/news.js (20 most recent; full list on pages/news.html) -->
 </ul>
+<p id="news-more" style="display:none"><a href="pages/news.html">More news &rarr;</a></p>
 
 <!-- Footer -->
 <div id="footer">
