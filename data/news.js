@@ -22,6 +22,11 @@
 const NEWS_DATA = [
   {
     date: 'Aug 2026',
+    emoji: '🇭🇺',
+    text: 'Three papers accepted to EMNLP 2026 (2 mains, 1 findings)'
+  },
+  {
+    date: 'Aug 2026',
     emoji: '🧑‍⚖️',
     text: 'Serving as Area Chair for ICLR 2027 and Senior PC for AAAI 2027'
   },
