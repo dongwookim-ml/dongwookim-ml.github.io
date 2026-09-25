@@ -22,6 +22,11 @@
 const NEWS_DATA = [
   {
     date: 'Sep 2026',
+    emoji: '🎤',
+    text: 'Two EMNLP 2026 main papers selected for oral presentation'
+  },
+  {
+    date: 'Sep 2026',
     emoji: '🇦🇺',
     text: 'Two papers accepted to NeurIPS 2026'
   },
