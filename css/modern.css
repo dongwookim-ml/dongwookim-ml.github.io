@@ -269,6 +269,12 @@ div#footer-text {
   margin-left: 0.3em;
 }
 
+.pub-legend {
+  font-size: 0.85em;
+  color: #666;
+  margin: 0.2em 0 0;
+}
+
 /* ==================== */
 /* TEAM                 */
 /* ==================== */
