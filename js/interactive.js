@@ -164,9 +164,9 @@
   const bosses=[
     {area:'Trustworthy AI',label:'Trustworthy AI',x:-2.25,z:-2.25,top:1.8,art:knight,question:'Can a model truly forget what it learned, and how do we test that we can trust it?'},
     {area:'ML for Science',label:'ML for Science',x:-3.4,z:.8,top:1.92,art:flask,question:'Can generative models design molecules and drugs that respect physical symmetries?'},
-    {area:'Graph Neural Networks',label:'GNNs',x:-.8,z:3.4,top:1.38,art:slime,question:'What can a GNN really tell apart, and how do we keep it from over-smoothing?'},
+    {area:'Graph Neural Networks',label:'GNNs',x:-.8,z:3.4,top:1.38,art:slime,question:'When and why do GNNs generalize to nodes they have never seen?'},
     {area:'Language Models',label:'Language Models',x:.8,z:-3.4,top:1.86,art:book,question:'Can we actually understand the principles behind how LLMs work?'},
-    {area:'Generative Models',label:'Generative Models',x:3.4,z:-.8,top:1.59,art:ghost,question:'How do we generate structured data such as graphs, faithfully and at scale?'}
+    {area:'Generative Models',label:'Generative Models',x:3.4,z:-.8,top:1.59,art:ghost,question:'How do diffusion models learn, and can pre-trained generators be composed for new goals?'}
   ];
   // The hero arrives on the magic circle and leaves through the door in the back wall.
   const home={x:0,z:0},exit={x:-1.15,z:-3.3};
