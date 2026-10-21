@@ -86,9 +86,9 @@
   for(let row=0;row<3;row++)for(let i=0;i<12;i++){const h=.47+(i%3)*.08;box(.98+i*.28,.16+row*.83,-3.58,.19,h,.43,['#f4aaa4','#9fd5c3','#a9c4ef','#f6d78f'][i%4],'papers');box(.98+i*.28,.24+row*.83,-3.137,.19,.035,.014,'#fff7e6','papers');}
   box(-.6,.028,-.1,4.7,.014,3.8,'#ddd4f3');
   desk(-3.05,-.25,'about');desk(.8,.15,'people');
-  person(-1.85,1.55,{shirt:'#c4aeea',hair:'#7a4b3a',group:'about',long:true});
+  person(-1.85,1.55,{shirt:'#f2b179',hair:'#4a3a35',group:'about'});
   // The student sits on a stool behind the shared desk, high enough to show their face.
-  box(2.36,.03,-.6,.44,.37,.4,'#ecc699','people');person(2.58,-.4,{shirt:'#f2b179',hair:'#4a3a35',y:.3});
+  box(2.36,.03,-.6,.44,.37,.4,'#ecc699','people');person(2.58,-.4,{shirt:'#c4aeea',hair:'#7a4b3a',y:.3,long:true});
   plant(-3.95,2.75,true);plant(4.15,-1.7);cat(-2.5,2.9);
   // An empty chair faces the second desk, with a heart on its back.
   for(const x of[2.55,3.16])for(const z of[2.5,3.03])box(x,.03,z,.09,.61,.09,'#86a9a3','join');
@@ -164,16 +164,22 @@
       const section = node(category === 'Alumni' ? 'details' : 'section');
       section.append(node(category === 'Alumni' ? 'summary' : 'h3', category));
       for (const member of members) {
-        const row = node('div', '', 'member');
-        row.append(node('strong', member.name), node('p', [member.dept, member.research].filter(Boolean).join(' · ')));
+        const row = node('div', '', 'member'), info = node('div'), photo = node('img');
+        photo.src = member.photo;
+        photo.alt = '';
+        photo.loading = 'lazy';
+        // Like the team page, show initials if the photo fails to load.
+        photo.onerror = () => photo.replaceWith(node('span', member.name.split(' ').map(part => part[0]).join(''), 'initials'));
+        info.append(node('strong', member.name), node('p', [member.dept, member.research].filter(Boolean).join(' · ')));
         for (const [label, href] of [['Homepage', member.homepage], ['Scholar', member.scholar]]) {
           if (!href) continue;
           const link = node('a', label + ' ↗');
           link.href = href;
           link.target = '_blank';
           link.rel = 'noopener';
-          row.append(link);
+          info.append(link);
         }
+        row.append(photo, info);
         section.append(row);
       }
       panel.append(section);

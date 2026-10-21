@@ -52,7 +52,9 @@ body {margin:0;background:#fff}
 #lab-layout .join ol {padding-left:19px}
 #lab-layout .join li {margin-bottom:10px}
 #lab-layout .join ul {font-size:13px}
-#lab-layout .member {padding:12px 0;border-bottom:1px solid var(--lab-line)}
+#lab-layout .member {display:grid;grid-template-columns:56px minmax(0,1fr);gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--lab-line)}
+#lab-layout .member img,#lab-layout .member .initials {width:56px;height:56px;border-radius:10px;object-fit:cover;object-position:center 20%;background:var(--lab-side)}
+#lab-layout .member .initials {display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--lab-muted)}
 #lab-layout .member strong {font-size:14px;font-weight:500}
 #lab-layout .member p {font-size:12px;margin:4px 0;color:var(--lab-muted)}
 #lab-layout .member a {font-size:12px;margin-right:12px}
