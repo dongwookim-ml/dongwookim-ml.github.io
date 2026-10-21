@@ -1,5 +1,5 @@
 body {margin:0;background:#fff}
-#lab-layout {--lab-bg:#fff;--lab-side:#f7f8f5;--lab-ink:#263c4a;--lab-muted:#66767f;--lab-line:#dce3e6;--lab-blue:#355f82;background:var(--lab-bg);color:var(--lab-ink);font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;max-width:1200px;margin:auto}
+#lab-layout {--lab-bg:#fff;--lab-side:#f7f8f5;--lab-ink:#263c4a;--lab-muted:#66767f;--lab-line:#dce3e6;--lab-blue:#355f82;background:var(--lab-bg);color:var(--lab-ink);font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;max-width:1680px;margin:auto}
 #lab-layout * {box-sizing:border-box}
 #lab-layout .site-header {padding:24px 28px 22px;border-bottom:1px solid var(--lab-line);display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 #lab-layout h1 {font:500 28px/1.2 Optima,Georgia,serif;margin:0 0 5px;color:var(--lab-blue)}
@@ -9,11 +9,12 @@ body {margin:0;background:#fff}
 #lab-layout .site-nav a[aria-current] {border-bottom:2px solid var(--lab-blue)}
 #lab-layout a {color:var(--lab-blue);text-underline-offset:3px;text-decoration:none;overflow-wrap:anywhere}
 #lab-layout a:hover {text-decoration:underline}
-#lab-layout .layout {display:grid;grid-template-columns:minmax(0,42%) minmax(0,58%);align-items:start}
+#lab-layout .layout {display:grid;grid-template-columns:minmax(0,1fr) min(680px,58%);align-items:start}
 #lab-layout .explore {background:var(--lab-side);padding:24px 14px 28px;border-right:1px solid var(--lab-line);position:sticky;top:0}
 #lab-layout .explore h2 {font-size:16px;font-weight:500;margin:0 10px 2px}
 #lab-layout .explore>.caption {margin:0 10px}
-#lab-layout canvas {display:block;width:100%;height:auto;image-rendering:pixelated;touch-action:pan-y;margin:2px 0 0;cursor:pointer}
+/* Cap the 3:2 lab by window height so the header, lab and buttons fit on one screen (380px covers the rest). */
+#lab-layout canvas {display:block;width:100%;max-width:max(480px,(100vh - 380px)*1.5);height:auto;image-rendering:pixelated;touch-action:pan-y;margin:2px auto 0;cursor:pointer}
 #lab-layout button {font:inherit;font-size:13px;padding:8px 11px;min-height:40px;border:1px solid var(--lab-line);border-radius:3px;background:var(--lab-bg);color:var(--lab-ink);cursor:pointer}
 #lab-layout button[aria-pressed="true"] {background:var(--lab-blue);color:var(--lab-bg);border-color:var(--lab-blue)}
 #lab-layout :focus-visible {outline:2px solid var(--lab-blue);outline-offset:3px}
