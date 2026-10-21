@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interactive Lab | Dongwoo Kim</title>
+  <meta name="description" content="Meet Dongwoo Kim and explore a pixel-art Machine Learning Lab with research, publications, people, and opportunities at POSTECH.">
+  <link rel="icon" href="../images/dw-sq.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/interactive.css">
+  <script src="../data/team.js" defer></script>
+  <script src="../js/interactive.js" defer></script>
+</head>
+<body>
+<div id="lab-layout">
+  <header class="site-header">
+    <div>
+      <h1><a href="../index.html">Dongwoo Kim</a></h1>
+      <p class="caption">Machine Learning Lab · POSTECH</p>
+    </div>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="publication.html">Publications</a>
+      <a href="team.html">Team</a>
+      <a href="join.html">Join Us</a>
+      <a href="interactive.html" aria-current="page">Interactive</a>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <aside class="explore" aria-label="Explore the lab">
+      <h2>Explore the lab</h2>
+      <p class="caption">Choose an object to walk there, or use the buttons below.</p>
+      <canvas width="480" height="320" role="img" aria-label="A pixel-art lab with a professor's desk on the left, a research blackboard, publication bookshelf, shared desk on the right, and an empty chair. The destination buttons provide the same navigation."></canvas>
+      <div class="camera" aria-label="Camera controls">
+        <button type="button" data-turn="-1" aria-label="Turn the view left">↶</button>
+        <span class="caption">Change view</span>
+        <button type="button" data-turn="1" aria-label="Turn the view right">↷</button>
+      </div>
+      <nav class="places" aria-label="Lab destinations">
+        <button type="button" data-place="about" aria-pressed="true" aria-controls="lab-panel">About Dongwoo</button>
+        <button type="button" data-place="research" aria-pressed="false" aria-controls="lab-panel">Research</button>
+        <button type="button" data-place="papers" aria-pressed="false" aria-controls="lab-panel">Publications</button>
+        <button type="button" data-place="people" aria-pressed="false" aria-controls="lab-panel">People</button>
+        <button type="button" data-place="join" aria-pressed="false" aria-controls="lab-panel">Join us</button>
+      </nav>
+      <p class="arrival" role="status" aria-live="polite">At the professor's desk · Dongwoo Kim</p>
+    </aside>
+
+    <article class="reading" id="lab-panel" aria-labelledby="lab-panel-title" aria-busy="false">
+      <p class="eyebrow">THE PROFESSOR’S DESK</p>
+      <h2 id="lab-panel-title">Dongwoo Kim</h2>
+      <p class="intro"></p>
+      <a class="original-page" href="../index.html">Open the original page →</a>
+      <div class="content about">
+        <p>Read <a href="../index.html">Dongwoo Kim’s profile</a>, or explore another part of the lab.</p>
+      </div>
+      <noscript><p>The interactive tour needs JavaScript. All content is available through the navigation above.</p></noscript>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <a href="https://postech.ac.kr">POSTECH</a> ·
+    <a href="https://ml.postech.ac.kr">Machine Learning Lab</a> ·
+    <a href="../index.html">Dongwoo Kim</a>
+  </footer>
+</div>
+</body>
+</html>

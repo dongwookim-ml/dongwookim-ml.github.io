@@ -21,11 +21,13 @@ python -m http.server 8000
 
 - `index.html` — home page: profile, bio, experience/education/awards, recent news. Uses `css/modern.css` and a sidebar + mobile-nav layout.
 - `pages/` — sub-pages: `research.html`, `publication.html`, `team.html`, `join.html`, all linked in the main nav.
+- `pages/interactive.html` — optional pixel-art lab tour with a content panel. Uses its own `css/interactive.css` and `js/interactive.js`; the original pages remain available.
 
 ### Styles & scripts
 
 - `css/modern.css` — the stylesheet; CSS variables in `:root`.
 - `js/modern.js` — runtime loaders: `loadNews`, `loadTeam`. Each looks for a target element on the current page and bails if absent.
+- `js/interactive.js` — lab rendering and navigation. Opens with the professor's profile from `index.html`; reads research, publications, and joining information from the existing HTML pages over HTTP, and members from `TEAM_DATA`. Preview with a local HTTP server, not `file://`.
 
 ### Data files in `/data/`
 
