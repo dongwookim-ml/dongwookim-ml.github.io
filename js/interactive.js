@@ -9,9 +9,9 @@
     research:{title:'Research',eyebrow:'THE BLACKBOARD',intro:'',page:'research.html',place:'the blackboard',pin:[-2.1,3.05,-3.55],destination:[-2.2,-2]},
     papers:{title:'Publications',eyebrow:'THE BOOKSHELF',intro:'* equal contribution · † co-corresponding',page:'publication.html',place:'the bookshelf',pin:[2.4,3.05,-3.35],destination:[2.4,-2]},
     people:{title:'Our people',eyebrow:'THE SHARED DESK',intro:'Machine Learning Lab · POSTECH',page:'team.html',place:'the shared desk',pin:[2,2.1,.5],destination:[2.4,-1.2]},
-    join:{title:'Join the lab',eyebrow:'A SEAT FOR YOU',intro:'For prospective graduate students and undergraduate researchers.',page:'join.html',place:'the empty chair',pin:[2.9,1.9,2.7],destination:[2.3,1.9]}
+    join:{title:'Join the lab',eyebrow:'A SEAT FOR YOU',intro:'For prospective graduate students and undergraduate researchers.',page:'join.html',place:'the empty chair',pin:[2.92,1.75,3.15],destination:[1.5,3.2]}
   };
-  let selected='about',angle=45,cameraFrame,walkFrame,faces=[],target='about',avatar={x:-.7,z:1.8},stride=0;
+  let selected='about',angle=45,view=45,cameraFrame,walkFrame,faces=[],target='about',avatar={x:-.7,z:1.8},stride=0;
   const keys=['','about','research','papers','people','join'],pixels=ctx.createImageData(480,320),depths=new Float32Array(480*320),picks=new Uint8Array(480*320);
   const boxes=[];
   // Orthographic boxes share a depth buffer for drawing and object picking.
@@ -184,11 +184,14 @@
     walkFrame = null;
     root.querySelectorAll('[data-place]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.place === key)));
     root.querySelector('.arrival').textContent = 'At ' + sections[key].place + ' · ' + sections[key].title;
-    renderPanel(key);
     draw();
-    if (reading.getBoundingClientRect().top < 0) {
-      reading.scrollIntoView({block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth'});
-    }
+    renderPanel(key).then(() => {
+      // On narrow screens the panel sits below the lab. Scroll once it is filled, so the page is long enough.
+      const top = reading.getBoundingClientRect().top;
+      if (selected === key && target === key && (top < 0 || top > innerHeight / 2)) {
+        reading.scrollIntoView({block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth'});
+      }
+    });
   }
   function walk(key){
     if(!Object.hasOwn(sections,key))return;cancelAnimationFrame(walkFrame);target=key;
@@ -207,15 +210,18 @@
     }
     walkFrame=requestAnimationFrame(tick);
   }
-  function cameraButtons(){root.querySelector('[data-turn="-1"]').disabled=angle<=25;root.querySelector('[data-turn="1"]').disabled=angle>=65;}
-  function turn(direction){cancelAnimationFrame(cameraFrame);const start=angle,destination=Math.max(25,Math.min(65,angle+direction*10)),t0=performance.now();
-    if(reducedMotion.matches){angle=destination;draw();cameraButtons();return;}
-    function tick(t){const v=Math.min(1,(t-t0)/260),e=v*v*(3-2*v);angle=start+(destination-start)*e;draw();if(v<1)cameraFrame=requestAnimationFrame(tick);else cameraButtons();}
+  function cameraButtons(){root.querySelector('[data-turn="-1"]').disabled=view<=25;root.querySelector('[data-turn="1"]').disabled=view>=65;}
+  // Step from the last requested view, not the mid-turn angle, so views stay on the 10° grid.
+  function turn(direction){cancelAnimationFrame(cameraFrame);const start=angle,t0=performance.now();view=Math.max(25,Math.min(65,view+direction*10));cameraButtons();
+    if(reducedMotion.matches){angle=view;draw();return;}
+    function tick(t){const v=Math.min(1,(t-t0)/260),e=v*v*(3-2*v);angle=start+(view-start)*e;draw();if(v<1)cameraFrame=requestAnimationFrame(tick);}
     cameraFrame=requestAnimationFrame(tick);
   }
   root.querySelectorAll('[data-place]').forEach(b=>b.addEventListener('click',()=>walk(b.dataset.place)));
   root.querySelectorAll('[data-turn]').forEach(b=>b.addEventListener('click',()=>turn(Number(b.dataset.turn))));
   canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect(),x=Math.floor((e.clientX-r.left)*480/r.width),y=Math.floor((e.clientY-r.top)*320/r.height);if(x>=0&&x<480&&y>=0&&y<320){const key=keys[picks[y*480+x]];if(key)walk(key);}});
-  arrive('about');
+  // The markup already shows the desk as selected; render without scrolling on load.
+  renderPanel('about');
+  draw();
   cameraButtons();
 })();

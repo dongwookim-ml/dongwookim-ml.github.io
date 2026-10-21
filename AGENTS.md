@@ -8,7 +8,7 @@ Personal academic website for Prof. Dongwoo Kim (POSTECH Machine Learning Lab). 
 
 ## Development
 
-**Local preview:** Open `index.html` directly in a browser, or use a local server:
+**Local preview:** Open `index.html` directly in a browser, or use a local server. `pages/interactive.html` works only through the server:
 ```bash
 python -m http.server 8000
 ```
