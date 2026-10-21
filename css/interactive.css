@@ -13,8 +13,8 @@ body {margin:0;background:#fff}
 #lab-layout .explore {background:var(--lab-side);padding:24px 14px 28px;border-right:1px solid var(--lab-line);position:sticky;top:0}
 #lab-layout .explore h2 {font-size:16px;font-weight:500;margin:0 10px 2px}
 #lab-layout .explore>.caption {margin:0 10px}
-/* Cap the 3:2 lab by window height so the header, lab and buttons fit on one screen (380px covers the rest). */
-#lab-layout canvas {display:block;width:100%;max-width:max(480px,(100vh - 380px)*1.5);height:auto;image-rendering:pixelated;touch-action:pan-y;margin:2px auto 0;cursor:pointer}
+/* Cap the 392×290 lab by window height so the header, lab and buttons fit on one screen (380px covers the rest). */
+#lab-layout canvas {display:block;width:100%;max-width:max(392px,(100vh - 380px)*1.35);height:auto;image-rendering:pixelated;touch-action:pan-y;margin:2px auto 0;cursor:pointer}
 #lab-layout button {font:inherit;font-size:13px;padding:8px 11px;min-height:40px;border:1px solid var(--lab-line);border-radius:3px;background:var(--lab-bg);color:var(--lab-ink);cursor:pointer}
 #lab-layout button[aria-pressed="true"] {background:var(--lab-blue);color:var(--lab-bg);border-color:var(--lab-blue)}
 #lab-layout :focus-visible {outline:2px solid var(--lab-blue);outline-offset:3px}
@@ -62,4 +62,5 @@ body {margin:0;background:#fff}
 @media(max-width:380px){#lab-layout .places{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:450px){#lab-layout .about .imgtable tr{grid-template-columns:1fr;gap:12px}}
 @media(max-height:750px) and (min-width:701px){#lab-layout .explore{position:static}}
+@media(min-width:1400px){#lab-layout .places{grid-template-columns:repeat(5,minmax(0,1fr))}#lab-layout .places [data-place="about"]{grid-column:auto}#lab-layout canvas{max-width:max(392px,(100vh - 286px)*1.35)}}
 @media print{#lab-layout .explore,#lab-layout .site-nav{display:none}#lab-layout .layout{display:block}}

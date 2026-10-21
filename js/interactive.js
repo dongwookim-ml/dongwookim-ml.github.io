@@ -12,12 +12,13 @@
     join:{title:'Join the lab',eyebrow:'A SEAT FOR YOU',intro:'For prospective graduate students and undergraduate researchers.',page:'join.html',place:'the empty chair',pin:[2.92,1.75,3.15],destination:[1.5,3.2]}
   };
   let selected='about',walkFrame,faces=[],target='about',avatar={x:-.3,z:1.6},stride=0;
-  const keys=['','about','research','papers','people','join'],pixels=ctx.createImageData(480,320),depths=new Float32Array(480*320),picks=new Uint8Array(480*320);
+  const keys=['','about','research','papers','people','join'],W=canvas.width,H=canvas.height,pixels=ctx.createImageData(W,H),depths=new Float32Array(W*H),picks=new Uint8Array(W*H);
   const boxes=[];
   // Orthographic boxes share a depth buffer for drawing and object picking.
   function box(x,y,z,w,h,d,color,group=''){boxes.push({x,y,z,w,h,d,color,group});}
   function shade(hex,k){return '#'+hex.slice(1).match(/../g).map(c=>Math.min(255,Math.round(parseInt(c,16)*k)).toString(16).padStart(2,'0')).join('');}
-  function project([x,y,z]){const a=Math.PI/4,depth=x*Math.sin(a)+z*Math.cos(a);return [240+(x*Math.cos(a)-z*Math.sin(a))*29,190+depth*14.5-y*25.1,depth*.866+y*.5];}
+  // The origin sits so the room, walls and shadow fill the canvas with a few pixels to spare.
+  function project([x,y,z]){const a=Math.PI/4,depth=x*Math.sin(a)+z*Math.cos(a);return [197+(x*Math.cos(a)-z*Math.sin(a))*29,175+depth*14.5-y*25.1,depth*.866+y*.5];}
   function face(points,color,group=''){faces.push({p:points.map(project),color,group});}
   function cube(b){const{x,y,z,w,h,d,color,group}=b,X=x+w,Y=y+h,Z=z+d;
     face([[x,Y,z],[X,Y,z],[X,Y,Z],[x,Y,Z]],shade(color,1.08),group);
@@ -96,12 +97,12 @@
   box(-3.85,.03,1.35,.95,.53,.65,'#dcae84');box(-3.93,.56,1.29,1.11,.1,.77,'#ecc699');box(-3.6,.67,1.5,.39,.20,.29,'#fff3dc');
   function triangle(a,b,c,rgba,id){
     const area=(b[1]-c[1])*(a[0]-c[0])+(c[0]-b[0])*(a[1]-c[1]);if(Math.abs(area)<.001)return;
-    const left=Math.max(0,Math.floor(Math.min(a[0],b[0],c[0]))),right=Math.min(479,Math.ceil(Math.max(a[0],b[0],c[0])));
-    const top=Math.max(0,Math.floor(Math.min(a[1],b[1],c[1]))),bottom=Math.min(319,Math.ceil(Math.max(a[1],b[1],c[1])));
+    const left=Math.max(0,Math.floor(Math.min(a[0],b[0],c[0]))),right=Math.min(W-1,Math.ceil(Math.max(a[0],b[0],c[0])));
+    const top=Math.max(0,Math.floor(Math.min(a[1],b[1],c[1]))),bottom=Math.min(H-1,Math.ceil(Math.max(a[1],b[1],c[1])));
     for(let y=top;y<=bottom;y++)for(let x=left;x<=right;x++){
       const px=x+.5,py=y+.5,u=((b[1]-c[1])*(px-c[0])+(c[0]-b[0])*(py-c[1]))/area,v=((c[1]-a[1])*(px-c[0])+(a[0]-c[0])*(py-c[1]))/area,w=1-u-v;
       if(u<0||v<0||w<0)continue;
-      const index=y*480+x,z=u*a[2]+v*b[2]+w*c[2];if(z<depths[index])continue;
+      const index=y*W+x,z=u*a[2]+v*b[2]+w*c[2];if(z<depths[index])continue;
       depths[index]=z;picks[index]=id;pixels.data.set(rgba,index*4);
     }
   }
@@ -258,7 +259,7 @@
     walkFrame=requestAnimationFrame(tick);
   }
   root.querySelectorAll('[data-place]').forEach(b=>b.addEventListener('click',()=>walk(b.dataset.place)));
-  canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect(),x=Math.floor((e.clientX-r.left)*480/r.width),y=Math.floor((e.clientY-r.top)*320/r.height);if(x>=0&&x<480&&y>=0&&y<320){const key=keys[picks[y*480+x]];if(key)walk(key);}});
+  canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect(),x=Math.floor((e.clientX-r.left)*W/r.width),y=Math.floor((e.clientY-r.top)*H/r.height);if(x>=0&&x<W&&y>=0&&y<H){const key=keys[picks[y*W+x]];if(key)walk(key);}});
   // Arrow keys move the avatar in their screen direction. Stepping onto a place's spot opens it without scrolling.
   const moves={ArrowUp:[-1,-1],ArrowDown:[1,1],ArrowLeft:[-1,1],ArrowRight:[1,-1]},held=new Set();
   let stepFrame,lastStep,walked=0;
