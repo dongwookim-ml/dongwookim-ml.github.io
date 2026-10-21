@@ -1,8 +1,8 @@
 body {margin:0;background:#fff}
-#lab-layout {--lab-bg:#fff;--lab-side:#f7f8f5;--lab-ink:#263c4a;--lab-muted:#66767f;--lab-line:#dce3e6;--lab-blue:#355f82;background:var(--lab-bg);color:var(--lab-ink);font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;max-width:1680px;margin:auto}
+#lab-layout {--lab-bg:#fff;--lab-side:#f7f8f5;--lab-ink:#263c4a;--lab-muted:#66767f;--lab-line:#dce3e6;--lab-blue:#355f82;background:var(--lab-bg);color:var(--lab-ink);--text:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;--pixel:"Pixelify Sans",var(--text);font:14px/1.55 var(--text);max-width:1680px;margin:auto}
 #lab-layout * {box-sizing:border-box}
 #lab-layout .site-header {padding:24px 28px 22px;border-bottom:1px solid var(--lab-line);display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-#lab-layout h1 {font:500 28px/1.2 Optima,Georgia,serif;margin:0 0 5px;color:var(--lab-blue)}
+#lab-layout h1 {font:600 28px/1.2 var(--pixel);margin:0 0 5px;color:var(--lab-blue)}
 #lab-layout .caption {font-size:12px;color:var(--lab-muted);margin:0}
 #lab-layout .site-nav {display:flex;gap:8px 18px;flex-wrap:wrap;font-size:14px}
 #lab-layout .site-nav a {display:inline-flex;align-items:center;min-height:40px}
@@ -26,7 +26,7 @@ body {margin:0;background:#fff}
 #lab-layout .bosses .tag.defeated span::before {content:"✓ "}
 #lab-layout .bosses .tag.speaking {box-shadow:0 0 0 2px #ffe08a}
 /* A JRPG-style dialogue box across the top of the stage, on the topmost layer. */
-#lab-layout .bosses .dialogue {position:absolute;z-index:2;top:2%;left:2%;right:2%;margin:0;padding:6px 26px 8px 12px;font-size:clamp(10px,2.4cqw,14px);line-height:1.4;color:#fff;background:rgba(24,20,52,.94);border:2px solid #fff;border-radius:6px;box-shadow:0 0 0 2px #2b2540,0 3px 0 2px rgba(0,0,0,.25);pointer-events:none}
+#lab-layout .bosses .dialogue {position:absolute;z-index:2;top:2%;left:2%;right:2%;margin:0;padding:6px 26px 8px 12px;font-size:clamp(11px,2.6cqw,15px);line-height:1.4;color:#fff;background:rgba(24,20,52,.94);border:2px solid #fff;border-radius:6px;box-shadow:0 0 0 2px #2b2540,0 3px 0 2px rgba(0,0,0,.25);pointer-events:none}
 #lab-layout .bosses .dialogue strong {display:block;margin-bottom:2px;font-weight:600;color:#ffe08a}
 #lab-layout .bosses .dialogue::after {content:"▼";position:absolute;right:10px;bottom:6px;font-size:.7em;color:#ffe08a;animation:blink 1s step-end infinite}
 @keyframes blink {50% {opacity:0}}
@@ -34,6 +34,8 @@ body {margin:0;background:#fff}
 /* On small stages the tags would cover the bosses; the dialogue box names each boss instead. */
 @container (max-width:560px){#lab-layout .bosses .tag:not(:focus-visible){opacity:0}}
 #lab-layout button {font:inherit;font-size:13px;padding:8px 11px;min-height:40px;border:1px solid var(--lab-line);border-radius:3px;background:var(--lab-bg);color:var(--lab-ink);cursor:pointer}
+/* Two type roles: the pixel font for titles, headings and game UI, and IBM Plex Mono for everything you read. */
+#lab-layout .explore h2,#lab-layout .eyebrow,#lab-layout button,#lab-layout summary,#lab-layout .bosses .dialogue {font-family:var(--pixel)}
 #lab-layout button[aria-pressed="true"] {background:var(--lab-blue);color:var(--lab-bg);border-color:var(--lab-blue)}
 #lab-layout :focus-visible {outline:2px solid var(--lab-blue);outline-offset:3px}
 #lab-layout .places {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:0 10px}
@@ -42,11 +44,11 @@ body {margin:0;background:#fff}
 /* The panel is its own scroll box, as tall as the lab column, so only the panel scrolls and the page stays put. */
 #lab-layout .reading {padding:26px 30px 30px;min-width:0;contain:size;overflow-y:auto;overscroll-behavior:contain}
 #lab-layout .eyebrow {font-size:11px;letter-spacing:.12em;color:var(--lab-muted);margin:0 0 5px}
-#lab-layout .reading h2 {font:500 28px/1.2 Optima,Georgia,serif;margin:0 0 9px;color:var(--lab-blue)}
+#lab-layout .reading h2 {font:600 28px/1.2 var(--pixel);margin:0 0 9px;color:var(--lab-blue)}
 #lab-layout .intro {font-size:12px;margin:0 0 22px;color:var(--lab-muted)}
 #lab-layout .intro:empty {display:none}
 #lab-layout .original-page {display:inline-block;font-size:12px;margin-bottom:22px}
-#lab-layout .content h3 {font-size:15px;font-weight:500;margin:22px 0 10px}
+#lab-layout .content h3 {font:500 16px/1.4 var(--pixel);margin:22px 0 10px}
 #lab-layout .content h3:first-child {margin-top:0}
 #lab-layout .content ul {list-style:none;padding:0;margin:0}
 #lab-layout .papers li {padding:14px 0;border-bottom:1px solid var(--lab-line);font-size:13px;color:var(--lab-muted)}
@@ -58,7 +60,7 @@ body {margin:0;background:#fff}
 #lab-layout details {border-top:1px solid var(--lab-line);padding:12px 0}
 #lab-layout summary {font-size:13px;font-weight:500;color:var(--lab-blue);cursor:pointer}
 #lab-layout details ul {margin-top:15px}
-#lab-layout .about h2,#lab-layout .research h2,#lab-layout .join h2 {font:500 16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:22px 0 8px;color:var(--lab-ink)}
+#lab-layout .about h2,#lab-layout .research h2,#lab-layout .join h2 {font:500 16px/1.4 var(--pixel);margin:22px 0 8px;color:var(--lab-ink)}
 /* In the dungeon the panel takes on its colors. */
 #lab-layout.in-dungeon .reading {background:#26223a;color:#e2dcf7;scrollbar-color:#5f5c8c #26223a}
 #lab-layout.in-dungeon .eyebrow,#lab-layout.in-dungeon .intro {color:#a9a2cc}

@@ -45,7 +45,7 @@ Each data file has format documentation in a header comment. Publications are no
 
 ### External dependencies (CDN)
 
-- Google Fonts (Inter)
+- Google Fonts (Inter; Pixelify Sans and IBM Plex Mono on the interactive page)
 - Font Awesome 5.15.4
 
 ## Adding content
