@@ -85,10 +85,9 @@
   for(let row=0;row<3;row++)for(let i=0;i<12;i++){const h=.47+(i%3)*.08;box(.98+i*.28,.16+row*.83,-3.58,.19,h,.43,['#f4aaa4','#9fd5c3','#a9c4ef','#f6d78f'][i%4],'papers');box(.98+i*.28,.24+row*.83,-3.137,.19,.035,.014,'#fff7e6','papers');}
   box(-.6,.028,-.1,4.7,.014,3.8,'#ddd4f3');
   desk(-3.05,-.25,'about');desk(.8,.15,'people');
-  person(-1.85,1.55,{shirt:'#6f86c4',group:'about'});
+  person(-1.85,1.55,{shirt:'#c4aeea',hair:'#7a4b3a',group:'about',long:true});
   // The student sits on a stool behind the shared desk, high enough to show their face.
   box(2.36,.03,-.6,.44,.37,.4,'#ecc699','people');person(2.58,-.4,{shirt:'#f2b179',hair:'#4a3a35',y:.3});
-  person(-.95,-2.75,{shirt:'#c4aeea',hair:'#7a4b3a',group:'research',long:true});
   plant(-3.95,2.75,true);plant(4.15,-1.7);cat(-2.5,2.9);
   // An empty chair faces the second desk, with a heart on its back.
   for(const x of[2.55,3.16])for(const z of[2.5,3.03])box(x,.03,z,.09,.61,.09,'#86a9a3','join');
@@ -210,7 +209,7 @@
     }
   }
 
-  function arrive(key) {
+  function arrive(key, scroll = true) {
     selected = key;
     target = key;
     stride = 0;
@@ -221,10 +220,25 @@
     renderPanel(key).then(() => {
       // On narrow screens the panel sits below the lab. Scroll once it is filled, so the page is long enough.
       const top = reading.getBoundingClientRect().top;
-      if (selected === key && target === key && (top < 0 || top > innerHeight / 2)) {
+      if (scroll && selected === key && target === key && (top < 0 || top > innerHeight / 2)) {
         reading.scrollIntoView({block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth'});
       }
     });
+  }
+  // Floor footprints [x0,z0,x1,z1]: desks, shelf, board, people, plants, cat, cabinet and chair.
+  const obstacles=[[-3.13,-.33,-.53,.92],[.72,.07,3.32,1.32],[.75,-3.92,4.65,-3.07],[-4.3,-3.92,-.55,-3.55],[-2.21,1.24,-1.49,1.86],[2.22,-.71,2.94,-.09],[-4.4,2.48,-3.5,3.02],[3.7,-1.97,4.6,-1.43],[-2.7,2.54,-2.3,3.24],[-3.93,1.29,-2.82,2.06],[2.47,2.42,3.37,3.22]];
+  function blocked(x,z){return Math.abs(x)>4.7||Math.abs(z)>3.7||obstacles.some(([x0,z0,x1,z1])=>x>x0-.3&&x<x1+.3&&z>z0-.3&&z<z1+.3);}
+  // Shortest walkable route on a 0.1 grid, so a walk from anywhere goes around the furniture.
+  function route(tx,tz){
+    const n=95,cell=(x,z)=>Math.round((x+4.7)*10)+Math.round((z+3.7)*10)*n,spot=c=>[c%n/10-4.7,Math.floor(c/n)/10-3.7];
+    const start=cell(avatar.x,avatar.z),goal=cell(tx,tz),from=new Map([[start,start]]),queue=[start];
+    for(let q=0;q<queue.length&&!from.has(goal);q++){
+      const c=queue[q];
+      for(const next of[c-1,c+1,c-n,c+n])if(!from.has(next)&&Math.abs(next%n-c%n)<2&&(next===goal||!blocked(...spot(next)))){from.set(next,c);queue.push(next);}
+    }
+    const points=[[tx,tz]];
+    for(let c=from.get(goal);c!==undefined&&c!==start;c=from.get(c))points.unshift(spot(c));
+    return [[avatar.x,avatar.z],...points];
   }
   function walk(key){
     if(!Object.hasOwn(sections,key))return;cancelAnimationFrame(walkFrame);target=key;
@@ -232,11 +246,11 @@
     if(Math.hypot(avatar.x-dx,avatar.z-dz)<.001){arrive(key);return;}
     if(key !== 'people') loadPage(key).catch(() => {});
     if(reducedMotion.matches){avatar={x:dx,z:dz};arrive(key);return;}
-    const points=[[avatar.x,avatar.z],[0,avatar.z],[0,dz],[dx,dz]],segments=[];let total=0;
+    const points=route(dx,dz),segments=[];let total=0;
     for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],length=Math.hypot(b[0]-a[0],b[1]-a[1]);if(length>.001){segments.push({a,b,length});total+=length;}}
     if(total<.001){arrive(key);return;}
     reading.setAttribute('aria-busy','true');root.querySelector('.arrival').textContent='Walking to '+sections[key].place+'…';
-    const start=performance.now(),duration=Math.min(1100,Math.max(350,total*120));
+    const start=performance.now(),duration=Math.min(1600,Math.max(350,total*120));
     function tick(t){const progress=Math.min(1,(t-start)/duration);let distance=total*progress;
       for(const s of segments){if(distance<=s.length){const f=distance/s.length;avatar={x:s.a[0]+(s.b[0]-s.a[0])*f,z:s.a[1]+(s.b[1]-s.a[1])*f};break;}distance-=s.length;}
       stride=Math.sin(progress*total*7);draw();if(progress<1)walkFrame=requestAnimationFrame(tick);else{avatar={x:dx,z:dz};arrive(key);}
@@ -245,6 +259,28 @@
   }
   root.querySelectorAll('[data-place]').forEach(b=>b.addEventListener('click',()=>walk(b.dataset.place)));
   canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect(),x=Math.floor((e.clientX-r.left)*480/r.width),y=Math.floor((e.clientY-r.top)*320/r.height);if(x>=0&&x<480&&y>=0&&y<320){const key=keys[picks[y*480+x]];if(key)walk(key);}});
+  // Arrow keys move the avatar in their screen direction. Stepping onto a place's spot opens it without scrolling.
+  const moves={ArrowUp:[-1,-1],ArrowDown:[1,1],ArrowLeft:[-1,1],ArrowRight:[1,-1]},held=new Set();
+  let stepFrame,lastStep,walked=0;
+  function step(t){
+    let dx=0,dz=0;for(const k of held){dx+=moves[k][0];dz+=moves[k][1];}
+    const length=Math.hypot(dx,dz);
+    if(!length){stepFrame=null;stride=0;draw();return;}
+    if(walkFrame){cancelAnimationFrame(walkFrame);arrive(selected,false);}
+    const distance=Math.max(0,Math.min(50,t-lastStep))*.003,x=avatar.x+dx/length*distance,z=avatar.z+dz/length*distance;lastStep=t;
+    if(!blocked(x,avatar.z))avatar.x=x;if(!blocked(avatar.x,z))avatar.z=z;
+    walked+=distance;stride=Math.sin(walked*7);
+    const zone=Object.keys(sections).find(k=>Math.hypot(avatar.x-sections[k].destination[0],avatar.z-sections[k].destination[1])<.8);
+    if(zone&&zone!==selected)arrive(zone,false);else draw();
+    stepFrame=requestAnimationFrame(step);
+  }
+  addEventListener('keydown',e=>{
+    if(!moves[e.key]||e.altKey||e.ctrlKey||e.metaKey)return;
+    e.preventDefault();held.add(e.key);
+    if(!stepFrame){lastStep=performance.now();stepFrame=requestAnimationFrame(step);}
+  });
+  addEventListener('keyup',e=>held.delete(e.key));
+  addEventListener('blur',()=>held.clear());
   // The markup already shows the desk as selected; render without scrolling on load.
   renderPanel('about');
   draw();
