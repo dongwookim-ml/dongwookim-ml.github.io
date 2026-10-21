@@ -12,7 +12,7 @@
     join:{title:'Join the lab',eyebrow:'A SEAT FOR YOU',intro:'For prospective graduate students and undergraduate researchers.',page:'join.html',place:'the empty chair',pin:[2.92,1.75,3.15],destination:[1.5,3.2]}
   };
   let selected='about',walkFrame,faces=[],target='about',avatar={x:-.3,z:1.6},stride=0,scene='lab',tint=null;
-  const keys=['','about','research','papers','people','join','exit','boss0','boss1','boss2','boss3','boss4','boss5'],W=canvas.width,H=canvas.height,pixels=ctx.createImageData(W,H),depths=new Float32Array(W*H),picks=new Uint8Array(W*H);
+  const keys=['','about','research','papers','people','join','exit','boss0','boss1','boss2','boss3','boss4'],W=canvas.width,H=canvas.height,pixels=ctx.createImageData(W,H),depths=new Float32Array(W*H),picks=new Uint8Array(W*H);
   // Each scene keeps its own static boxes. `tint` recolors boxes as they are added, for flashing or defeated bosses.
   const lab=[],dungeon=[];let boxes=lab;
   // Orthographic boxes share a depth buffer for drawing and object picking.
@@ -100,7 +100,7 @@
   for(const [c,r]of heart)box(2.67+c*.1,1.24-r*.1,3.22,.1,.1,.015,'#f6a5bd','join');
   box(-3.85,.03,1.35,.95,.53,.65,'#dcae84');box(-3.93,.56,1.29,1.11,.1,.77,'#ecc699');box(-3.6,.67,1.5,.39,.20,.29,'#fff3dc');
   // The research dungeon, in the same quarter view on a square floor: brick walls with torches,
-  // an exit door in the back corner, and a magic circle in the middle where the hero arrives.
+  // an exit door in the back wall, and a magic circle in the middle where the hero arrives.
   boxes=dungeon;
   box(-4,-.34,-4,8,.34,8,'#3b3a55');
   for(let x=-4;x<4;x++)for(let z=-4;z<4;z++)box(x,0,z,.99,.025,.99,(x+z)%2?'#4d4c6f':'#55547a');
@@ -109,8 +109,8 @@
     const a=Math.max(-4,c+r%2*.5),b=Math.min(4,c+r%2*.5+1)-.05;if(b<=a)continue;
     box(a,r*.5+.03,-4,b-a,.44,.02,(r+c)%2?'#7a77a8':'#736fa0');box(-4,r*.5+.03,a,.02,.44,b-a,(r+c)%2?'#6d6a98':'#66638f');
   }
-  box(-3.95,0,-4,.9,2.1,.05,'#4b4570','exit');box(-3.85,0,-3.96,.7,1.95,.04,'#9a7552','exit');
-  box(-3.52,0,-3.92,.03,1.95,.01,'#7d5c40','exit');box(-3.3,.9,-3.92,.07,.07,.02,'#ffe08a','exit');
+  box(-1.6,0,-4,.9,2.1,.05,'#4b4570','exit');box(-1.5,0,-3.96,.7,1.95,.04,'#9a7552','exit');
+  box(-1.17,0,-3.92,.03,1.95,.01,'#7d5c40','exit');box(-.95,.9,-3.92,.07,.07,.02,'#ffe08a','exit');
   for(const x of[-2.3,1.9]){box(x-.07,1.5,-4,.14,.35,.12,'#8a6a4a');box(x-.13,1.85,-4,.26,.08,.16,'#a07a52');box(x-.1,1.93,-3.96,.2,.28,.1,'#ffb347');box(x-.05,1.98,-3.9,.1,.16,.05,'#ffe08a');}
   for(const z of[-2.6,2.2]){box(-4,1.5,z-.07,.12,.35,.14,'#8a6a4a');box(-4,1.85,z-.13,.16,.08,.26,'#a07a52');box(-3.96,1.93,z-.1,.1,.28,.2,'#ffb347');box(-3.9,1.98,z-.05,.05,.16,.1,'#ffe08a');}
   box(-1.05,.026,-.55,2.1,.006,1.1,'#9b7fe0');box(-.9,.032,-.47,1.8,.006,.94,'#463f6e');
@@ -124,13 +124,6 @@
     eyes(x,.26,z+.4,g);
     for(const [nx,ny]of[[-.4,.86],[0,1.22],[.4,.86]])box(x+nx-.08,ny,z-.08,.16,.16,.16,'#ffe08a',g);
     for(const side of[-.4,.4])for(let s=1;s<5;s++)box(x+side*(1-s/5)-.025,.92+.36*s/5,z-.025,.05,.05,.05,'#fff7e6',g);
-  }
-  // Geometric Deep Learning: a floating crystal circled by a ring.
-  function crystal(x,z,g){
-    box(x-.4,.03,z-.2,.8,.01,.4,'#2f2d47',g);
-    [.3,.62,.9,1.02,.9,.62,.3].forEach((w,i)=>box(x-w/2,.38+i*.2,z-w*.35,w,.2,w*.7,i>3?'#b8e6f2':'#8fd3e8',g));
-    eyes(x,1.04,z+.36,g);
-    box(x-.85,.95,z+.4,1.7,.06,.06,'#e9d6ff',g);
   }
   // Trustworthy AI: a knight with a lock on the shield.
   function knight(x,z,g){
@@ -167,17 +160,16 @@
   }
   function sword(x,z){box(x+.38,.3,z-.02,.05,.1,.05,'#8a6a4a');box(x+.31,.4,z-.05,.19,.04,.1,'#c9a24a');box(x+.37,.44,z-.03,.07,.56,.06,'#e6edf5');}
   // One boss per research area; `area` must match a heading on the research page, and `question` is what the boss asks.
-  // Two stand on top, two on the left and two on the right of the magic circle. The shorter bosses take the lower spots.
+  // One stands on top, two on the left and two on the right of the magic circle. The shorter bosses take the lower spots.
   const bosses=[
-    {area:'Trustworthy AI',label:'Trustworthy AI',x:-3.35,z:-1.15,top:1.8,art:knight,question:'Can a model truly forget what it learned, and how do we test that we can trust it?'},
-    {area:'Geometric Deep Learning',label:'Geometric DL',x:-1.15,z:-3.35,top:1.78,art:crystal,question:'Can hyperbolic and Riemannian geometry represent hierarchies better than flat space?'},
+    {area:'Trustworthy AI',label:'Trustworthy AI',x:-2.25,z:-2.25,top:1.8,art:knight,question:'Can a model truly forget what it learned, and how do we test that we can trust it?'},
     {area:'ML for Science',label:'ML for Science',x:-3.4,z:.8,top:1.92,art:flask,question:'Can generative models design molecules and drugs that respect physical symmetries?'},
     {area:'Graph Neural Networks',label:'GNNs',x:-.8,z:3.4,top:1.38,art:slime,question:'What can a GNN really tell apart, and how do we keep it from over-smoothing?'},
     {area:'Language Models',label:'Language Models',x:.8,z:-3.4,top:1.86,art:book,question:'Can we actually understand the principles behind how LLMs work?'},
     {area:'Generative Models',label:'Generative Models',x:3.4,z:-.8,top:1.59,art:ghost,question:'How do we generate structured data such as graphs, faithfully and at scale?'}
   ];
-  // The hero arrives on the magic circle and leaves through the door in the back corner.
-  const home={x:0,z:0},exit={x:-3.5,z:-3.2};
+  // The hero arrives on the magic circle and leaves through the door in the back wall.
+  const home={x:0,z:0},exit={x:-1.15,z:-3.3};
   function triangle(a,b,c,rgba,id){
     const area=(b[1]-c[1])*(a[0]-c[0])+(c[0]-b[0])*(a[1]-c[1]);if(Math.abs(area)<.001)return;
     const left=Math.max(0,Math.floor(Math.min(a[0],b[0],c[0]))),right=Math.min(W-1,Math.ceil(Math.max(a[0],b[0],c[0])));
@@ -264,11 +256,72 @@
     }
   }
 
+  // A 28×28 pixel portrait in the lab's chibi style, drawn from a short description of a person's photo:
+  // hair (short, side, fringe, bowl, curly, long, longBangs, longWavy or bob) with hairColor and, for long hair, the part column;
+  // glasses {color, round}; top (tee, knit, shirt, suit, jacket or plaid) with topColor, inner and tie colors;
+  // and bg, skin, smile and a round face.
+  function portrait(spec, label) {
+    const S=28,g=[...Array(S)].map(()=>Array(S).fill(null));
+    const row=(y,x0,x1,c)=>{for(let x=Math.max(0,x0);x<=Math.min(S-1,x1);x++)if(y>=0&&y<S)g[y][x]=c;};
+    const rect=(x0,y0,x1,y1,c)=>{for(let y=y0;y<=y1;y++)row(y,x0,x1,c);};
+    const px=(x,y,c)=>row(y,x,x,c);
+    const {hair,hairColor:hc,skin='#f6d3b8',glasses,top,topColor:tc,inner='#f4f4f2',tie,bg,smile,round}=spec,sk=shade(skin,.9),hd=shade(hc,.75),hl=shade(hc,1.45);
+    // Shoulders and clothes
+    row(21,8,19,tc);row(22,6,21,tc);rect(4,23,23,27,tc);
+    rect(12,18,15,21,sk);
+    if(top==='tee'){row(21,11,16,sk);row(22,11,16,shade(tc,.8));}
+    if(top==='knit'){row(21,11,16,sk);row(22,10,17,shade(tc,1.2));row(23,10,17,shade(tc,.85));}
+    if(top==='shirt'){row(21,12,15,sk);px(11,21,inner);px(16,21,inner);row(22,10,12,inner);row(22,15,17,inner);px(13,22,sk);px(14,22,sk);rect(13,23,14,27,shade(tc,.85));}
+    if(top==='suit'||top==='jacket'){
+      rect(11,21,16,27,inner);if(top==='suit'){row(21,12,15,sk);px(11,21,inner);px(16,21,inner);}
+      for(let y=22;y<S;y++){row(y,4,Math.min(11,8+(y-22)),tc);row(y,Math.max(16,19-(y-22)),23,tc);}
+      if(tie)rect(13,22,14,27,tie);
+    }
+    if(top==='plaid'){row(21,12,15,sk);for(let y=21;y<S;y++)for(let x=4;x<24;x++)if(g[y][x]===tc&&((x>>1)+(y>>1))%2)px(x,y,inner);}
+    // Face, ears, eyes with a highlight, blush and mouth
+    row(6,10,17,skin);row(7,8,19,skin);rect(7,8,20,15,skin);
+    if(round){row(16,7,20,skin);row(17,8,19,skin);row(18,9,18,skin);}else{row(16,8,19,skin);row(17,9,18,skin);row(18,10,17,skin);}
+    rect(6,11,6,13,sk);rect(21,11,21,13,sk);
+    for(const ex of[10,16]){rect(ex,12,ex+1,13,'#2b2630');px(ex,12,'#ffffff');}
+    row(15,8,9,'#f4a7a8');row(15,18,19,'#f4a7a8');
+    if(smile){px(12,16,'#c46a6a');px(15,16,'#c46a6a');row(17,13,14,'#c46a6a');}else row(16,13,14,'#c46a6a');
+    // Hair
+    const cap=()=>{row(2,11,16,hc);row(3,9,18,hc);row(4,8,19,hc);rect(7,5,20,7,hc);row(6,6,21,hc);row(7,6,21,hc);};
+    const sides=to=>{rect(6,8,7,to,hc);rect(20,8,21,to,hc);};
+    const brows=()=>{row(10,10,11,hd);row(10,16,17,hd);};
+    if(hair==='short'){cap();sides(10);row(8,6,9,hc);row(8,18,21,hc);brows();}
+    if(hair==='side'){cap();row(1,12,17,hc);row(2,10,19,hc);sides(10);row(8,6,15,hc);row(9,6,12,hc);px(13,9,hc);row(8,18,21,hc);px(10,3,hl);px(11,3,hl);px(12,2,hl);brows();}
+    if(hair==='fringe'){cap();sides(11);rect(7,8,20,9,hc);for(const x of[8,9,11,12,13,15,16,18,19])px(x,10,hc);px(10,4,hl);px(11,4,hl);}
+    if(hair==='bowl'){row(1,11,16,hc);row(2,9,18,hc);row(3,7,20,hc);rect(6,4,21,9,hc);row(10,6,21,hc);rect(5,6,6,13,hc);rect(21,6,22,13,hc);px(10,3,hl);px(11,3,hl);px(9,4,hl);}
+    if(hair==='curly'){cap();for(const x of[9,10,13,14,17,18])px(x,1,hc);rect(5,4,6,10,hc);rect(21,4,22,10,hc);sides(11);rect(7,8,20,8,hc);for(const x of[7,8,10,11,13,15,16,18,20])px(x,9,hc);px(8,10,hc);px(13,10,hc);px(19,10,hc);px(10,3,hl);px(14,2,hl);px(18,4,hl);px(7,6,hl);}
+    if(hair.startsWith('long')||hair==='bob'){
+      const end=hair==='bob'?19:26,p=spec.part??13;cap();
+      for(let y=8;y<=end;y++){const w=y>18?(hair==='bob'?1:2):0;row(y,5-w,7,hc);row(y,20,22+w,hc);}
+      if(hair==='bob'){row(19,6,9,hc);row(19,18,21,hc);}
+      if(hair==='longBangs'){rect(7,8,20,9,hc);for(const x of[8,10,11,13,14,16,17,19])px(x,10,hc);}
+      else{row(6,p-2,p+3,skin);row(7,Math.max(8,p-4),Math.min(19,p+5),skin);if(p<13)row(8,p+4,19,hc);}
+      for(let y=2;y<6;y++)px(p,y,hl);
+      if(hair==='longWavy')for(let y=12;y<=end;y+=3){px(4,y,hc);px(23,y+1,hc);px(8,y+1,hc);}
+    }
+    if(glasses){const c=glasses.color,r=glasses.round?1:0;for(const x0 of[9,15]){row(11,x0+r,x0+3-r,c);row(14,x0+r,x0+3-r,c);rect(x0,12,x0,13,c);rect(x0+3,12,x0+3,13,c);}row(12,13,14,c);}
+    // A soft outline: background pixels next to the figure take a darker shade of that neighbor.
+    const art=node('canvas'),pen=art.getContext('2d');art.width=art.height=S;pen.fillStyle=bg;pen.fillRect(0,0,S,S);
+    for(let y=0;y<S;y++)for(let x=0;x<S;x++){
+      const next=[[0,-1],[-1,0],[1,0],[0,1]].map(([dx,dy])=>g[y+dy]?.[x+dx]).find(Boolean),color=g[y][x]||(next&&shade(next,.62));
+      if(color){pen.fillStyle=color;pen.fillRect(x,y,1,1);}
+    }
+    if(label){art.setAttribute('role','img');art.setAttribute('aria-label',label);}else art.setAttribute('aria-hidden','true');
+    return art;
+  }
+  // The professor's portrait, drawn after the profile photo on the home page.
+  const professor={hair:'side',hairColor:'#2b2630',glasses:{color:'#8e939c',round:true},top:'suit',topColor:'#2c3550',inner:'#cfe0f2',bg:'#d9dde3',smile:true};
+
   function renderAbout(main) {
     for (const child of main.children) {
       if (child.id === 'news') break;
       panel.append(child.cloneNode(true));
     }
+    panel.querySelector('img')?.replaceWith(portrait(professor, 'Pixel portrait of Dongwoo Kim'));
   }
 
   function renderTeam() {
@@ -276,12 +329,17 @@
       const section = node(category === 'Alumni' ? 'details' : 'section');
       section.append(node(category === 'Alumni' ? 'summary' : 'h3', category));
       for (const member of members) {
-        const row = node('div', '', 'member'), info = node('div'), photo = node('img');
-        photo.src = member.photo;
-        photo.alt = '';
-        photo.loading = 'lazy';
-        // Like the team page, show initials if the photo fails to load.
-        photo.onerror = () => photo.replaceWith(node('span', member.name.split(' ').map(part => part[0]).join(''), 'initials'));
+        const row = node('div', '', 'member'), info = node('div');
+        // Members with an avatar description appear as pixel portraits; others keep their photo.
+        let photo = member.avatar && portrait(member.avatar);
+        if (!photo) {
+          photo = node('img');
+          photo.src = member.photo;
+          photo.alt = '';
+          photo.loading = 'lazy';
+          // Like the team page, show initials if the photo fails to load.
+          photo.onerror = () => photo.replaceWith(node('span', member.name.split(' ').map(part => part[0]).join(''), 'initials'));
+        }
         info.append(node('strong', member.name), node('p', [member.dept, member.research].filter(Boolean).join(' · ')));
         for (const [label, href] of [['Homepage', member.homepage], ['Scholar', member.scholar]]) {
           if (!href) continue;
@@ -394,13 +452,13 @@
     }
     walkTo(dx,dz,()=>arrive(key));
   }
-  function status(){const n=bosses.filter(b=>b.defeated).length;return n===bosses.length?'Dungeon cleared! All six research bosses are defeated.':'Research dungeon · '+n+'/'+bosses.length+' bosses defeated';}
+  function status(){const n=bosses.filter(b=>b.defeated).length;return n===bosses.length?'Dungeon cleared! All '+bosses.length+' research bosses are defeated.':'Research dungeon · '+n+'/'+bosses.length+' bosses defeated';}
   // Switch scenes behind a short fade from dark.
   let fadeFrame;
   const labLabel=canvas.getAttribute('aria-label');
   function setScene(next){
     scene=next;root.classList.toggle('in-dungeon',next==='dungeon');held.clear();
-    canvas.setAttribute('aria-label',next==='dungeon'?'A pixel-art research dungeon. Six bosses, one for each research area, stand around a magic circle. Walk up to a boss to hear its research question; the boss buttons start a fight.':labLabel);
+    canvas.setAttribute('aria-label',next==='dungeon'?'A pixel-art research dungeon. A boss for each research area stands around a magic circle. Walk up to a boss to hear its research question; the boss buttons start a fight.':labLabel);
     cancelAnimationFrame(fadeFrame);
     if(reducedMotion.matches){fade=0;draw();return;}
     const start=performance.now();
