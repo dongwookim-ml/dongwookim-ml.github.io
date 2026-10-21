@@ -6,7 +6,7 @@
   const pageCache=new Map();
   const sections={
     about:{title:'Dongwoo Kim',eyebrow:'THE PROFESSOR’S DESK',intro:'',page:'../index.html',place:"the professor's desk",pin:[-1.9,2.1,.3],destination:[-.3,1.6]},
-    research:{title:'Research',eyebrow:'THE BLACKBOARD',intro:'',page:'research.html',place:'the blackboard',pin:[-2.1,3.05,-3.55],destination:[-2.2,-2]},
+    research:{title:'Research',eyebrow:'THE DUNGEON',intro:'Walk up to a boss to hear its research question, then press Space or click it to fight.',page:'research.html',place:'the dungeon gate',pin:[-2.4,3,-3.8],destination:[-2.4,-2.3]},
     papers:{title:'Publications',eyebrow:'THE BOOKSHELF',intro:'* equal contribution · † co-corresponding',page:'publication.html',place:'the bookshelf',pin:[2.4,3.05,-3.35],destination:[2.4,-2]},
     people:{title:'Our people',eyebrow:'THE SHARED DESK',intro:'Machine Learning Lab · POSTECH',page:'team.html',place:'the shared desk',pin:[2,2.1,.5],destination:[3.9,1.85]},
     join:{title:'Join the lab',eyebrow:'A SEAT FOR YOU',intro:'For prospective graduate students and undergraduate researchers.',page:'join.html',place:'the empty chair',pin:[2.92,1.75,3.15],destination:[1.5,3.2]}
@@ -18,10 +18,9 @@
   // Orthographic boxes share a depth buffer for drawing and object picking.
   function box(x,y,z,w,h,d,color,group=''){boxes.push({x,y,z,w,h,d,color:tint?tint(color):color,group});}
   function shade(hex,k){return '#'+hex.slice(1).match(/../g).map(c=>Math.min(255,Math.round(parseInt(c,16)*k)).toString(16).padStart(2,'0')).join('');}
-  // The lab is a 45° view and the dungeon a straight-on battle view. Each origin keeps its room inside the canvas.
-  const views={lab:{a:Math.PI/4,x:197,y:175},dungeon:{a:0,x:196,y:160}};
-  function project([x,y,z],{a,x:ox,y:oy}=views[scene]){const depth=x*Math.sin(a)+z*Math.cos(a);return [ox+(x*Math.cos(a)-z*Math.sin(a))*29,oy+depth*14.5-y*25.1,depth*.866+y*.5];}
-  function face(points,color,group=''){faces.push({p:points.map(p=>project(p)),color,group});}
+  // The origin sits so the room, walls and shadow fill the canvas with a few pixels to spare.
+  function project([x,y,z]){const a=Math.PI/4,depth=x*Math.sin(a)+z*Math.cos(a);return [197+(x*Math.cos(a)-z*Math.sin(a))*29,175+depth*14.5-y*25.1,depth*.866+y*.5];}
+  function face(points,color,group=''){faces.push({p:points.map(project),color,group});}
   function cube(b){const{x,y,z,w,h,d,color,group}=b,X=x+w,Y=y+h,Z=z+d;
     face([[x,Y,z],[X,Y,z],[X,Y,Z],[x,Y,Z]],shade(color,1.08),group);
     face([[X,y,z],[X,y,Z],[X,Y,Z],[X,Y,z]],shade(color,.86),group);
@@ -74,13 +73,16 @@
   box(-4.98,1.25,-1.8,.06,1.35,2.1,'#fff6ea');box(-4.9,1.35,-1.68,.04,1.15,1.86,'#bfe3f2');
   box(-4.84,1.35,-.82,.035,1.15,.09,'#fff6ea');box(-4.84,1.87,-1.68,.035,.08,1.86,'#fff6ea');
   box(-4.92,1.15,-2.05,.07,1.6,.32,'#f7b8c6');box(-4.92,1.15,.03,.07,1.6,.32,'#f7b8c6');
-  // Research board, with graph nodes, short chalk marks and a doodled heart.
-  box(-4.3,1.16,-3.92,3.75,1.5,.10,'#d6a77a','research');box(-4.18,1.28,-3.805,3.5,1.25,.025,'#4d7d6e','research');
-  for(const [x,y]of[[-3.8,1.66],[-3.1,2.17],[-2.48,1.69],[-1.65,2.13]])box(x,y,-3.765,.15,.15,.03,'#fff3c4','research');
-  for(let i=0;i<7;i++){box(-3.72+i*.1,1.75+i*.067,-3.77,.11,.045,.025,'#bfe3cf','research');box(-3.05+i*.1,2.15-i*.058,-3.77,.11,.045,.025,'#bfe3cf','research');}
-  box(-1.7,1.52,-3.77,.72,.035,.03,'#bfe3cf','research');box(-4.26,1.13,-3.78,3.67,.07,.23,'#e0b98d','research');
+  // The dungeon gate for Research: stone pillars and a lintel with a gem, a dark doorway with glowing eyes,
+  // a raised portcullis, torches and two steps.
+  for(const x of[-3.65,-1.65])for(let r=0;r<5;r++)box(x,r*.5,-4,.5,.5,.42,r%2?'#8c88b0':'#9b97bd','research');
+  box(-3.75,2.5,-4,2.7,.32,.46,'#7d79a3','research');box(-2.52,2.56,-3.54,.24,.2,.02,'#c792ff','research');
+  box(-3.15,0,-3.9,1.5,2.5,.04,'#1f1a2e','research');
+  for(const x of[-2.7,-2.22])box(x,1.25,-3.85,.1,.07,.01,'#ffe08a','research');
+  for(let i=0;i<5;i++)box(-3.02+i*.3,1.9,-3.82,.05,.6,.04,'#4a4560','research');box(-3.15,2.1,-3.82,1.5,.05,.04,'#4a4560','research');
+  box(-3.25,0,-3.58,1.7,.14,.3,'#8c88b0','research');box(-3.25,0,-3.28,1.7,.07,.3,'#9b97bd','research');
+  for(const x of[-3.4,-1.4]){box(x-.05,1.55,-3.58,.1,.25,.1,'#6e5238','research');box(x-.08,1.8,-3.55,.16,.2,.08,'#ffb347','research');box(x-.04,1.84,-3.5,.08,.12,.04,'#ffe08a','research');}
   const heart=[[1,0],[3,0],[0,1],[1,1],[2,1],[3,1],[4,1],[1,2],[2,2],[3,2],[2,3]];
-  for(const [c,r]of heart)box(-1.26+c*.09,2.26-r*.09,-3.77,.09,.09,.03,'#f6a5bd','research');
   // Open bookshelf, layered with individually colored books.
   box(.75,.05,-3.85,3.9,2.66,.13,'#c8956e','papers');
   for(const x of[.75,4.5])box(x,.05,-3.85,.15,2.66,.73,'#ddb187','papers');
@@ -97,16 +99,21 @@
   box(2.47,.62,2.42,.9,.14,.8,'#a6dccb','join');box(2.47,.74,3.08,.9,.62,.14,'#b4e3d3','join');
   for(const [c,r]of heart)box(2.67+c*.1,1.24-r*.1,3.22,.1,.1,.015,'#f6a5bd','join');
   box(-3.85,.03,1.35,.95,.53,.65,'#dcae84');box(-3.93,.56,1.29,1.11,.1,.77,'#ecc699');box(-3.6,.67,1.5,.39,.20,.29,'#fff3dc');
-  // The research dungeon: stone floor, a brick back wall with torches and the exit door, and a magic circle for the hero.
+  // The research dungeon, in the same quarter view on a square floor: brick walls with torches,
+  // an exit door in the back corner, and a magic circle in the middle where the hero arrives.
   boxes=dungeon;
-  box(-6.5,-.34,-5,13,.34,12,'#3b3a55');
-  for(let x=-6.5;x<6.5;x++)for(let z=-5;z<7;z++)box(x,0,z,.98,.025,.98,(Math.floor(x)+z)%2?'#4d4c6f':'#55547a');
-  box(-6.5,0,-5.4,13,3.05,.4,'#5f5c8c');
-  for(let r=0;r<6;r++)for(let c=-7;c<7;c++){const x0=Math.max(-6.5,c+r%2*.5),x1=Math.min(6.5,c+r%2*.5+1)-.05;if(x1>x0)box(x0,r*.5+.03,-5,x1-x0,.44,.02,(r+c)%2?'#7a77a8':'#736fa0');}
-  box(-.85,0,-4.98,1.7,2.05,.05,'#4b4570','exit');box(-.68,0,-4.94,1.36,1.88,.04,'#9a7552','exit');
-  for(const x of[-.24,.22])box(x,0,-4.9,.03,1.88,.01,'#7d5c40','exit');box(.42,.85,-4.9,.09,.09,.02,'#ffe08a','exit');
-  for(const x of[-4.6,-1.6,1.6,4.6]){box(x-.07,1.5,-4.98,.14,.35,.12,'#8a6a4a');box(x-.13,1.85,-4.98,.26,.08,.16,'#a07a52');box(x-.1,1.93,-4.94,.2,.28,.1,'#ffb347');box(x-.05,1.98,-4.88,.1,.16,.05,'#ffe08a');}
-  box(-1.05,.026,1.95,2.1,.006,1.1,'#9b7fe0');box(-.9,.032,2.03,1.8,.006,.94,'#463f6e');
+  box(-4,-.34,-4,8,.34,8,'#3b3a55');
+  for(let x=-4;x<4;x++)for(let z=-4;z<4;z++)box(x,0,z,.99,.025,.99,(x+z)%2?'#4d4c6f':'#55547a');
+  box(-4.12,0,-4.12,.12,3.05,8.12,'#5f5c8c');box(-4,0,-4.12,8,3.05,.12,'#6c6a99');
+  for(let r=0;r<6;r++)for(let c=-5;c<5;c++){
+    const a=Math.max(-4,c+r%2*.5),b=Math.min(4,c+r%2*.5+1)-.05;if(b<=a)continue;
+    box(a,r*.5+.03,-4,b-a,.44,.02,(r+c)%2?'#7a77a8':'#736fa0');box(-4,r*.5+.03,a,.02,.44,b-a,(r+c)%2?'#6d6a98':'#66638f');
+  }
+  box(-3.95,0,-4,.9,2.1,.05,'#4b4570','exit');box(-3.85,0,-3.96,.7,1.95,.04,'#9a7552','exit');
+  box(-3.52,0,-3.92,.03,1.95,.01,'#7d5c40','exit');box(-3.3,.9,-3.92,.07,.07,.02,'#ffe08a','exit');
+  for(const x of[-2.3,1.9]){box(x-.07,1.5,-4,.14,.35,.12,'#8a6a4a');box(x-.13,1.85,-4,.26,.08,.16,'#a07a52');box(x-.1,1.93,-3.96,.2,.28,.1,'#ffb347');box(x-.05,1.98,-3.9,.1,.16,.05,'#ffe08a');}
+  for(const z of[-2.6,2.2]){box(-4,1.5,z-.07,.12,.35,.14,'#8a6a4a');box(-4,1.85,z-.13,.16,.08,.26,'#a07a52');box(-3.96,1.93,z-.1,.1,.28,.2,'#ffb347');box(-3.9,1.98,z-.05,.05,.16,.1,'#ffe08a');}
+  box(-1.05,.026,-.55,2.1,.006,1.1,'#9b7fe0');box(-.9,.032,-.47,1.8,.006,.94,'#463f6e');
   boxes=lab;
   // Cute boss faces: two eyes and blush on a front face at height y.
   function eyes(x,y,z,g){box(x-.2,y,z,.09,.12,.02,'#3a3340',g);box(x+.11,y,z,.09,.12,.02,'#3a3340',g);box(x-.3,y-.08,z,.1,.05,.02,'#f6a7ab',g);box(x+.2,y-.08,z,.1,.05,.02,'#f6a7ab',g);}
@@ -159,16 +166,18 @@
     eyes(x,1,z+.3,g);
   }
   function sword(x,z){box(x+.38,.3,z-.02,.05,.1,.05,'#8a6a4a');box(x+.31,.4,z-.05,.19,.04,.1,'#c9a24a');box(x+.37,.44,z-.03,.07,.56,.06,'#e6edf5');}
-  // One boss per research area; `area` must match a heading on the research page. Two stand on top and two on each side.
+  // One boss per research area; `area` must match a heading on the research page, and `question` is what the boss asks.
+  // Two stand on top, two on the left and two on the right of the magic circle. The shorter bosses take the lower spots.
   const bosses=[
-    {area:'Graph Neural Networks',label:'GNNs',x:-2.3,z:-3.8,top:1.38,art:slime},
-    {area:'Geometric Deep Learning',label:'Geometric DL',x:2.3,z:-3.8,top:1.78,art:crystal},
-    {area:'Trustworthy AI',label:'Trustworthy AI',x:-4.5,z:0,top:1.8,art:knight},
-    {area:'ML for Science',label:'ML for Science',x:-4.5,z:5.3,top:1.92,art:flask},
-    {area:'Language Models',label:'Language Models',x:4.5,z:0,top:1.86,art:book},
-    {area:'Generative Models',label:'Generative Models',x:4.5,z:5.3,top:1.59,art:ghost}
+    {area:'Trustworthy AI',label:'Trustworthy AI',x:-3.35,z:-1.15,top:1.8,art:knight,question:'Can a model truly forget what it learned, and how do we test that we can trust it?'},
+    {area:'Geometric Deep Learning',label:'Geometric DL',x:-1.15,z:-3.35,top:1.78,art:crystal,question:'Can hyperbolic and Riemannian geometry represent hierarchies better than flat space?'},
+    {area:'ML for Science',label:'ML for Science',x:-3.4,z:.8,top:1.92,art:flask,question:'Can generative models design molecules and drugs that respect physical symmetries?'},
+    {area:'Graph Neural Networks',label:'GNNs',x:-.8,z:3.4,top:1.38,art:slime,question:'What can a GNN really tell apart, and how do we keep it from over-smoothing?'},
+    {area:'Language Models',label:'Language Models',x:.8,z:-3.4,top:1.86,art:book,question:'Can we actually understand the principles behind how LLMs work?'},
+    {area:'Generative Models',label:'Generative Models',x:3.4,z:-.8,top:1.59,art:ghost,question:'How do we generate structured data such as graphs, faithfully and at scale?'}
   ];
-  const home={x:0,z:2.5};let hero={...home};
+  // The hero arrives on the magic circle and leaves through the door in the back corner.
+  const home={x:0,z:0},exit={x:-3.5,z:-3.2};
   function triangle(a,b,c,rgba,id){
     const area=(b[1]-c[1])*(a[0]-c[0])+(c[0]-b[0])*(a[1]-c[1]);if(Math.abs(area)<.001)return;
     const left=Math.max(0,Math.floor(Math.min(a[0],b[0],c[0]))),right=Math.min(W-1,Math.ceil(Math.max(a[0],b[0],c[0])));
@@ -180,8 +189,19 @@
       depths[index]=z;picks[index]=id;pixels.data.set(rgba,index*4);
     }
   }
-  // Small 2D pixel sprites drawn over the scene: X is the color, o is a white highlight.
-  function sprite(rows,x,y,color){rows.forEach((row,r)=>[...row].forEach((c,i)=>{if(c!=='.'){ctx.fillStyle=c==='o'?'#ffffff':color;ctx.fillRect(x+i,y+r,1,1);}}));}
+  // Small 2D pixel sprites drawn over the scene: each letter picks a color, `o` defaults to white.
+  function sprite(rows,x,y,colors){rows.forEach((row,r)=>[...row].forEach((c,i)=>{if(c!=='.'){ctx.fillStyle=colors[c]||'#ffffff';ctx.fillRect(x+i,y+r,1,1);}}));}
+  // The destination heart, outlined in dark rose so it stands out on the pastel walls.
+  const heartShape=['..XXX...XXX..','.XXXXX.XXXXX.','XXooXXXXXXXXX','XXoXXXXXXXXXX','XXXXXXXXXXXXX','.XXXXXXXXXXX.','..XXXXXXXXX..','...XXXXXXX...','....XXXXX....','.....XXX.....','......X......'];
+  const filled=(r,c)=>(heartShape[r]?.[c]??'.')!=='.';
+  const heartRows=[...Array(13)].map((_,r)=>[...Array(15)].map((_,c)=>filled(r-1,c-1)?heartShape[r-1][c-1]:[[-1,0],[1,0],[0,-1],[0,1]].some(([dr,dc])=>filled(r-1+dr,c-1+dc))?'d':'.').join(''));
+  // The heart bobs and pulses while four stars twinkle around it, stepping about eight times a second.
+  function heartSprite(x,y,t){
+    const step=reducedMotion.matches?0:Math.floor(t/120);
+    sprite(heartRows,x-7,y-13+[0,-1,-2,-1][step%4],{X:step%8<4?'#ff5d86':'#ff7d9e',d:'#9e3553'});
+    if(reducedMotion.matches)return;
+    for(const [dx,dy,phase]of[[-12,-14,0],[9,-17,2],[10,-5,4],[-11,-4,1]]){const s=(step+phase)%6;if(s<2)sprite(['.X.','XoX','.X.'],x+dx-1,y+dy-1,{X:'#ffd84d'});else if(s<3)sprite(['o'],x+dx,y+dy,{});}
+  }
   const grey=c=>{const [r,g,b]=c.slice(1,7).match(/../g).map(v=>parseInt(v,16)),l=Math.round((r*.3+g*.59+b*.11)*.6+70).toString(16).padStart(2,'0');return '#'+l+l+l;};
   const flashing=b=>b.hit!=null&&Math.floor(b.hit*6)%2===0;
   let fade=0;
@@ -193,24 +213,21 @@
       face([[avatar.x-.36,.05,avatar.z-.33],[avatar.x+.36,.05,avatar.z-.33],[avatar.x+.36,.05,avatar.z+.33],[avatar.x-.36,.05,avatar.z+.33]],'#e3c9a8');
       person(avatar.x,avatar.z,{shirt:'#6cc2a2',group:'',step:stride});
     }else{
-      face([[-6.3,-.38,-4.8],[6.8,-.38,-4.8],[6.8,-.38,7.5],[-6.3,-.38,7.5]],'#00000012');
-      person(hero.x,hero.z,{shirt:'#6cc2a2',group:'',step:stride});sword(hero.x,hero.z);
+      face([[-4,-.38,-3.8],[4.5,-.38,-3.8],[4.5,-.38,4.4],[-4,-.38,4.4]],'#00000012');
+      person(avatar.x,avatar.z,{shirt:'#6cc2a2',group:'',step:stride});sword(avatar.x,avatar.z);
       // A struck boss shakes and flashes white; a defeated one turns grey.
       bosses.forEach((b,i)=>{tint=flashing(b)?()=>'#ffffff':b.defeated?grey:null;b.art(b.x+(b.hit!=null?Math.sin(b.hit*40)*.08:0),b.z,'boss'+i);tint=null;});
     }
     boxes.forEach(cube);boxes.length=staticCount;
     for(const f of faces){const rgba=f.color.slice(1).match(/../g).map(v=>parseInt(v,16));if(rgba.length===3)rgba.push(255);for(let i=1;i<f.p.length-1;i++)triangle(f.p[0],f.p[i],f.p[i+1],rgba,keys.indexOf(f.group));}
+    paint(performance.now());
+    if(scene==='dungeon')talk();
+  }
+  // Repaint the last rendered scene with its 2D overlay: the heart in the lab, sparks on struck bosses, and the scene fade.
+  function paint(t){
     ctx.putImageData(pixels,0,0);
-    if(scene==='lab'){
-      // A pixel heart, with one highlight, marks the destination.
-      const [x,y]=project(sections[target].pin).map(Math.round);
-      sprite(['.XX...XX.','XoXX.XXXX','XXXXXXXXX','XXXXXXXXX','.XXXXXXX.','..XXXXX..','...XXX...','....X....'],x-4,y-8,'#f2708f');
-    }else for(const b of bosses){
-      // Health bars, and a spark on each flash of a hit.
-      const [x,y]=project([b.x,b.top+.2,b.z]).map(Math.round),hp=b.defeated?0:b.hit!=null?1-b.hit:1;
-      ctx.fillStyle='#2d2a40';ctx.fillRect(x-12,y-2,24,4);ctx.fillStyle=hp>.3?'#7ee08a':'#ff8a8a';ctx.fillRect(x-11,y-1,Math.round(22*hp),2);
-      if(flashing(b)){const [sx,sy]=project([b.x,b.top/2,b.z+.5]).map(Math.round);sprite(['...X...','.X.X.X.','..XXX..','XXXXXXX','..XXX..','.X.X.X.','...X...'],sx-3,sy-3,'#fff3a0');}
-    }
+    if(scene==='lab'){const [x,y]=project(sections[target].pin).map(Math.round);heartSprite(x,y,t);}
+    else for(const b of bosses)if(flashing(b)){const [x,y]=project([b.x,b.top/2,b.z+.5]).map(Math.round);sprite(['...X...','.X.X.X.','..XXX..','XXXXXXX','..XXX..','.X.X.X.','...X...'],x-3,y-3,{X:'#fff3a0'});}
     if(fade>0){ctx.fillStyle=`rgba(36,30,58,${fade})`;ctx.fillRect(0,0,W,H);}
   }
   function node(tag,text,className){const n=document.createElement(tag);if(text)n.textContent=text;if(className)n.className=className;return n;}
@@ -289,6 +306,7 @@
     root.querySelector('.original-page').href = section.page;
     panel.className = 'content ' + key;
     panel.replaceChildren(node('p', 'Loading…'));
+    reading.scrollTop = 0;
     reading.setAttribute('aria-busy', 'true');
     try {
       const main = key === 'people' ? null : await loadPage(key);
@@ -311,6 +329,7 @@
     }
   }
 
+  let labSpot;
   function arrive(key, scroll = true) {
     selected = key;
     target = key;
@@ -319,20 +338,26 @@
     root.querySelectorAll('[data-place]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.place === key)));
     root.querySelector('.arrival').textContent = key === 'research' ? status() : 'At ' + sections[key].place + ' · ' + sections[key].title;
     // Research opens the dungeon, where each boss stands for one research area.
-    if (key === 'research' && scene === 'lab') setScene('dungeon');
-    else draw();
+    if (key === 'research' && scene === 'lab') {
+      labSpot = {...avatar};
+      avatar = {...home};
+      setScene('dungeon');
+    } else draw();
     renderPanel(key).then(() => {
       // On narrow screens the panel sits below the lab. Scroll once it is filled, so the page is long enough,
-      // but keep the dungeon in view so the bosses can be fought.
+      // but keep the dungeon in view so the bosses can be found.
       const top = reading.getBoundingClientRect().top;
       if (scroll && selected === key && target === key && (top < 0 || top > innerHeight / 2 && scene === 'lab')) {
         reading.scrollIntoView({block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth'});
       }
     });
   }
-  // Floor footprints [x0,z0,x1,z1]: desks, shelf, board, people, plants, cat, cabinet and chair.
-  const obstacles=[[-3.13,-.33,-.53,.92],[.72,.07,3.32,1.32],[.75,-3.92,4.65,-3.07],[-4.3,-3.92,-.55,-3.55],[-2.21,1.24,-1.49,1.86],[2.22,-.71,2.94,-.09],[-4.4,2.48,-3.5,3.02],[3.7,-1.97,4.6,-1.43],[-2.7,2.54,-2.3,3.24],[-3.93,1.29,-2.82,2.06],[2.47,2.42,3.37,3.22]];
-  function blocked(x,z){return Math.abs(x)>4.7||Math.abs(z)>3.7||obstacles.some(([x0,z0,x1,z1])=>x>x0-.3&&x<x1+.3&&z>z0-.3&&z<z1+.3);}
+  // Floor footprints [x0,z0,x1,z1] and room bounds for walking. Lab: desks, shelf, gate, people, plants, cat, cabinet and chair.
+  const obstacles={
+    lab:[[-3.13,-.33,-.53,.92],[.72,.07,3.32,1.32],[.75,-3.92,4.65,-3.07],[-3.75,-4,-1.05,-3],[-2.21,1.24,-1.49,1.86],[2.22,-.71,2.94,-.09],[-4.4,2.48,-3.5,3.02],[3.7,-1.97,4.6,-1.43],[-2.7,2.54,-2.3,3.24],[-3.93,1.29,-2.82,2.06],[2.47,2.42,3.37,3.22]],
+    dungeon:bosses.map(b=>[b.x-.6,b.z-.45,b.x+.6,b.z+.45])
+  },bounds={lab:4.7,dungeon:3.7};
+  function blocked(x,z){return Math.abs(x)>bounds[scene]||Math.abs(z)>3.7||obstacles[scene].some(([x0,z0,x1,z1])=>x>x0-.3&&x<x1+.3&&z>z0-.3&&z<z1+.3);}
   // Shortest walkable route on a 0.1 grid, so a walk from anywhere goes around the furniture.
   function route(tx,tz){
     const n=95,cell=(x,z)=>Math.round((x+4.7)*10)+Math.round((z+3.7)*10)*n,spot=c=>[c%n/10-4.7,Math.floor(c/n)/10-3.7];
@@ -345,32 +370,37 @@
     for(let c=from.get(goal);c!==undefined&&c!==start;c=from.get(c))points.unshift(spot(c));
     return [[avatar.x,avatar.z],...points];
   }
-  function walk(key){
-    if(!Object.hasOwn(sections,key))return;
-    if(scene==='dungeon'){if(key==='research'){arrive(key);return;}leave();}
-    cancelAnimationFrame(walkFrame);target=key;
-    const [dx,dz]=sections[key].destination;
-    if(Math.hypot(avatar.x-dx,avatar.z-dz)<.001){arrive(key);return;}
-    if(key !== 'people') loadPage(key).catch(() => {});
-    if(reducedMotion.matches){avatar={x:dx,z:dz};arrive(key);return;}
+  // Walk the avatar along a route to (dx,dz), then call done.
+  function walkTo(dx,dz,done){
+    cancelAnimationFrame(walkFrame);walkFrame=null;
+    if(reducedMotion.matches||Math.hypot(avatar.x-dx,avatar.z-dz)<.001){avatar={x:dx,z:dz};done();return;}
     const points=route(dx,dz),segments=[];let total=0;
     for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],length=Math.hypot(b[0]-a[0],b[1]-a[1]);if(length>.001){segments.push({a,b,length});total+=length;}}
-    if(total<.001){arrive(key);return;}
-    reading.setAttribute('aria-busy','true');root.querySelector('.arrival').textContent='Walking to '+sections[key].place+'…';
     const start=performance.now(),duration=Math.min(1600,Math.max(350,total*120));
     function tick(t){const progress=Math.min(1,(t-start)/duration);let distance=total*progress;
       for(const s of segments){if(distance<=s.length){const f=distance/s.length;avatar={x:s.a[0]+(s.b[0]-s.a[0])*f,z:s.a[1]+(s.b[1]-s.a[1])*f};break;}distance-=s.length;}
-      stride=Math.sin(progress*total*7);draw();if(progress<1)walkFrame=requestAnimationFrame(tick);else{avatar={x:dx,z:dz};arrive(key);}
+      stride=Math.sin(progress*total*7);draw();if(progress<1)walkFrame=requestAnimationFrame(tick);else{avatar={x:dx,z:dz};walkFrame=null;stride=0;done();}
     }
     walkFrame=requestAnimationFrame(tick);
+  }
+  function walk(key){
+    if(!Object.hasOwn(sections,key))return;
+    if(scene==='dungeon'){if(key==='research'){arrive(key);return;}leave();}
+    target=key;
+    const [dx,dz]=sections[key].destination;
+    if(Math.hypot(avatar.x-dx,avatar.z-dz)>=.001){
+      if(key !== 'people') loadPage(key).catch(() => {});
+      reading.setAttribute('aria-busy','true');root.querySelector('.arrival').textContent='Walking to '+sections[key].place+'…';
+    }
+    walkTo(dx,dz,()=>arrive(key));
   }
   function status(){const n=bosses.filter(b=>b.defeated).length;return n===bosses.length?'Dungeon cleared! All six research bosses are defeated.':'Research dungeon · '+n+'/'+bosses.length+' bosses defeated';}
   // Switch scenes behind a short fade from dark.
   let fadeFrame;
   const labLabel=canvas.getAttribute('aria-label');
   function setScene(next){
-    scene=next;root.classList.toggle('in-dungeon',next==='dungeon');
-    canvas.setAttribute('aria-label',next==='dungeon'?'A pixel-art research dungeon. The hero stands in a magic circle, surrounded by six bosses, one for each research area. Use the boss buttons to fight them.':labLabel);
+    scene=next;root.classList.toggle('in-dungeon',next==='dungeon');held.clear();
+    canvas.setAttribute('aria-label',next==='dungeon'?'A pixel-art research dungeon. Six bosses, one for each research area, stand around a magic circle. Walk up to a boss to hear its research question; the boss buttons start a fight.':labLabel);
     cancelAnimationFrame(fadeFrame);
     if(reducedMotion.matches){fade=0;draw();return;}
     const start=performance.now();
@@ -378,68 +408,103 @@
   }
   function leave(){
     if(scene!=='dungeon')return;
-    cancelAnimationFrame(fightFrame);fightFrame=null;for(const b of bosses)b.hit=null;hero={...home};stride=0;
+    cancelAnimationFrame(walkFrame);walkFrame=null;cancelAnimationFrame(fightFrame);fightFrame=null;
+    for(const b of bosses){b.hit=null;b.tag.style.setProperty('--hp',b.defeated?0:1);}
+    if(speaker)speaker.tag.classList.remove('speaking');speaker=null;dialogue.hidden=true;
+    avatar=labSpot;stride=0;
     setScene('lab');root.querySelector('.arrival').textContent='At '+sections.research.place+' · '+sections.research.title;
   }
-  // The hero dashes to the boss, strikes until its health runs out and walks back. The panel then jumps to that research area.
+  // The nearest boss within reach speaks its research question in the dialogue box, and only the panel scrolls to that research area.
+  const bossLayer=root.querySelector('.bosses'),dialogue=bossLayer.querySelector('.dialogue');
+  let speaker=null;
+  function talk(){
+    const near=bosses.map(b=>[b,Math.hypot(avatar.x-b.x,avatar.z-b.z)]).filter(([,d])=>d<1.6).sort((p,q)=>p[1]-q[1])[0]?.[0]||null;
+    if(near===speaker)return;
+    if(speaker)speaker.tag.classList.remove('speaking');
+    speaker=near;
+    panel.querySelectorAll('h2.active').forEach(h=>h.classList.remove('active'));
+    if(!near){dialogue.hidden=true;return;}
+    near.tag.classList.add('speaking');
+    dialogue.replaceChildren(node('strong',near.area),near.question);dialogue.hidden=false;
+    const heading=[...panel.querySelectorAll('h2')].find(h=>h.textContent.trim()===near.area);
+    if(!heading)return;
+    heading.classList.add('active');
+    reading.scrollTo({top:reading.scrollTop+heading.getBoundingClientRect().top-reading.getBoundingClientRect().top-12,behavior:reducedMotion.matches?'auto':'smooth'});
+  }
+  // Clicking a boss walks up to it and fights: a lunge, a few flashing hits while its health drains, and a step back.
+  function approach(i){
+    const b=bosses[i];if(scene!=='dungeon'||fightFrame)return;
+    if(Math.hypot(avatar.x-b.x,avatar.z-b.z)<1.6){fight(i);return;}
+    const spots=[...Array(8)].map((_,k)=>({x:b.x+Math.cos(k*Math.PI/4)*1.15,z:b.z+Math.sin(k*Math.PI/4)*1.15})).filter(p=>!blocked(p.x,p.z));
+    const spot=spots.sort((p,q)=>Math.hypot(p.x-avatar.x,p.z-avatar.z)-Math.hypot(q.x-avatar.x,q.z-avatar.z))[0];
+    if(spot)walkTo(spot.x,spot.z,()=>fight(i));
+  }
   let fightFrame;
   function fight(i){
     const b=bosses[i];if(fightFrame||scene!=='dungeon')return;
     if(reducedMotion.matches){defeat(b);draw();return;}
-    const dx=b.x-home.x,dz=b.z-home.z,d=Math.hypot(dx,dz),near={x:b.x-dx/d*1.3,z:b.z-dz/d*1.3},start=performance.now();
-    const lerp=(p,q,f)=>({x:p.x+(q.x-p.x)*f,z:p.z+(q.z-p.z)*f});
+    const from={...avatar},dx=b.x-from.x,dz=b.z-from.z,d=Math.hypot(dx,dz)||1,start=performance.now();
     let struck=false;
     function tick(t){
-      const e=Math.max(0,t-start);
-      if(e<350)hero=lerp(home,near,e/350);
-      else if(e<750){hero=near;b.hit=(e-350)/400;}
-      else{if(!struck){struck=true;b.hit=null;defeat(b);}hero=lerp(near,home,Math.min(1,(e-750)/350));}
-      stride=e<350||e>=750?Math.sin(e/45):0;
-      if(e<1100){draw();fightFrame=requestAnimationFrame(tick);}else{hero={...home};stride=0;fightFrame=null;draw();}
+      const e=Math.max(0,t-start),f=e<150?e/150:e<550?1:Math.max(0,1-(e-550)/200);
+      avatar={x:from.x+dx/d*.35*f,z:from.z+dz/d*.35*f};
+      b.hit=e>=150&&e<550?(e-150)/400:null;
+      b.tag.style.setProperty('--hp',b.defeated?0:b.hit!=null?1-b.hit:1);
+      if(e>=550&&!struck){struck=true;defeat(b);}
+      if(e<750){draw();fightFrame=requestAnimationFrame(tick);}else{avatar=from;fightFrame=null;draw();}
     }
     fightFrame=requestAnimationFrame(tick);
   }
   function defeat(b){
-    b.defeated=true;b.button.classList.add('defeated');
+    b.defeated=true;b.tag.classList.add('defeated');b.tag.style.setProperty('--hp',0);
     root.querySelector('.arrival').textContent=status();
-    const heading=[...panel.querySelectorAll('h2')].find(h=>h.textContent.trim()===b.area);
-    if(!heading)return;
-    heading.scrollIntoView({block:'start',behavior:reducedMotion.matches?'auto':'smooth'});
-    heading.classList.remove('struck');void heading.offsetWidth;heading.classList.add('struck');
   }
-  // Name tags over the dungeon double as accessible fight buttons.
-  const bossLayer=root.querySelector('.bosses');
+  // Name tags with health bars float above the bosses and double as accessible fight buttons.
   bosses.forEach((b,i)=>{
-    const [x,y]=project([b.x,0,b.z+.45],views.dungeon);
-    b.button=node('button',b.label);b.button.type='button';b.button.style.left=x/W*100+'%';b.button.style.top=y/H*100+'%';
-    b.button.setAttribute('aria-label','Fight the '+b.area+' boss');b.button.addEventListener('click',()=>fight(i));bossLayer.append(b.button);
+    const [x,y]=project([b.x,b.top+.2,b.z]);
+    b.tag=node('button','','tag');b.tag.type='button';b.tag.append(node('span',b.label),node('i'));
+    b.tag.style.left=x/W*100+'%';b.tag.style.top=y/H*100+'%';
+    b.tag.setAttribute('aria-label','Fight the '+b.area+' boss');b.tag.addEventListener('click',()=>approach(i));bossLayer.append(b.tag);
   });
   bossLayer.querySelector('.leave').addEventListener('click',leave);
   root.querySelectorAll('[data-place]').forEach(b=>b.addEventListener('click',()=>walk(b.dataset.place)));
-  canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect(),x=Math.floor((e.clientX-r.left)*W/r.width),y=Math.floor((e.clientY-r.top)*H/r.height);if(x>=0&&x<W&&y>=0&&y<H){const key=keys[picks[y*W+x]];if(scene==='dungeon'){if(key==='exit')leave();else if(key?.startsWith('boss'))fight(+key.slice(4));}else if(key)walk(key);}});
-  // Arrow keys move the avatar in their screen direction. Stepping onto a place's spot opens it without scrolling.
+  canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect(),x=Math.floor((e.clientX-r.left)*W/r.width),y=Math.floor((e.clientY-r.top)*H/r.height);if(x>=0&&x<W&&y>=0&&y<H){const key=keys[picks[y*W+x]];if(scene==='dungeon'){if(key==='exit')walkTo(exit.x,exit.z,leave);else if(key?.startsWith('boss'))approach(+key.slice(4));}else if(key)walk(key);}});
+  // Arrow keys move the avatar in their screen direction, in the lab and in the dungeon.
+  // In the lab, stepping onto a place's spot opens it without scrolling; in the dungeon, the door leads back.
   const moves={ArrowUp:[-1,-1],ArrowDown:[1,1],ArrowLeft:[-1,1],ArrowRight:[1,-1]},held=new Set();
   let stepFrame,lastStep,walked=0;
   function step(t){
     let dx=0,dz=0;for(const k of held){dx+=moves[k][0];dz+=moves[k][1];}
     const length=Math.hypot(dx,dz);
-    if(!length||scene!=='lab'){stepFrame=null;stride=0;held.clear();draw();return;}
-    if(walkFrame){cancelAnimationFrame(walkFrame);arrive(selected,false);}
+    if(!length){stepFrame=null;stride=0;draw();return;}
+    if(fightFrame){lastStep=t;stepFrame=requestAnimationFrame(step);return;}
+    if(walkFrame){cancelAnimationFrame(walkFrame);walkFrame=null;if(scene==='lab')arrive(selected,false);}
     const distance=Math.max(0,Math.min(50,t-lastStep))*.003,x=avatar.x+dx/length*distance,z=avatar.z+dz/length*distance;lastStep=t;
     if(!blocked(x,avatar.z))avatar.x=x;if(!blocked(avatar.x,z))avatar.z=z;
     walked+=distance;stride=Math.sin(walked*7);
-    const zone=Object.keys(sections).find(k=>Math.hypot(avatar.x-sections[k].destination[0],avatar.z-sections[k].destination[1])<.8);
-    if(zone&&zone!==selected)arrive(zone,false);else draw();
+    if(scene==='dungeon'){
+      if(Math.hypot(avatar.x-exit.x,avatar.z-exit.z)<.6){stepFrame=null;leave();return;}
+      draw();
+    }else{
+      const zone=Object.keys(sections).find(k=>Math.hypot(avatar.x-sections[k].destination[0],avatar.z-sections[k].destination[1])<.8);
+      if(zone&&zone!==selected)arrive(zone,false);else draw();
+    }
     stepFrame=requestAnimationFrame(step);
   }
   addEventListener('keydown',e=>{
-    if(e.key==='Escape'&&scene==='dungeon'){leave();return;}
-    if(!moves[e.key]||scene!=='lab'||e.altKey||e.ctrlKey||e.metaKey)return;
+    if(scene==='dungeon'){
+      if(e.key==='Escape'){leave();return;}
+      if(speaker&&(e.key===' '||e.key==='Enter')&&!e.target.closest?.('a,button,summary')){e.preventDefault();fight(bosses.indexOf(speaker));return;}
+    }
+    if(!moves[e.key]||e.altKey||e.ctrlKey||e.metaKey)return;
     e.preventDefault();held.add(e.key);
     if(!stepFrame){lastStep=performance.now();stepFrame=requestAnimationFrame(step);}
   });
   addEventListener('keyup',e=>held.delete(e.key));
   addEventListener('blur',()=>held.clear());
+  // Twinkle the heart: repaint only the overlay, over the last rendered scene, when its step changes.
+  let lastTwinkle=0;
+  (function twinkle(t){if(scene==='lab'&&!reducedMotion.matches&&Math.floor(t/120)!==lastTwinkle){lastTwinkle=Math.floor(t/120);paint(t);}requestAnimationFrame(twinkle);})(0);
   // The markup already shows the desk as selected; render without scrolling on load.
   renderPanel('about');
   draw();

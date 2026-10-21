@@ -9,7 +9,7 @@ body {margin:0;background:#fff}
 #lab-layout .site-nav a[aria-current] {border-bottom:2px solid var(--lab-blue)}
 #lab-layout a {color:var(--lab-blue);text-underline-offset:3px;text-decoration:none;overflow-wrap:anywhere}
 #lab-layout a:hover {text-decoration:underline}
-#lab-layout .layout {display:grid;grid-template-columns:minmax(0,1fr) min(680px,58%);align-items:start}
+#lab-layout .layout {display:grid;grid-template-columns:minmax(0,1fr) min(680px,58%);align-items:stretch}
 #lab-layout .explore {background:var(--lab-side);padding:24px 14px 28px;border-right:1px solid var(--lab-line);position:sticky;top:0}
 #lab-layout .explore h2 {font-size:16px;font-weight:500;margin:0 10px 2px}
 #lab-layout .explore>.caption {margin:0 10px}
@@ -18,17 +18,29 @@ body {margin:0;background:#fff}
 #lab-layout canvas {display:block;width:100%;height:auto;image-rendering:pixelated;touch-action:pan-y;cursor:pointer}
 #lab-layout .bosses {display:none;position:absolute;inset:0;pointer-events:none}
 #lab-layout.in-dungeon .bosses {display:block}
-#lab-layout .bosses button {position:absolute;transform:translateX(-50%);pointer-events:auto;min-height:0;padding:1px 7px;font-size:clamp(9px,2.4cqw,12px);line-height:1.4;font-weight:500;white-space:nowrap;border:0;border-radius:999px;background:rgba(36,30,58,.82);color:#fff}
-#lab-layout .bosses button.defeated {background:rgba(105,102,120,.85)}
-#lab-layout .bosses button.defeated::before {content:"✓ "}
-#lab-layout .bosses .leave {left:1.5%;top:2%;transform:none}
+#lab-layout .bosses button {position:absolute;pointer-events:auto;min-height:0;padding:2px 7px;font-size:clamp(9px,2.2cqw,12px);line-height:1.3;font-weight:500;white-space:nowrap;border:0;border-radius:6px;background:rgba(36,30,58,.85);color:#fff}
+#lab-layout .bosses .leave {left:1.5%;bottom:2.5%}
+#lab-layout .bosses .tag {--hp:1;transform:translate(-50%,-100%)}
+#lab-layout .bosses .tag i {display:block;height:3px;margin:2px 0 1px;border-radius:2px;background:linear-gradient(90deg,#7ee08a calc(var(--hp)*100%),#4a4560 0)}
+#lab-layout .bosses .tag.defeated {background:rgba(105,102,120,.85)}
+#lab-layout .bosses .tag.defeated span::before {content:"✓ "}
+#lab-layout .bosses .tag.speaking {box-shadow:0 0 0 2px #ffe08a}
+/* A JRPG-style dialogue box across the top of the stage, on the topmost layer. */
+#lab-layout .bosses .dialogue {position:absolute;z-index:2;top:2%;left:2%;right:2%;margin:0;padding:6px 26px 8px 12px;font-size:clamp(10px,2.4cqw,14px);line-height:1.4;color:#fff;background:rgba(24,20,52,.94);border:2px solid #fff;border-radius:6px;box-shadow:0 0 0 2px #2b2540,0 3px 0 2px rgba(0,0,0,.25);pointer-events:none}
+#lab-layout .bosses .dialogue strong {display:block;margin-bottom:2px;font-weight:600;color:#ffe08a}
+#lab-layout .bosses .dialogue::after {content:"▼";position:absolute;right:10px;bottom:6px;font-size:.7em;color:#ffe08a;animation:blink 1s step-end infinite}
+@keyframes blink {50% {opacity:0}}
+@media(prefers-reduced-motion:reduce){#lab-layout .bosses .dialogue::after{animation:none}}
+/* On small stages the tags would cover the bosses; the dialogue box names each boss instead. */
+@container (max-width:560px){#lab-layout .bosses .tag:not(:focus-visible){opacity:0}}
 #lab-layout button {font:inherit;font-size:13px;padding:8px 11px;min-height:40px;border:1px solid var(--lab-line);border-radius:3px;background:var(--lab-bg);color:var(--lab-ink);cursor:pointer}
 #lab-layout button[aria-pressed="true"] {background:var(--lab-blue);color:var(--lab-bg);border-color:var(--lab-blue)}
 #lab-layout :focus-visible {outline:2px solid var(--lab-blue);outline-offset:3px}
 #lab-layout .places {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:0 10px}
 #lab-layout .places [data-place="about"] {grid-column:1/-1}
 #lab-layout .arrival {margin:16px 10px 0;font-size:12px;color:var(--lab-blue);min-height:20px}
-#lab-layout .reading {padding:26px 30px 30px;min-width:0;min-height:620px}
+/* The panel is its own scroll box, as tall as the lab column, so only the panel scrolls and the page stays put. */
+#lab-layout .reading {padding:26px 30px 30px;min-width:0;contain:size;overflow-y:auto;overscroll-behavior:contain}
 #lab-layout .eyebrow {font-size:11px;letter-spacing:.12em;color:var(--lab-muted);margin:0 0 5px}
 #lab-layout .reading h2 {font:500 28px/1.2 Optima,Georgia,serif;margin:0 0 9px;color:var(--lab-blue)}
 #lab-layout .intro {font-size:12px;margin:0 0 22px;color:var(--lab-muted)}
@@ -47,9 +59,13 @@ body {margin:0;background:#fff}
 #lab-layout summary {font-size:13px;font-weight:500;color:var(--lab-blue);cursor:pointer}
 #lab-layout details ul {margin-top:15px}
 #lab-layout .about h2,#lab-layout .research h2,#lab-layout .join h2 {font:500 16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:22px 0 8px;color:var(--lab-ink)}
-#lab-layout .research h2 {scroll-margin-top:16px;border-radius:3px}
-#lab-layout .research h2.struck {animation:struck 1.4s ease-out}
-@keyframes struck {from {background:#ffe9a8;box-shadow:0 0 0 6px #ffe9a8} to {background:transparent;box-shadow:0 0 0 6px transparent}}
+/* In the dungeon the panel takes on its colors. */
+#lab-layout.in-dungeon .reading {background:#26223a;color:#e2dcf7;scrollbar-color:#5f5c8c #26223a}
+#lab-layout.in-dungeon .eyebrow,#lab-layout.in-dungeon .intro {color:#a9a2cc}
+#lab-layout.in-dungeon #lab-panel-title {color:#ffe08a}
+#lab-layout.in-dungeon .reading a {color:#ffd27a}
+#lab-layout.in-dungeon .research h2 {color:#f4efff;padding:6px 10px;border-left:3px solid #4f4b75;border-radius:3px;background:#2f2a48}
+#lab-layout.in-dungeon .research h2.active {border-left-color:#ffb347;background:#3d355e;box-shadow:0 0 0 1px rgba(255,179,71,.35)}
 #lab-layout .about p,#lab-layout .research p,#lab-layout .join p {font-size:13px;margin:0 0 10px}
 #lab-layout .about .imgtable {width:100%;border-collapse:collapse}
 #lab-layout .about .imgtable tr {display:grid;grid-template-columns:112px minmax(0,1fr);gap:20px}
@@ -70,9 +86,9 @@ body {margin:0;background:#fff}
 #lab-layout .member a {font-size:12px;margin-right:12px}
 #lab-layout .site-footer {border-top:1px solid var(--lab-line);padding:14px 28px;font-size:11px;color:var(--lab-muted)}
 @media(pointer:coarse){#lab-layout button,#lab-layout summary,#lab-layout .site-nav a{min-height:44px}}
-@media(max-width:700px){#lab-layout .layout{grid-template-columns:1fr}#lab-layout .explore{position:static;border-right:0;border-bottom:1px solid var(--lab-line)}#lab-layout .stage{max-width:430px;margin:auto}#lab-layout .reading{padding:24px 20px;min-height:0}#lab-layout .site-header{padding:20px}#lab-layout .places{grid-template-columns:repeat(4,minmax(0,1fr));padding:0}#lab-layout .places button{padding:7px 3px;font-size:12px}}
+@media(max-width:700px){#lab-layout .layout{grid-template-columns:1fr}#lab-layout .reading{height:min(70vh,560px)}#lab-layout .explore{position:static;border-right:0;border-bottom:1px solid var(--lab-line)}#lab-layout .stage{max-width:430px;margin:auto}#lab-layout .reading{padding:24px 20px;min-height:0}#lab-layout .site-header{padding:20px}#lab-layout .places{grid-template-columns:repeat(4,minmax(0,1fr));padding:0}#lab-layout .places button{padding:7px 3px;font-size:12px}}
 @media(max-width:380px){#lab-layout .places{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:450px){#lab-layout .about .imgtable tr{grid-template-columns:1fr;gap:12px}}
 @media(max-height:750px) and (min-width:701px){#lab-layout .explore{position:static}}
 @media(min-width:1400px){#lab-layout .places{grid-template-columns:repeat(5,minmax(0,1fr))}#lab-layout .places [data-place="about"]{grid-column:auto}#lab-layout .stage{max-width:max(392px,(100vh - 286px)*1.35)}}
-@media print{#lab-layout .explore,#lab-layout .site-nav{display:none}#lab-layout .layout{display:block}}
+@media print{#lab-layout .explore,#lab-layout .site-nav{display:none}#lab-layout .layout{display:block}#lab-layout .reading{contain:none;height:auto;overflow:visible}}
