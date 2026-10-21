@@ -5,7 +5,7 @@
   const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
   const pageCache=new Map();
   const sections={
-    about:{title:'Dongwoo Kim',eyebrow:'THE PROFESSOR’S DESK',intro:'',page:'../index.html',place:"the professor's desk",pin:[-1.9,2.1,.3],destination:[-.3,1.6]},
+    about:{title:'Dongwoo Kim',eyebrow:'THE PROFESSOR’S DESK',intro:'',page:'../index.html?classic',place:"the professor's desk",pin:[-1.9,2.1,.3],destination:[-.3,1.6]},
     research:{title:'Research',eyebrow:'THE DUNGEON',intro:'Walk up to a boss to hear its research question, then press Space or click it to fight.',page:'research.html',place:'the dungeon gate',pin:[-2.4,3,-3.8],destination:[-2.4,-2.3]},
     papers:{title:'Publications',eyebrow:'THE BOOKSHELF',intro:'* equal contribution · † co-corresponding',page:'publication.html',place:'the bookshelf',pin:[2.4,3.05,-3.35],destination:[2.4,-2]},
     people:{title:'Our people',eyebrow:'THE SHARED DESK',intro:'Machine Learning Lab · POSTECH',page:'team.html',place:'the shared desk',pin:[2,2.1,.5],destination:[3.9,1.85]},
