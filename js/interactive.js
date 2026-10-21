@@ -11,15 +11,17 @@
     people:{title:'Our people',eyebrow:'THE SHARED DESK',intro:'Machine Learning Lab · POSTECH',page:'team.html',place:'the shared desk',pin:[2,2.1,.5],destination:[3.9,1.85]},
     join:{title:'Join the lab',eyebrow:'A SEAT FOR YOU',intro:'For prospective graduate students and undergraduate researchers.',page:'join.html',place:'the empty chair',pin:[2.92,1.75,3.15],destination:[1.5,3.2]}
   };
-  let selected='about',walkFrame,faces=[],target='about',avatar={x:-.3,z:1.6},stride=0;
-  const keys=['','about','research','papers','people','join'],W=canvas.width,H=canvas.height,pixels=ctx.createImageData(W,H),depths=new Float32Array(W*H),picks=new Uint8Array(W*H);
-  const boxes=[];
+  let selected='about',walkFrame,faces=[],target='about',avatar={x:-.3,z:1.6},stride=0,scene='lab',tint=null;
+  const keys=['','about','research','papers','people','join','exit','boss0','boss1','boss2','boss3','boss4','boss5'],W=canvas.width,H=canvas.height,pixels=ctx.createImageData(W,H),depths=new Float32Array(W*H),picks=new Uint8Array(W*H);
+  // Each scene keeps its own static boxes. `tint` recolors boxes as they are added, for flashing or defeated bosses.
+  const lab=[],dungeon=[];let boxes=lab;
   // Orthographic boxes share a depth buffer for drawing and object picking.
-  function box(x,y,z,w,h,d,color,group=''){boxes.push({x,y,z,w,h,d,color,group});}
+  function box(x,y,z,w,h,d,color,group=''){boxes.push({x,y,z,w,h,d,color:tint?tint(color):color,group});}
   function shade(hex,k){return '#'+hex.slice(1).match(/../g).map(c=>Math.min(255,Math.round(parseInt(c,16)*k)).toString(16).padStart(2,'0')).join('');}
-  // The origin sits so the room, walls and shadow fill the canvas with a few pixels to spare.
-  function project([x,y,z]){const a=Math.PI/4,depth=x*Math.sin(a)+z*Math.cos(a);return [197+(x*Math.cos(a)-z*Math.sin(a))*29,175+depth*14.5-y*25.1,depth*.866+y*.5];}
-  function face(points,color,group=''){faces.push({p:points.map(project),color,group});}
+  // The lab is a 45° view and the dungeon a straight-on battle view. Each origin keeps its room inside the canvas.
+  const views={lab:{a:Math.PI/4,x:197,y:175},dungeon:{a:0,x:196,y:160}};
+  function project([x,y,z],{a,x:ox,y:oy}=views[scene]){const depth=x*Math.sin(a)+z*Math.cos(a);return [ox+(x*Math.cos(a)-z*Math.sin(a))*29,oy+depth*14.5-y*25.1,depth*.866+y*.5];}
+  function face(points,color,group=''){faces.push({p:points.map(p=>project(p)),color,group});}
   function cube(b){const{x,y,z,w,h,d,color,group}=b,X=x+w,Y=y+h,Z=z+d;
     face([[x,Y,z],[X,Y,z],[X,Y,Z],[x,Y,Z]],shade(color,1.08),group);
     face([[X,y,z],[X,y,Z],[X,Y,Z],[X,Y,z]],shade(color,.86),group);
@@ -95,6 +97,78 @@
   box(2.47,.62,2.42,.9,.14,.8,'#a6dccb','join');box(2.47,.74,3.08,.9,.62,.14,'#b4e3d3','join');
   for(const [c,r]of heart)box(2.67+c*.1,1.24-r*.1,3.22,.1,.1,.015,'#f6a5bd','join');
   box(-3.85,.03,1.35,.95,.53,.65,'#dcae84');box(-3.93,.56,1.29,1.11,.1,.77,'#ecc699');box(-3.6,.67,1.5,.39,.20,.29,'#fff3dc');
+  // The research dungeon: stone floor, a brick back wall with torches and the exit door, and a magic circle for the hero.
+  boxes=dungeon;
+  box(-6.5,-.34,-5,13,.34,12,'#3b3a55');
+  for(let x=-6.5;x<6.5;x++)for(let z=-5;z<7;z++)box(x,0,z,.98,.025,.98,(Math.floor(x)+z)%2?'#4d4c6f':'#55547a');
+  box(-6.5,0,-5.4,13,3.05,.4,'#5f5c8c');
+  for(let r=0;r<6;r++)for(let c=-7;c<7;c++){const x0=Math.max(-6.5,c+r%2*.5),x1=Math.min(6.5,c+r%2*.5+1)-.05;if(x1>x0)box(x0,r*.5+.03,-5,x1-x0,.44,.02,(r+c)%2?'#7a77a8':'#736fa0');}
+  box(-.85,0,-4.98,1.7,2.05,.05,'#4b4570','exit');box(-.68,0,-4.94,1.36,1.88,.04,'#9a7552','exit');
+  for(const x of[-.24,.22])box(x,0,-4.9,.03,1.88,.01,'#7d5c40','exit');box(.42,.85,-4.9,.09,.09,.02,'#ffe08a','exit');
+  for(const x of[-4.6,-1.6,1.6,4.6]){box(x-.07,1.5,-4.98,.14,.35,.12,'#8a6a4a');box(x-.13,1.85,-4.98,.26,.08,.16,'#a07a52');box(x-.1,1.93,-4.94,.2,.28,.1,'#ffb347');box(x-.05,1.98,-4.88,.1,.16,.05,'#ffe08a');}
+  box(-1.05,.026,1.95,2.1,.006,1.1,'#9b7fe0');box(-.9,.032,2.03,1.8,.006,.94,'#463f6e');
+  boxes=lab;
+  // Cute boss faces: two eyes and blush on a front face at height y.
+  function eyes(x,y,z,g){box(x-.2,y,z,.09,.12,.02,'#3a3340',g);box(x+.11,y,z,.09,.12,.02,'#3a3340',g);box(x-.3,y-.08,z,.1,.05,.02,'#f6a7ab',g);box(x+.2,y-.08,z,.1,.05,.02,'#f6a7ab',g);}
+  // Graph Neural Networks: a slime wearing a small graph.
+  function slime(x,z,g){
+    const c='#b39ddb';
+    box(x-.62,0,z-.4,1.24,.52,.8,c,g);box(x-.48,.52,z-.32,.96,.3,.64,c,g);box(x-.28,.82,z-.2,.56,.14,.4,c,g);
+    eyes(x,.26,z+.4,g);
+    for(const [nx,ny]of[[-.4,.86],[0,1.22],[.4,.86]])box(x+nx-.08,ny,z-.08,.16,.16,.16,'#ffe08a',g);
+    for(const side of[-.4,.4])for(let s=1;s<5;s++)box(x+side*(1-s/5)-.025,.92+.36*s/5,z-.025,.05,.05,.05,'#fff7e6',g);
+  }
+  // Geometric Deep Learning: a floating crystal circled by a ring.
+  function crystal(x,z,g){
+    box(x-.4,.03,z-.2,.8,.01,.4,'#2f2d47',g);
+    [.3,.62,.9,1.02,.9,.62,.3].forEach((w,i)=>box(x-w/2,.38+i*.2,z-w*.35,w,.2,w*.7,i>3?'#b8e6f2':'#8fd3e8',g));
+    eyes(x,1.04,z+.36,g);
+    box(x-.85,.95,z+.4,1.7,.06,.06,'#e9d6ff',g);
+  }
+  // Trustworthy AI: a knight with a lock on the shield.
+  function knight(x,z,g){
+    for(const lx of[-.28,.06])box(x+lx,0,z-.12,.22,.32,.24,'#5d6680',g);
+    box(x-.4,.32,z-.25,.8,.55,.5,'#aab4c8',g);
+    box(x-.38,.87,z-.3,.76,.62,.6,'#c3cbdb',g);box(x-.3,1.1,z+.3,.6,.12,.02,'#3a3340',g);
+    box(x-.2,1.13,z+.32,.08,.06,.01,'#ffe08a',g);box(x+.12,1.13,z+.32,.08,.06,.01,'#ffe08a',g);
+    box(x-.08,1.49,z-.2,.16,.3,.4,'#f2708f',g);
+    box(x-.62,.3,z+.28,.56,.72,.08,'#6f86c4',g);
+    box(x-.43,.52,z+.36,.18,.15,.02,'#ffe08a',g);box(x-.41,.67,z+.36,.03,.09,.02,'#ffe08a',g);box(x-.31,.67,z+.36,.03,.09,.02,'#ffe08a',g);box(x-.41,.74,z+.36,.13,.03,.02,'#ffe08a',g);
+  }
+  // ML for Science: a potion flask with bubbles.
+  function flask(x,z,g){
+    [.8,1.1,1.2,1.1,.8].forEach((w,i)=>box(x-w/2,i*.18,z-w*.3,w,.18,w*.6,i<3?'#8be3b4':'#d6eef5',g));
+    eyes(x,.3,z+.36,g);
+    box(x-.17,.9,z-.17,.34,.32,.34,'#d6eef5',g);box(x-.21,1.22,z-.21,.42,.14,.42,'#c9a06a',g);
+    for(const [bx,by]of[[.22,1.48],[.05,1.66],[.3,1.82]])box(x+bx-.05,by,z-.05,.1,.1,.1,'#bff5d4',g);
+  }
+  // Language Models: a book monster with a speech bubble.
+  function book(x,z,g){
+    box(x-.55,0,z-.28,1.1,1.25,.56,'#e07a7a',g);box(x-.5,1.25,z-.24,1,.04,.48,'#fff7e6',g);
+    for(const y of[.18,1])box(x-.55,y,z+.28,1.1,.06,.02,'#ffe08a',g);
+    eyes(x,.66,z+.28,g);box(x-.12,.4,z+.28,.24,.08,.02,'#7a3a4a',g);
+    box(x+.05,1.42,z-.05,.82,.44,.1,'#ffffff',g);box(x+.12,1.36,z-.05,.14,.08,.1,'#ffffff',g);
+    for(const dx of[.25,.44,.63])box(x+dx,1.6,z+.05,.08,.08,.02,'#3a3340',g);
+  }
+  // Generative Models: a ghost speckled with diffusion noise.
+  function ghost(x,z,g){
+    box(x-.4,.03,z-.2,.8,.01,.4,'#2f2d47',g);
+    box(x-.5,.4,z-.3,1,1.05,.6,'#ece6ff',g);box(x-.38,1.45,z-.24,.76,.14,.48,'#ece6ff',g);
+    for(let i=0;i<4;i++)box(x-.5+i*.25,.2+i%2*.1,z-.3,.25,.2,.6,'#ece6ff',g);
+    for(let i=0;i<12;i++)box(x-.44+i*37%9*.1,.48+i*53%8*.11,z+.3,.05,.05,.01,'#b9aee6',g);
+    eyes(x,1,z+.3,g);
+  }
+  function sword(x,z){box(x+.38,.3,z-.02,.05,.1,.05,'#8a6a4a');box(x+.31,.4,z-.05,.19,.04,.1,'#c9a24a');box(x+.37,.44,z-.03,.07,.56,.06,'#e6edf5');}
+  // One boss per research area; `area` must match a heading on the research page. Two stand on top and two on each side.
+  const bosses=[
+    {area:'Graph Neural Networks',label:'GNNs',x:-2.3,z:-3.8,top:1.38,art:slime},
+    {area:'Geometric Deep Learning',label:'Geometric DL',x:2.3,z:-3.8,top:1.78,art:crystal},
+    {area:'Trustworthy AI',label:'Trustworthy AI',x:-4.5,z:0,top:1.8,art:knight},
+    {area:'ML for Science',label:'ML for Science',x:-4.5,z:5.3,top:1.92,art:flask},
+    {area:'Language Models',label:'Language Models',x:4.5,z:0,top:1.86,art:book},
+    {area:'Generative Models',label:'Generative Models',x:4.5,z:5.3,top:1.59,art:ghost}
+  ];
+  const home={x:0,z:2.5};let hero={...home};
   function triangle(a,b,c,rgba,id){
     const area=(b[1]-c[1])*(a[0]-c[0])+(c[0]-b[0])*(a[1]-c[1]);if(Math.abs(area)<.001)return;
     const left=Math.max(0,Math.floor(Math.min(a[0],b[0],c[0]))),right=Math.min(W-1,Math.ceil(Math.max(a[0],b[0],c[0])));
@@ -106,17 +180,38 @@
       depths[index]=z;picks[index]=id;pixels.data.set(rgba,index*4);
     }
   }
+  // Small 2D pixel sprites drawn over the scene: X is the color, o is a white highlight.
+  function sprite(rows,x,y,color){rows.forEach((row,r)=>[...row].forEach((c,i)=>{if(c!=='.'){ctx.fillStyle=c==='o'?'#ffffff':color;ctx.fillRect(x+i,y+r,1,1);}}));}
+  const grey=c=>{const [r,g,b]=c.slice(1,7).match(/../g).map(v=>parseInt(v,16)),l=Math.round((r*.3+g*.59+b*.11)*.6+70).toString(16).padStart(2,'0');return '#'+l+l+l;};
+  const flashing=b=>b.hit!=null&&Math.floor(b.hit*6)%2===0;
+  let fade=0;
   function draw(){
     faces=[];pixels.data.fill(0);depths.fill(-Infinity);picks.fill(0);
-    face([[-5,-.38,-3.8],[5.5,-.38,-3.8],[5.5,-.38,4.4],[-5,-.38,4.4]],'#00000012');
-    face([[avatar.x-.36,.05,avatar.z-.33],[avatar.x+.36,.05,avatar.z-.33],[avatar.x+.36,.05,avatar.z+.33],[avatar.x-.36,.05,avatar.z+.33]],'#e3c9a8');
-    const staticCount=boxes.length;person(avatar.x,avatar.z,{shirt:'#6cc2a2',group:'',step:stride});
+    boxes=scene==='lab'?lab:dungeon;const staticCount=boxes.length;
+    if(scene==='lab'){
+      face([[-5,-.38,-3.8],[5.5,-.38,-3.8],[5.5,-.38,4.4],[-5,-.38,4.4]],'#00000012');
+      face([[avatar.x-.36,.05,avatar.z-.33],[avatar.x+.36,.05,avatar.z-.33],[avatar.x+.36,.05,avatar.z+.33],[avatar.x-.36,.05,avatar.z+.33]],'#e3c9a8');
+      person(avatar.x,avatar.z,{shirt:'#6cc2a2',group:'',step:stride});
+    }else{
+      face([[-6.3,-.38,-4.8],[6.8,-.38,-4.8],[6.8,-.38,7.5],[-6.3,-.38,7.5]],'#00000012');
+      person(hero.x,hero.z,{shirt:'#6cc2a2',group:'',step:stride});sword(hero.x,hero.z);
+      // A struck boss shakes and flashes white; a defeated one turns grey.
+      bosses.forEach((b,i)=>{tint=flashing(b)?()=>'#ffffff':b.defeated?grey:null;b.art(b.x+(b.hit!=null?Math.sin(b.hit*40)*.08:0),b.z,'boss'+i);tint=null;});
+    }
     boxes.forEach(cube);boxes.length=staticCount;
     for(const f of faces){const rgba=f.color.slice(1).match(/../g).map(v=>parseInt(v,16));if(rgba.length===3)rgba.push(255);for(let i=1;i<f.p.length-1;i++)triangle(f.p[0],f.p[i],f.p[i+1],rgba,keys.indexOf(f.group));}
     ctx.putImageData(pixels,0,0);
-    // A pixel heart, with one highlight, marks the destination.
-    const [x,y]=project(sections[target].pin).map(Math.round);
-    ['.XX...XX.','XXXX.XXXX','XXXXXXXXX','XXXXXXXXX','.XXXXXXX.','..XXXXX..','...XXX...','....X....'].forEach((row,r)=>[...row].forEach((c,i)=>{if(c==='X'){ctx.fillStyle=r===1&&i===1?'#ffffff':'#f2708f';ctx.fillRect(x-4+i,y-8+r,1,1);}}));
+    if(scene==='lab'){
+      // A pixel heart, with one highlight, marks the destination.
+      const [x,y]=project(sections[target].pin).map(Math.round);
+      sprite(['.XX...XX.','XoXX.XXXX','XXXXXXXXX','XXXXXXXXX','.XXXXXXX.','..XXXXX..','...XXX...','....X....'],x-4,y-8,'#f2708f');
+    }else for(const b of bosses){
+      // Health bars, and a spark on each flash of a hit.
+      const [x,y]=project([b.x,b.top+.2,b.z]).map(Math.round),hp=b.defeated?0:b.hit!=null?1-b.hit:1;
+      ctx.fillStyle='#2d2a40';ctx.fillRect(x-12,y-2,24,4);ctx.fillStyle=hp>.3?'#7ee08a':'#ff8a8a';ctx.fillRect(x-11,y-1,Math.round(22*hp),2);
+      if(flashing(b)){const [sx,sy]=project([b.x,b.top/2,b.z+.5]).map(Math.round);sprite(['...X...','.X.X.X.','..XXX..','XXXXXXX','..XXX..','.X.X.X.','...X...'],sx-3,sy-3,'#fff3a0');}
+    }
+    if(fade>0){ctx.fillStyle=`rgba(36,30,58,${fade})`;ctx.fillRect(0,0,W,H);}
   }
   function node(tag,text,className){const n=document.createElement(tag);if(text)n.textContent=text;if(className)n.className=className;return n;}
   // Keep the original pages as the source of truth. Cache only for this visit.
@@ -222,12 +317,15 @@
     stride = 0;
     walkFrame = null;
     root.querySelectorAll('[data-place]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.place === key)));
-    root.querySelector('.arrival').textContent = 'At ' + sections[key].place + ' · ' + sections[key].title;
-    draw();
+    root.querySelector('.arrival').textContent = key === 'research' ? status() : 'At ' + sections[key].place + ' · ' + sections[key].title;
+    // Research opens the dungeon, where each boss stands for one research area.
+    if (key === 'research' && scene === 'lab') setScene('dungeon');
+    else draw();
     renderPanel(key).then(() => {
-      // On narrow screens the panel sits below the lab. Scroll once it is filled, so the page is long enough.
+      // On narrow screens the panel sits below the lab. Scroll once it is filled, so the page is long enough,
+      // but keep the dungeon in view so the bosses can be fought.
       const top = reading.getBoundingClientRect().top;
-      if (scroll && selected === key && target === key && (top < 0 || top > innerHeight / 2)) {
+      if (scroll && selected === key && target === key && (top < 0 || top > innerHeight / 2 && scene === 'lab')) {
         reading.scrollIntoView({block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth'});
       }
     });
@@ -248,7 +346,9 @@
     return [[avatar.x,avatar.z],...points];
   }
   function walk(key){
-    if(!Object.hasOwn(sections,key))return;cancelAnimationFrame(walkFrame);target=key;
+    if(!Object.hasOwn(sections,key))return;
+    if(scene==='dungeon'){if(key==='research'){arrive(key);return;}leave();}
+    cancelAnimationFrame(walkFrame);target=key;
     const [dx,dz]=sections[key].destination;
     if(Math.hypot(avatar.x-dx,avatar.z-dz)<.001){arrive(key);return;}
     if(key !== 'people') loadPage(key).catch(() => {});
@@ -264,15 +364,66 @@
     }
     walkFrame=requestAnimationFrame(tick);
   }
+  function status(){const n=bosses.filter(b=>b.defeated).length;return n===bosses.length?'Dungeon cleared! All six research bosses are defeated.':'Research dungeon · '+n+'/'+bosses.length+' bosses defeated';}
+  // Switch scenes behind a short fade from dark.
+  let fadeFrame;
+  const labLabel=canvas.getAttribute('aria-label');
+  function setScene(next){
+    scene=next;root.classList.toggle('in-dungeon',next==='dungeon');
+    canvas.setAttribute('aria-label',next==='dungeon'?'A pixel-art research dungeon. The hero stands in a magic circle, surrounded by six bosses, one for each research area. Use the boss buttons to fight them.':labLabel);
+    cancelAnimationFrame(fadeFrame);
+    if(reducedMotion.matches){fade=0;draw();return;}
+    const start=performance.now();
+    (function tick(t){fade=Math.max(0,1-(t-start)/400);draw();if(fade>0)fadeFrame=requestAnimationFrame(tick);})(start);
+  }
+  function leave(){
+    if(scene!=='dungeon')return;
+    cancelAnimationFrame(fightFrame);fightFrame=null;for(const b of bosses)b.hit=null;hero={...home};stride=0;
+    setScene('lab');root.querySelector('.arrival').textContent='At '+sections.research.place+' · '+sections.research.title;
+  }
+  // The hero dashes to the boss, strikes until its health runs out and walks back. The panel then jumps to that research area.
+  let fightFrame;
+  function fight(i){
+    const b=bosses[i];if(fightFrame||scene!=='dungeon')return;
+    if(reducedMotion.matches){defeat(b);draw();return;}
+    const dx=b.x-home.x,dz=b.z-home.z,d=Math.hypot(dx,dz),near={x:b.x-dx/d*1.3,z:b.z-dz/d*1.3},start=performance.now();
+    const lerp=(p,q,f)=>({x:p.x+(q.x-p.x)*f,z:p.z+(q.z-p.z)*f});
+    let struck=false;
+    function tick(t){
+      const e=Math.max(0,t-start);
+      if(e<350)hero=lerp(home,near,e/350);
+      else if(e<750){hero=near;b.hit=(e-350)/400;}
+      else{if(!struck){struck=true;b.hit=null;defeat(b);}hero=lerp(near,home,Math.min(1,(e-750)/350));}
+      stride=e<350||e>=750?Math.sin(e/45):0;
+      if(e<1100){draw();fightFrame=requestAnimationFrame(tick);}else{hero={...home};stride=0;fightFrame=null;draw();}
+    }
+    fightFrame=requestAnimationFrame(tick);
+  }
+  function defeat(b){
+    b.defeated=true;b.button.classList.add('defeated');
+    root.querySelector('.arrival').textContent=status();
+    const heading=[...panel.querySelectorAll('h2')].find(h=>h.textContent.trim()===b.area);
+    if(!heading)return;
+    heading.scrollIntoView({block:'start',behavior:reducedMotion.matches?'auto':'smooth'});
+    heading.classList.remove('struck');void heading.offsetWidth;heading.classList.add('struck');
+  }
+  // Name tags over the dungeon double as accessible fight buttons.
+  const bossLayer=root.querySelector('.bosses');
+  bosses.forEach((b,i)=>{
+    const [x,y]=project([b.x,0,b.z+.45],views.dungeon);
+    b.button=node('button',b.label);b.button.type='button';b.button.style.left=x/W*100+'%';b.button.style.top=y/H*100+'%';
+    b.button.setAttribute('aria-label','Fight the '+b.area+' boss');b.button.addEventListener('click',()=>fight(i));bossLayer.append(b.button);
+  });
+  bossLayer.querySelector('.leave').addEventListener('click',leave);
   root.querySelectorAll('[data-place]').forEach(b=>b.addEventListener('click',()=>walk(b.dataset.place)));
-  canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect(),x=Math.floor((e.clientX-r.left)*W/r.width),y=Math.floor((e.clientY-r.top)*H/r.height);if(x>=0&&x<W&&y>=0&&y<H){const key=keys[picks[y*W+x]];if(key)walk(key);}});
+  canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect(),x=Math.floor((e.clientX-r.left)*W/r.width),y=Math.floor((e.clientY-r.top)*H/r.height);if(x>=0&&x<W&&y>=0&&y<H){const key=keys[picks[y*W+x]];if(scene==='dungeon'){if(key==='exit')leave();else if(key?.startsWith('boss'))fight(+key.slice(4));}else if(key)walk(key);}});
   // Arrow keys move the avatar in their screen direction. Stepping onto a place's spot opens it without scrolling.
   const moves={ArrowUp:[-1,-1],ArrowDown:[1,1],ArrowLeft:[-1,1],ArrowRight:[1,-1]},held=new Set();
   let stepFrame,lastStep,walked=0;
   function step(t){
     let dx=0,dz=0;for(const k of held){dx+=moves[k][0];dz+=moves[k][1];}
     const length=Math.hypot(dx,dz);
-    if(!length){stepFrame=null;stride=0;draw();return;}
+    if(!length||scene!=='lab'){stepFrame=null;stride=0;held.clear();draw();return;}
     if(walkFrame){cancelAnimationFrame(walkFrame);arrive(selected,false);}
     const distance=Math.max(0,Math.min(50,t-lastStep))*.003,x=avatar.x+dx/length*distance,z=avatar.z+dz/length*distance;lastStep=t;
     if(!blocked(x,avatar.z))avatar.x=x;if(!blocked(avatar.x,z))avatar.z=z;
@@ -282,7 +433,8 @@
     stepFrame=requestAnimationFrame(step);
   }
   addEventListener('keydown',e=>{
-    if(!moves[e.key]||e.altKey||e.ctrlKey||e.metaKey)return;
+    if(e.key==='Escape'&&scene==='dungeon'){leave();return;}
+    if(!moves[e.key]||scene!=='lab'||e.altKey||e.ctrlKey||e.metaKey)return;
     e.preventDefault();held.add(e.key);
     if(!stepFrame){lastStep=performance.now();stepFrame=requestAnimationFrame(step);}
   });

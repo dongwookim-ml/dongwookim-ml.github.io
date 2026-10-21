@@ -31,7 +31,12 @@
     <aside class="explore" aria-label="Explore the lab">
       <h2>Explore the lab</h2>
       <p class="caption">Walk with the arrow keys, choose an object, or use the buttons below.</p>
-      <canvas width="392" height="290" role="img" aria-label="A pixel-art lab with a professor's desk on the left, a research blackboard, a publication bookshelf, a shared desk on the right, an empty chair, and a cat. The destination buttons provide the same navigation."></canvas>
+      <div class="stage">
+        <canvas width="392" height="290" role="img" aria-label="A pixel-art lab with a professor's desk on the left, a research blackboard, a publication bookshelf, a shared desk on the right, an empty chair, and a cat. The destination buttons provide the same navigation."></canvas>
+        <div class="bosses" role="group" aria-label="Research dungeon">
+          <button type="button" class="leave">← Back to the lab</button>
+        </div>
+      </div>
       <nav class="places" aria-label="Lab destinations">
         <button type="button" data-place="about" aria-pressed="true" aria-controls="lab-panel">About Dongwoo</button>
         <button type="button" data-place="research" aria-pressed="false" aria-controls="lab-panel">Research</button>

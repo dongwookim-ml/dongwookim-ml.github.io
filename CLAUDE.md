@@ -27,7 +27,7 @@ python -m http.server 8000
 
 - `css/modern.css` — the stylesheet; CSS variables in `:root`.
 - `js/modern.js` — runtime loaders: `loadNews`, `loadTeam`. Each looks for a target element on the current page and bails if absent.
-- `js/interactive.js` — lab rendering and navigation. Opens with the professor's profile from `index.html`; reads research, publications, and joining information from the existing HTML pages over HTTP, and members from `TEAM_DATA`. Preview with a local HTTP server, not `file://`.
+- `js/interactive.js` — lab rendering and navigation. Opens with the professor's profile from `index.html`; reads research, publications, and joining information from the existing HTML pages over HTTP, and members from `TEAM_DATA`. Preview with a local HTTP server, not `file://`. Research opens a dungeon with one boss per research area; each boss's `area` in `bosses` must match an `<h2>` in `pages/research.html`, so update both together.
 
 ### Data files in `/data/`
 
