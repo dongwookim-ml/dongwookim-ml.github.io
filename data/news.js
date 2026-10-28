@@ -23,6 +23,11 @@ const NEWS_DATA = [
   {
     date: 'Oct 2026',
     emoji: '🏆',
+    text: 'In-Place Feedback paper wins the Outstanding Paper Award at EMNLP 2026'
+  },
+  {
+    date: 'Oct 2026',
+    emoji: '🏆',
     text: 'Selected as a Top Area Chair at NeurIPS 2026'
   },
   {
