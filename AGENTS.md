@@ -8,7 +8,7 @@ Personal academic website for Prof. Dongwoo Kim (POSTECH Machine Learning Lab). 
 
 ## Development
 
-**Local preview:** use a local server. The home page redirects to `pages/interactive.html`, which works only through the server; open `index.html?classic` for the classic home page:
+**Local preview:** Open `index.html` directly in a browser, or use a local server. `pages/interactive.html` works only through the server:
 ```bash
 python -m http.server 8000
 ```
@@ -19,7 +19,7 @@ python -m http.server 8000
 
 ### Site layout
 
-- `index.html` — home page: profile, bio, experience/education/awards, recent news. Uses `css/modern.css` and a sidebar + mobile-nav layout. A script at the top sends visitors to `pages/interactive.html` unless the URL has `?classic` or a `#section`, so Home links use `index.html?classic`.
+- `index.html` — home page: profile, bio, experience/education/awards, recent news. Uses `css/modern.css` and a sidebar + mobile-nav layout.
 - `pages/` — sub-pages: `research.html`, `publication.html`, `team.html`, `join.html`, all linked in the main nav.
 - `pages/interactive.html` — optional pixel-art lab tour with a content panel. Uses its own `css/interactive.css` and `js/interactive.js`; the original pages remain available.
 
