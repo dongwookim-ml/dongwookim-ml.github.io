@@ -66,7 +66,7 @@ const TEAM_DATA = {
     },
     {
       name: 'Youngbin Choi',
-      dept: 'CSE',
+      dept: 'GSAI',
       research: 'LLM Personalization',
       photo: 'https://raw.githubusercontent.com/ml-postech/ml-postech.github.io/master/img/ybchoi_profile.jpg',
       homepage: 'https://youngbin4979.github.io/',
