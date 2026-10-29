@@ -9,10 +9,11 @@
     research:{title:'Research',eyebrow:'THE DUNGEON',intro:'Walk up to a boss to hear its research question, then press Space or click it to fight.',page:'research.html',place:'the dungeon gate',pin:[-2.4,3,-3.8],destination:[-2.4,-2.3]},
     papers:{title:'Publications',eyebrow:'THE BOOKSHELF',intro:'* equal contribution · † co-corresponding',page:'publication.html',place:'the bookshelf',pin:[2.4,3.05,-3.35],destination:[2.4,-2]},
     people:{title:'Our people',eyebrow:'THE SHARED DESK',intro:'Machine Learning Lab · POSTECH',page:'team.html',place:'the shared desk',pin:[2,2.1,.5],destination:[3.9,1.85]},
-    join:{title:'Join the lab',eyebrow:'A SEAT FOR YOU',intro:'For prospective graduate students and undergraduate researchers.',page:'join.html',place:'the empty chair',pin:[2.92,1.75,3.15],destination:[1.5,3.2]}
+    join:{title:'Join the lab',eyebrow:'A SEAT FOR YOU',intro:'For prospective graduate students and undergraduate researchers.',page:'join.html',place:'the empty chair',pin:[2.92,1.75,3.15],destination:[1.5,3.2]},
+    award:{title:'Outstanding Paper Award',eyebrow:'THE TROPHY',intro:'',page:'publication.html',place:'the trophy',pin:[-.35,1.8,-3.45],destination:[-.55,-2.45]}
   };
   let selected='about',walkFrame,faces=[],target='about',avatar={x:-.3,z:1.6},stride=0,scene='lab',tint=null;
-  const keys=['','about','research','papers','people','join','exit','boss0','boss1','boss2','boss3','boss4'],W=canvas.width,H=canvas.height,pixels=ctx.createImageData(W,H),depths=new Float32Array(W*H),picks=new Uint8Array(W*H);
+  const keys=['','about','research','papers','people','join','exit','boss0','boss1','boss2','boss3','boss4','award'],W=canvas.width,H=canvas.height,pixels=ctx.createImageData(W,H),depths=new Float32Array(W*H),picks=new Uint8Array(W*H);
   // Each scene keeps its own static boxes. `tint` recolors boxes as they are added, for flashing or defeated bosses.
   const lab=[],dungeon=[];let boxes=lab;
   // Orthographic boxes share a depth buffer for drawing and object picking.
@@ -88,6 +89,17 @@
   for(const x of[.75,4.5])box(x,.05,-3.85,.15,2.66,.73,'#ddb187','papers');
   for(const y of[.05,.88,1.72,2.62])box(.75,y,-3.85,3.9,.1,.78,'#e7bf93','papers');
   for(let row=0;row<3;row++)for(let i=0;i<12;i++){const h=.47+(i%3)*.08;box(.98+i*.28,.16+row*.83,-3.58,.19,h,.43,['#f4aaa4','#9fd5c3','#a9c4ef','#f6d78f'][i%4],'papers');box(.98+i*.28,.24+row*.83,-3.137,.19,.035,.014,'#fff7e6','papers');}
+  // A gold trophy on a pedestal between the gate and the bookshelf, for the EMNLP 2026 Outstanding Paper Award.
+  // The handles sit left and right on screen, and a plaque and a star face the viewer.
+  function trophy(x,z,g){
+    box(x-.27,.03,z-.27,.54,.62,.54,'#a9c4ef',g);box(x-.31,.65,z-.31,.62,.06,.62,'#c9daf5',g);
+    box(x-.17,.71,z-.17,.34,.13,.34,'#7a5a3a',g);box(x-.09,.75,z+.17,.18,.05,.01,'#ffe08a',g);
+    box(x-.05,.84,z-.05,.1,.16,.1,'#e0a92e',g);box(x-.12,1,z-.12,.24,.07,.24,'#e0a92e',g);
+    box(x-.17,1.07,z-.17,.34,.12,.34,'#f2c14e',g);box(x-.22,1.19,z-.22,.44,.24,.44,'#f6c945',g);box(x-.25,1.43,z-.25,.5,.05,.5,'#ffd966',g);
+    for(const d of[-.24,.24])box(x+d-.05,1.15,z-d-.05,.1,.24,.1,'#e0a92e',g);
+    box(x-.04,1.25,z+.22,.08,.08,.01,'#fff3a0',g);
+  }
+  trophy(-.35,-3.45,'award');
   box(-.6,.028,-.1,4.7,.014,3.8,'#ddd4f3');
   desk(-3.05,-.25,'about');desk(.8,.15,'people');
   person(-1.85,1.55,{shirt:'#f2b179',hair:'#4a3a35',group:'about'});
@@ -316,6 +328,15 @@
   // The professor's portrait, drawn after the profile photo on the home page.
   const professor={hair:'side',hairColor:'#2b2630',glasses:{color:'#8e939c',round:true},top:'suit',topColor:'#2c3550',inner:'#cfe0f2',bg:'#d9dde3',smile:true};
 
+  // The trophy shows the award news, followed by the paper's entry on the publication page.
+  function renderAward(main) {
+    const news = NEWS_DATA.find(item => item.text.includes('Outstanding Paper'));
+    const paper = [...main.querySelectorAll('li')].find(item => item.textContent.includes('Outstanding Paper'));
+    const list = node('ul');
+    list.append(paper.cloneNode(true));
+    panel.append(node('p', news.emoji + ' ' + news.date + ' · ' + news.text), list);
+  }
+
   function renderAbout(main) {
     for (const child of main.children) {
       if (child.id === 'news') break;
@@ -374,6 +395,7 @@
       if (key === 'about') renderAbout(main);
       else if (key === 'papers') renderPublications(main);
       else if (key === 'people') renderTeam();
+      else if (key === 'award') renderAward(main);
       else panel.append(...Array.from(main.children, child => child.cloneNode(true)));
     } catch (error) {
       if (selected !== key || target !== key) return;
@@ -410,9 +432,9 @@
       }
     });
   }
-  // Floor footprints [x0,z0,x1,z1] and room bounds for walking. Lab: desks, shelf, gate, people, plants, cat, cabinet and chair.
+  // Floor footprints [x0,z0,x1,z1] and room bounds for walking. Lab: desks, shelf, gate, people, plants, cat, cabinet, chair and trophy.
   const obstacles={
-    lab:[[-3.13,-.33,-.53,.92],[.72,.07,3.32,1.32],[.75,-3.92,4.65,-3.07],[-3.75,-4,-1.05,-3],[-2.21,1.24,-1.49,1.86],[2.22,-.71,2.94,-.09],[-4.4,2.48,-3.5,3.02],[3.7,-1.97,4.6,-1.43],[-2.7,2.54,-2.3,3.24],[-3.93,1.29,-2.82,2.06],[2.47,2.42,3.37,3.22]],
+    lab:[[-3.13,-.33,-.53,.92],[.72,.07,3.32,1.32],[.75,-3.92,4.65,-3.07],[-3.75,-4,-1.05,-3],[-2.21,1.24,-1.49,1.86],[2.22,-.71,2.94,-.09],[-4.4,2.48,-3.5,3.02],[3.7,-1.97,4.6,-1.43],[-2.7,2.54,-2.3,3.24],[-3.93,1.29,-2.82,2.06],[2.47,2.42,3.37,3.22],[-.66,-3.76,-.04,-3.14]],
     dungeon:bosses.map(b=>[b.x-.6,b.z-.45,b.x+.6,b.z+.45])
   },bounds={lab:4.7,dungeon:3.7};
   function blocked(x,z){return Math.abs(x)>bounds[scene]||Math.abs(z)>3.7||obstacles[scene].some(([x0,z0,x1,z1])=>x>x0-.3&&x<x1+.3&&z>z0-.3&&z<z1+.3);}

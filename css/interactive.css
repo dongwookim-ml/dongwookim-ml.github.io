@@ -51,12 +51,12 @@ body {margin:0;background:#fff}
 #lab-layout .content h3 {font:500 16px/1.4 var(--pixel);margin:22px 0 10px}
 #lab-layout .content h3:first-child {margin-top:0}
 #lab-layout .content ul {list-style:none;padding:0;margin:0}
-#lab-layout .papers li {padding:14px 0;border-bottom:1px solid var(--lab-line);font-size:13px;color:var(--lab-muted)}
+#lab-layout :is(.papers,.award) li {padding:14px 0;border-bottom:1px solid var(--lab-line);font-size:13px;color:var(--lab-muted)}
 #lab-layout .papers li:first-child {padding-top:0}
-#lab-layout .papers p {margin:0}
-#lab-layout .papers b:first-child {font-size:16px;font-weight:500;line-height:1.45;color:var(--lab-ink);display:inline-block;margin-bottom:5px}
-#lab-layout .papers i {font-style:normal;color:var(--lab-ink)}
-#lab-layout .papers b:not(:first-child) {font-weight:500;color:var(--lab-blue)}
+#lab-layout :is(.papers,.award) p {margin:0}
+#lab-layout :is(.papers,.award) b:first-child {font-size:16px;font-weight:500;line-height:1.45;color:var(--lab-ink);display:inline-block;margin-bottom:5px}
+#lab-layout :is(.papers,.award) i {font-style:normal;color:var(--lab-ink)}
+#lab-layout :is(.papers,.award) b:not(:first-child) {font-weight:500;color:var(--lab-blue)}
 #lab-layout details {border-top:1px solid var(--lab-line);padding:12px 0}
 #lab-layout summary {font-size:13px;font-weight:500;color:var(--lab-blue);cursor:pointer}
 #lab-layout details ul {margin-top:15px}
